@@ -77,7 +77,7 @@ cat <<EOF >> /etc/mail/aliases
 #
 # Email system messages to the mailserver admins
 #
-root: |/usr/local/share/mailserver/sysmail.rb
+root: |/usr/local/share/mailserv/sysmail.rb
 EOF
 /usr/bin/newaliases >/dev/null 2>&1
 
