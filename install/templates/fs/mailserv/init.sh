@@ -61,4 +61,4 @@ if [ -x /usr/local/bin/god ]; then
   /usr/local/bin/god -c /etc/god/god.conf
 fi
 
-/usr/local/share/mailserver/console.rb
+/usr/local/share/mailserv/console.rb
