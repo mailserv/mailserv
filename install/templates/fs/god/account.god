@@ -1,7 +1,7 @@
 # run with:  god -c /etc/god/account.god
 #
 
-RAILS_ROOT = "/var/www/user/account"
+RAILS_ROOT = "/var/mailserv/account"
 
 God.watch do |w|
   w.name = "account"

@@ -1,6 +1,4 @@
-#!/usr/local/bin/ruby
-
-@snippet = <<END_OF_SNIPPET
+#!/bin/sh
 
 if [ ! -f /etc/ssl/private/server.key ]; then
   # Generate SSL keys if none exists
@@ -8,26 +6,12 @@ if [ ! -f /etc/ssl/private/server.key ]; then
   echo -n 'openssl: Generating new SSL certificate.'
   /usr/sbin/openssl genrsa -out /etc/ssl/private/server.key 2048 2>/dev/null
   echo -n '.'
-  /usr/sbin/openssl req -new -key /etc/ssl/private/server.key \\
+  /usr/sbin/openssl req -new -key /etc/ssl/private/server.key \
     -out /tmp/server.csr -subj "/CN=`hostname` -sha1" 2>/dev/null
   echo -n '.'
-  /usr/sbin/openssl x509 -req -days 1095 -in /tmp/server.csr \\
+  /usr/sbin/openssl x509 -req -days 1095 -in /tmp/server.csr \
     -signkey /etc/ssl/private/server.key -out /etc/ssl/server.crt 2>/dev/null
   cp /etc/ssl/server.crt /etc/ssl/server_ca_chain.crt
   rm -f /tmp/server.csr
   echo '. done.'
 fi
-
-END_OF_SNIPPET
-
-def do_install
-  infile = File.read("/etc/rc")
-  File.open("/etc/rc", "w") do |f|
-    infile.each_line do |line|
-      f.puts @snippet if line.include?('starting network daemons')
-      f.puts line
-    end
-  end
-end
-
-do_install if ARGV[0] == "install"
