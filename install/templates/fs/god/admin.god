@@ -1,7 +1,7 @@
 # run with:  god -c /etc/god/admin.god
 #
 
-RAILS_ROOT = "/var/www/admin"
+RAILS_ROOT = "/var/mailserv/admin"
 
 God.watch do |w|
   w.name = "admin"

@@ -3,6 +3,21 @@
 # Only run on install
 [[ "$1" != "install" ]] && exit 1
 
+# --------------------------------------------------------------
+# sasl and filesystem stuff
+# --------------------------------------------------------------
+mkdir -p /usr/local/lib/sasl2
+install -m 644 /var/mailserv/install/templates/smtpd.conf /usr/local/lib/sasl2
+
+install /var/mailserv/install/templates/fs/bin/* /usr/local/bin/
+install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
+
+mkdir -p /usr/local/share/mailserv
+mkdir -p /usr/local/share/mailserv/template
+install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
+install /var/mailserv/install/templates/fs/mailserv/template/* /usr/local/share/mailserv/template
+
+
 template="/var/mailserv/install/templates"
 install -m 644 \
   ${template}/clamd.conf \
@@ -68,7 +83,7 @@ mkdir /etc/awstats
 # --------------------------------------------------------------
 # /var/cron/tabs/root
 # --------------------------------------------------------------
-install -m 600 /install/templates/crontab_root /var/cron/tabs/root
+install -m 600 /var/mailserv/install/templates/crontab_root /var/cron/tabs/root
 
 # --------------------------------------------------------------
 # /etc/mail/aliases
@@ -102,13 +117,4 @@ chgrp 0 /etc/daily.local \
 mkdir /etc/god
 install -m 644 /var/mailserv/install/templates/fs/god/* /etc/god
 
-mkdir -p /usr/local/lib/sasl2
-install -m 644 /var/mailserv/install/templates/smtpd.conf /usr/local/lib/sasl2
 
-install /var/mailserv/install/templates/fs/bin/* /usr/local/bin/
-install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
-
-mkdir -p /usr/local/share/mailserv
-mkdir -p /usr/local/share/mailserv/template
-install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
-install /var/mailserv/install/templates/fs/mailserv/template/* /usr/local/share/mailserv/template
