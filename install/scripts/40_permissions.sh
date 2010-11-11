@@ -11,17 +11,6 @@ case $1 in
     touch /var/log/freshclam.log && chown _clamav:_clamav /var/log/freshclam.log
     ;;
 
-  (upgrade):
-    echo "  Ensuring correct permissions"
-    for file in \
-        /var/log/imap \
-        /var/mailserver/config/permit_relays.pf \
-        /var/mailserver/config/spam-rdr.pf; do
-
-      [ ! -f $file ] && touch $file
-    done
-    ;;
-
 esac
 
 #
@@ -31,5 +20,5 @@ esac
 chgrp _dovecot /usr/local/libexec/dovecot/deliver
 chmod 4750 /usr/local/libexec/dovecot/deliver
 
-chown -R www:www /var/mailserv/webmail/temp
+chown -R www:www /var/mailserv/webmail/webmail/temp
 chmod 700 /root

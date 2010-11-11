@@ -48,3 +48,9 @@ cd /usr/ports/mail/postfix/stable       && env FLAVOR="mysql sasl2" make install
 echo "Checking out the git repository"
 echo "-------------------------------"
 cd /var && /usr/local/git clone git@github.com:mailserv/mailserv.git
+
+for file in `ls /var/mailserv/install/scripts/*`; do
+  $file install 2>&1 | tee -a /var/log/install.log
+done
+
+
