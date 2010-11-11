@@ -1,0 +1,15 @@
+[13 March 2009]
+
+* "Now we can have inheritance!" [Patch by Peter Abrahamsen]
+
+[12 March 2009]
+
+* Prevent AR from associating to this record by ID; we should be serialized instead. [Patch by Peter Abrahamsen]
+
+[28 February 2009]
+
+* Works with Rails 2.2.2.
+
+[27 April 2007]
+
+* Correctly cache class instance variables containing column information [Reported by Nils Jonsson]

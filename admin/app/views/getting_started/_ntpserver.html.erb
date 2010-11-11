@@ -1,0 +1,6 @@
+<tr>
+  <td>
+    <input type="checkbox" name="ntp[servers][][type]" <%= ntpserver_is_pool?(ntpserver[:type]) unless ntpserver.nil? %> value="pool" />
+  </td>
+  <td><input type="text" name="ntp[servers][][server]" value="<%= ntpserver[:server] unless ntpserver.nil? %>" %></td>
+</tr>

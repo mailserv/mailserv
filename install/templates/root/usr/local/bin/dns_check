@@ -1,0 +1,21 @@
+#!/usr/local/bin/ruby
+
+ns = `grep nameserver /etc/resolv.conf | awk '{print $2}'`
+ok_install = true
+
+print "Checking your DNS servers..."
+
+ns.each_line {|l|
+  unless system("dig @#{l.strip} google.com ANY >/dev/null")
+    print "\nNameserver " + l.strip + " is not responding"
+    ok_install = false
+  end
+}
+
+unless ok_install
+  print "\n\nAt least one of your nameservers is not responding properly.\n"
+  print "Please correct your setup and test using 'dns_check' again.\n"
+  exit(1)
+else
+  print " completed, everything looks ok.\n"
+end

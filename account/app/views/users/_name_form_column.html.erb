@@ -1,0 +1,8 @@
+<dl>
+  <dt>
+    <label for="record_name">Email</label>
+  </dt>
+  <dd>
+    <%= text_field_tag 'record[name]', @record.name, :class => "name-input text-input", :size => 30 %> <b>@<%= @domain.domain %></b>
+  </dd>
+</dl>

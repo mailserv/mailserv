@@ -1,0 +1,13 @@
+<h2>Shutdown or Reboot</h2>
+
+<div class="margin-top4">
+
+<%= form_tag %>
+
+<%= link_to_remote "Shutdown", { :url => { :action => 'shutdown' }, :confirm => "Are you sure you want to shutdown?"}, { :style => "border: 2px solid gray; padding: 0.4em 1em; background-color: #efefef; margin-left: 3em; font-size: 130%;" } %>
+
+<%= link_to_remote "Reboot", { :url => { :action => 'reboot' }, :confirm => "Are you sure you want to reboot?"}, { :style => "border: 2px solid gray; padding: 0.4em 1em; background-color: #efefef; margin-left: 3em; font-size: 130%;" } %>
+
+</form>
+
+</div>

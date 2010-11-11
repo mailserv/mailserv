@@ -1,0 +1,268 @@
+.contextRow td
+{
+  background: #EEEEEE;
+}
+
+#mailboxlist li.contextRow
+{
+  background-color: #E0E0E0;
+}
+
+#rcmContextMenu,
+#rcmFolderMenu,
+#rcmAddressMenu
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: auto;
+  display: none;
+  background-color: #F9F9F9;
+  border: 1px solid #CCC;
+  padding: 1px;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  z-index: 900;
+}
+
+#rcmContextMenu li ul,
+#rcmContextMenu li div,
+#rcmFolderMenu li ul,
+#rcmFolderMenu li div,
+#rcmAddressMenu li ul,
+#rcmAddressMenu li div
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: auto;
+  display: none;
+  background-color: #F9F9F9;
+  border: 1px solid #CCC;
+  padding: 1px;
+  z-index: 901;
+}
+
+#rcmContextMenu li.conmentitle,
+#rcmContextMenu li.submenu,
+#rcmFolderMenu li.conmentitle,
+#rcmFolderMenu li.submenu,
+#rcmAddressMenu li.conmentitle,
+#rcmAddressMenu li.submenu
+{
+  padding: 2px 8px 3px 22px;
+  cursor: default;
+}
+
+#rcmContextMenu li.submenu,
+#rcmFolderMenu li.submenu,
+#rcmAddressMenu li.submenu
+{
+  position: relative;
+  cursor: pointer;
+  background: url('submenu.gif') no-repeat right center;
+  padding-right: 15px;
+}
+
+#rcmContextMenu li.submenu:hover,
+#rcmFolderMenu li.submenu:hover,
+#rcmAddressMenu li.submenu:hover
+{
+  color: #fff;
+  background-color: #CC0000;
+}
+
+#rcmContextMenu li a,
+#rcmFolderMenu li a,
+#rcmAddressMenu li a
+{
+  background: url('../../../../skins/default/images/messageactions.png') no-repeat 1px 0;
+  background-position: 0px 20px;
+}
+
+#rcmContextMenu li a.active:hover,
+#rcmFolderMenu li a.active:hover,
+#rcmAddressMenu li a.active:hover
+{
+  color: #fff;
+  background-color: #CC0000;
+}
+
+#rcmContextMenu li.disabled a,
+#rcmFolderMenu li.disabled a,
+#rcmAddressMenu li.disabled a
+{
+  color: #AAA;
+  cursor: default;
+}
+
+#rcmContextMenu li.disabled a:hover,
+#rcmFolderMenu li.disabled a:hover,
+#rcmAddressMenu li.disabled a:hover
+{
+  color: #AAA;
+  background-color: transparent
+}
+
+#rcmContextMenu .read a,
+#rcmFolderMenu .readfolder a
+{
+  background: url('../../../../skins/default/images/icons/dot.png') no-repeat 2px center;
+}
+
+#rcmContextMenu .unread a
+{
+  background: url('../../../../skins/default/images/icons/unread.png') no-repeat 2px center;
+}
+#rcmContextMenu .flagged a
+{
+  background: url('../../../../skins/default/images/icons/flagged.png') no-repeat 2px center;
+}
+
+#rcmContextMenu .unflagged a
+{
+  background: url('../../../../skins/default/images/icons/unflagged.png') no-repeat 2px center;
+}
+
+#rcmContextMenu .reply a
+{
+  background: url('../../../../skins/default/images/icons/replied.png') no-repeat 2px center;
+}
+
+#rcmContextMenu .replyall a
+{
+  background: url('../../../../skins/default/images/icons/replied.png') no-repeat 2px center;
+}
+
+#rcmContextMenu .forward a
+{
+  background: url('../../../../skins/default/images/icons/forwarded.png') no-repeat 2px center;
+}
+
+#rcmContextMenu .delete a,
+#rcmAddressMenu .deletecontact a
+{
+  background: url('../../../../skins/default/images/icons/deleted.png') no-repeat 2px center;
+}
+
+#rcmFolderMenu .expunge a
+{
+  background: url('icons.png') no-repeat 3px 3px;
+}
+
+#rcmFolderMenu .purge a
+{
+  background: url('icons.png') no-repeat 3px -14px;
+}
+
+#rcmFolderMenu .collapseall a
+{
+  background: url('../../../../skins/default/images/icons/collapsed.png') no-repeat 5px center;
+}
+
+#rcmFolderMenu .expandall a
+{
+  background: url('../../../../skins/default/images/icons/expanded.png') no-repeat 5px center;
+}
+
+#rcmContextMenu .print a
+{
+  background-position: 1px 1px;
+}
+
+#rcmContextMenu .source a
+{
+  background-position: 1px -35px;
+}
+
+#rcmContextMenu .save a,
+#rcmAddressMenu .exportcontact a
+{
+  background-position: 1px -17px;
+}
+
+#rcmContextMenu .open a,
+#rcmFolderMenu .openfolder a
+{
+  background-position: 1px -53px;
+}
+
+#rcmContextMenu .edit a,
+#rcmAddressMenu .editcontact a
+{
+  background: url('editcontact.png') no-repeat 2px center;
+}
+
+#rcmAddressMenu .composeto a
+{
+  background: url('../../../../skins/default/images/icons/folders.png') 3px -36px no-repeat;
+}
+
+#rcmContextMenu ul.folders li a
+{
+  background: url('../../../../skins/default/images/icons/folders.png') 2px 1px no-repeat;
+}
+
+#rcmContextMenu ul.folders li.inbox a
+{
+  background-position: 2px -17px;
+}
+
+#rcmContextMenu ul.folders li.drafts a
+{
+  background-position: 2px -36px;
+}
+
+#rcmContextMenu ul.folders li.sent a
+{
+  background-position: 2px -54px;
+}
+
+#rcmContextMenu ul.folders li.junk a
+{
+  background-position: 2px -73px;
+}
+
+#rcmContextMenu ul.folders li.trash a
+{
+  background-position: 2px -90px;
+}
+
+#rcmContextMenu ul.scrollable
+{
+  top: 12px;
+  height: 100px;
+  overflow: hidden;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+#rcmContextMenu li div {
+  height: 12px;
+  overflow: hidden;
+}
+
+#rcmContextMenu li div.scroll_up_act {
+  background: url('up_act.gif') #F9F9F9 center center no-repeat;
+  border-bottom: 0;
+}
+
+#rcmContextMenu li div.scroll_up_pas {
+  background: url('up_pas.gif') #F9F9F9 center center no-repeat;
+  border-bottom: 0;
+  cursor: default;
+}
+
+#rcmContextMenu li div.scroll_down_act {
+  top: 112px;
+  background: url('down_act.gif') #F9F9F9 center center no-repeat;
+  border-top: 0;
+}
+
+#rcmContextMenu li div.scroll_down_pas {
+  top: 112px;
+  background: url('down_pas.gif') #F9F9F9 center center no-repeat;
+  border-top: 0;
+  cursor: default;
+}

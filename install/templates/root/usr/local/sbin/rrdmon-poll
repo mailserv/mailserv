@@ -1,0 +1,236 @@
+#!/usr/local/bin/ruby
+require 'rubygems'
+require 'date'
+require 'RRD'
+
+config_file = "/etc/rrdmon.conf"
+
+rrd_dir = "/var/spool/rrd"
+maillog = "/var/log/maillog"
+
+time = Time.now.strftime("%s")
+
+unless File.exists?(config_file)
+  print "Error: Can't read config file #{config_file}\n"
+  exit 1
+end
+
+# ------------------------------------------------------------------------------------
+# Create the Necessary files
+# ------------------------------------------------------------------------------------
+
+%x{mkdir #{rrd_dir}} unless File.directory?(rrd_dir)
+File.read(config_file).each do |line|
+  case line
+  when /^#/,/^\s/
+    next
+
+  when /cpu/  # ========================= CPU =========================
+
+    cpu_rrd = rrd_dir + "/" + "cpu.rrd"
+
+    # Accept data every 5 minutes
+    # Store 1 datapoint every 5 minute and keep 1 day
+    # Store 1 datapoint every 30 minutes and keep 1 week
+    # Store 1 datapoint every 2 hours and keep 1 month
+    # Store 1 datapoint every 1 day and keep 1 year
+    unless File.exists?(cpu_rrd)
+      RRD.create(cpu_rrd, "--step", "300",
+        "DS:user:GAUGE:400:0:100",
+        "DS:system:GAUGE:400:0:100",
+        "DS:idle:GAUGE:400:0:100",
+        "RRA:AVERAGE:0.5:1:288",
+        "RRA:AVERAGE:0.5:6:336",
+        "RRA:AVERAGE:0.5:24:372",
+        "RRA:AVERAGE:0.5:288:365"
+      )
+    end
+  
+  when /mem/  # ========================= MEM =========================
+
+    mem_rrd = rrd_dir + "/" + "mem.rrd"
+
+    # Accept data every 5 minutes
+    # Store 1 datapoint every 5 minute and keep 1 day
+    # Store 1 datapoint every 30 minutes and keep 1 week
+    # Store 1 datapoint every 2 hours and keep 1 month
+    # Store 1 datapoint every 1 day and keep 1 year
+    unless File.exists?(mem_rrd)
+      RRD.create(mem_rrd,
+        "--step", "300",
+        "DS:usage:GAUGE:400:0:U",
+        "DS:free:GAUGE:400:0:U",
+        "RRA:AVERAGE:0.5:1:288",
+        "RRA:AVERAGE:0.5:6:336",
+        "RRA:AVERAGE:0.5:24:372",
+        "RRA:AVERAGE:0.5:288:365"
+      )
+    end
+  
+  when /swap/  # ========================= SWAP =========================
+
+    swap_rrd = rrd_dir + "/" + "swap.rrd"
+    # Accept data every 5 minutes
+    # Store 1 datapoint every 5 minute and keep 1 day
+    # Store 1 datapoint every 30 minutes and keep 1 week
+    # Store 1 datapoint every 2 hours and keep 1 month
+    # Store 1 datapoint every 1 day and keep 1 year
+    unless File.exists?(swap_rrd)
+      RRD.create(swap_rrd,
+        "--step", "300",
+        "DS:usage:GAUGE:400:0:U",
+        "DS:free:GAUGE:400:0:U",
+        "RRA:AVERAGE:0.5:1:288",
+        "RRA:AVERAGE:0.5:6:336",
+        "RRA:AVERAGE:0.5:24:372",
+        "RRA:AVERAGE:0.5:288:365"
+      )
+    end
+  
+  when /pf/  # ========================= PF =========================
+
+    pf_rrd = rrd_dir + "/" + "pf.rrd"
+    # Accept data every 5 minutes
+    # Store 1 datapoint every 5 minute and keep 1 day
+    # Store 1 datapoint every 30 minutes and keep 1 week
+    # Store 1 datapoint every 2 hours and keep 1 month
+    # Store 1 datapoint every 1 day and keep 1 year
+    unless File.exists?(pf_rrd)
+      RRD.create(pf_rrd,
+        "--step", "300",
+        "DS:in_pass:COUNTER:400:0:U",
+        "DS:in_block:COUNTER:400:0:U",
+        "DS:out_pass:COUNTER:400:0:U",
+        "DS:out_block:COUNTER:400:0:U",
+        "RRA:AVERAGE:0.5:1:288",
+        "RRA:AVERAGE:0.5:6:336",
+        "RRA:AVERAGE:0.5:24:372",
+        "RRA:AVERAGE:0.5:288:365"
+      )
+    end
+  
+  when /mail/  # ========================= MAIL =========================
+
+    mail_rrd = rrd_dir + "/" + "mail.rrd"
+    # Accept data every 5 minutes
+    # Store 1 datapoint every 5 minute and keep 1 day
+    # Store 1 datapoint every 30 minutes and keep 1 week
+    # Store 1 datapoint every 2 hours and keep 1 month
+    # Store 1 datapoint every 1 day and keep 1 year
+    unless File.exists?(mail_rrd)
+      RRD.create(mail_rrd,
+        "--step", "300",
+        "DS:sent:GAUGE:400:0:U",
+        "DS:received:GAUGE:400:0:U",
+        "DS:bounced:GAUGE:400:0:U",
+        "DS:rejected:GAUGE:400:0:U",
+        "DS:virus:GAUGE:400:0:U",
+        "DS:spam:GAUGE:400:0:U",
+        "RRA:AVERAGE:0.5:1:288",
+        "RRA:AVERAGE:0.5:6:336",
+        "RRA:AVERAGE:0.5:24:372",
+        "RRA:AVERAGE:0.5:288:365"
+      )
+    end
+  end # when
+end # File.read
+
+
+# ------------------------------------------------------------------------------------
+# Monitor the system
+# ------------------------------------------------------------------------------------
+
+File.open(config_file).each {|line|
+
+  case line
+  when /^#/,/^\s/
+    next
+
+  when /cpu/  # ========================= CPU =========================
+
+    cpu_rrd = rrd_dir + "/" + "cpu.rrd"
+
+    vmstat = `vmstat 300 2 | tail -1`
+    vmstat =~ /(\d+)\s+(\d+)\s+(\d+)$/
+    user = $1
+    system = $2
+    idle = $3
+
+    RRD.update(cpu_rrd, "#{time}:#{user}:#{system}:#{idle}")
+
+  when /mem/  # ========================= MEM =========================
+
+    mem_rrd = rrd_dir + "/" + "mem.rrd"
+
+    memstat = `top -d 1 | grep Memory`
+    memstat =~ /\/(\d+)M.*Free:\s+(\d+)M/
+    usage = $1
+    free = $2
+
+    RRD.update(mem_rrd, "#{time}:#{usage}:#{free}")
+
+  when /swap/  # ========================= SWAP =========================
+
+    swap_rrd = rrd_dir + "/" + "swap.rrd"
+
+    swapctl = `swapctl -sk | awk '{print $6 " " $8}' | sed 's/k//g'`
+    swapctl =~ /(\d+)\s+(\d+)/
+    usage = $1.to_f/1024
+    free = $2.to_f/1024
+
+    RRD.update(swap_rrd, "#{time}:#{usage}:#{free}")
+
+  when /pf/  # ========================= PF =========================
+
+    pf_rrd = rrd_dir + "/" + "pf.rrd"
+
+    pfctl = `pfctl -s info`
+    pfctl =~ /Packets In\s+Passed\s+(\d+)\s+\d+\s+Blocked\s+(\d+)/
+    in_passed  = $1
+    in_blocked = $2
+    pfctl =~ /Packets Out\s+Passed\s+(\d+)\s+\d+\s+Blocked\s+(\d+)/
+    out_passed  = $1
+    out_blocked = $2
+
+    RRD.update(pf_rrd, "#{time}:#{in_passed}:#{in_blocked}:#{out_passed}:#{out_blocked}")
+
+  when /mail/  # ========================= MAIL =========================
+
+    mail_rrd = rrd_dir + "/" + "mail.rrd"
+
+    # Only check mail from the last 5 minutes
+    date1 = Time.at(Time.now.to_i - 1*60).strftime("%b %e %H:%M")
+    date2 = Time.at(Time.now.to_i - 2*60).strftime("%b %e %H:%M")
+    date3 = Time.at(Time.now.to_i - 3*60).strftime("%b %e %H:%M")
+    date4 = Time.at(Time.now.to_i - 4*60).strftime("%b %e %H:%M")
+    date5 = Time.at(Time.now.to_i - 5*60).strftime("%b %e %H:%M")
+    sent = 0
+    received = 0
+    bounced = 0
+    rejected = 0
+    virus = 0
+    spam = 0
+    File.open(maillog).each {|line|
+      next unless line =~ /#{date1}|#{date2}|#{date3}|#{date4}|#{date5}/
+
+      case line
+      when /postfix\/smtpd.*client=/
+        received += 1
+      when /postfix\/.*\bstatus=sent\b/
+        sent += 1
+      when /milter-reject.*\bmessage infected\b/i
+        virus += 1
+      when /spamd.*\bidentified spam\b/
+        spam += 1
+      when /postfix\/.*\bstatus=bounced\b/
+        bounced += 1
+      when /postfix\/.*(reject|discard)/
+        rejected += 1
+      end
+    }
+    RRD.update(mail_rrd, "#{time}:#{sent}:#{received}:#{bounced}:#{rejected}:#{virus}:#{spam}")
+
+  end
+}
+
+

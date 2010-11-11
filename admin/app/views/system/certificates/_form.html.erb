@@ -1,0 +1,30 @@
+<table class="system" style="width: auto;">
+  <tr>
+    <td>Country Name (2 letter code)</td>
+    <td><%= form.text_field "c", :size => 3, :maxlength => 2 %></td>
+  </tr>
+  <tr>
+    <td>State or Province Name (full name)</td>
+    <td><%= form.text_field "st" %></td>
+  </tr>
+  <tr>
+    <td>Locality Name (eg, city)</td>
+    <td><%= form.text_field "l" %></td>
+  </tr>
+  <tr>
+    <td>Organization Name (eg, company)</td>
+    <td><%= form.text_field "o" %></td>
+  </tr>
+  <tr>
+    <td>Organizational Unit Name (eg, section)</td>
+    <td><%= form.text_field "ou" %></td>
+  </tr>
+  <tr>
+    <td>Common Name (eg, fully qualified host name)</td>
+    <td><%= form.text_field "cn" %></td>
+  </tr>
+  <tr>
+    <td>Locality Name (eg, city)</td>
+    <td><%= form.text_field "email" %></td>
+  </tr>
+</table>

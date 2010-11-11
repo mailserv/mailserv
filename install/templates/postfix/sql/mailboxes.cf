@@ -1,0 +1,7 @@
+user = postfix
+password = postfix
+dbname = mail
+table = users
+select_field = CONCAT(SUBSTRING_INDEX(email,'@',-1),'/',SUBSTRING_INDEX(email,'@',1),'/')
+where_field = email
+hosts = localhost

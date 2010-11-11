@@ -1,0 +1,16 @@
+<div style="text-align: center;">
+  <%= form_tag :action => 'change' %>
+
+  <%= select("domain", "id", current_user.admin_for.collect {|p| [ p.domain, p.id ] }, {},
+    {:onchange => "form.submit();"}) %>
+
+  </form>
+</div>
+
+<%= render :active_scaffold => "users",
+           :constraints => { :domain_id => @domain.id }, :params => {:domain_id => @domain.id} %>
+
+<p>&nbsp;</p>
+
+<%= render :active_scaffold => "forwardings",
+           :constraints => { :domain_id => @domain.id } %>

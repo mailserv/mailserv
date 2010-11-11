@@ -1,0 +1,34 @@
+    <?php if ($set_carp) { ?>
+    <div id="carp_section">
+
+      <table>
+        <caption>Carp Configuration</caption>
+        <tr>
+          <th>Property</th>
+          <th>Value</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Carp Device</td>
+          <td><input type="text" name="carpdev" value="<?php print $hostname_if[0]['carpdev']; ?>"></td>
+        </tr>
+        <tr>
+          <td>Virtual ID</td>
+          <td><input type="text" name="vhid" value="<?php print $hostname_if[0]['vhid']; ?>"></td>
+        </tr>
+        <tr>
+          <td>Advertisement Base</td>
+          <td><input type="text" name="advbase" value="<?php print $hostname_if[0]['advbase']; ?>"></td>
+        </tr>
+        <tr>
+          <td>Advertisement Delay (skew)</td>
+          <td><input type="text" name="advskew" value="<?php print $hostname_if[0]['advskew']; ?>"></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td><input type="text" name="pass" value="<?php print $hostname_if[0]['pass']; ?>"></td>
+        </tr>
+      </table>
+
+    </div>
+    <?php } ?>

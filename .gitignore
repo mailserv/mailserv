@@ -1,0 +1,15 @@
+.DS_Store
+admin/db/*sqlite3
+admin/log/*.log
+admin/tmp/**/*
+admin/vendor/rails
+admin/public/javascripts/javascript.js
+admin/public/stylesheets/stylesheet.css
+admin/public/stylesheets/yui/stylesheet.css
+account/db/*sqlite3
+account/log/*.log
+account/tmp/**/*
+account/vendor/rails
+admin/public/images/rrd/daily/*
+admin/public/javascripts/active_scaffold/default/*
+mail/*

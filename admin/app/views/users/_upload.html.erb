@@ -1,0 +1,13 @@
+<% form_tag('/users/import', :multipart => true) do -%>
+  <%= hidden_field_tag :domain_id, @domain.id %>
+  <label for="csv_file">CSV File to Upload</label> <%= file_field_tag "csv_file" %>
+  <%= submit_tag 'Upload' %>
+<% end -%>
+<p style="margin: 15px 5px 10px 10px;">The format of the CSV file is as follows:</p>
+<pre>
+  name,fullname,password,quota
+  homer,Homer Simpson,doh!doh1,512
+</pre>
+<p style="margin: 15px 5px 10px 10px;">Make sure you include the header row (name,fullname,password,quota). 
+  The quota column is the only optional column and if not set
+  it will get the default quota for the domin.</p>

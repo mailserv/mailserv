@@ -1,0 +1,84 @@
+/***** RoundCube|Mail sauserprefs plugin styles *****/
+
+#address-rules-cont, #spam-langs-cont
+{
+  border: 1px solid #999999;
+  background-color: #F9F9F9;
+  height: 200px;
+  overflow: auto;
+  width: 510px;
+}
+
+body.address-rules-table, body.spam-langs-table
+{
+  margin: 0px;
+  background-color: #F9F9F9;
+}
+
+#address-rules-table, #spam-langs-table
+{
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  /* css hack for IE */
+  width: expression('auto');
+}
+
+/* safari hack \*/
+html>body*#address-rules-table[id$="address-rules-table"]:not([class="none"]) { table-layout: auto; }
+/**/
+
+/* safari hack \*/
+html>body*#spam-langs-table[id$="spam-langs-table"]:not([class="none"]) { table-layout: auto; }
+/**/
+
+#spam-langs-table td.lang, #address-rules-table td.rule, #address-rules-table td.email, #address-rules-table td.email
+{
+  text-align: left;
+  vertical-align: middle;
+}
+
+#spam-langs-table td.tick, #address-rules-table td.control
+{
+  text-align: right;
+  vertical-align: middle;
+}
+
+.whitelist_from, .whitelist_to
+{
+  color: #008800;
+  text-align: left;
+  vertical-align: middle;
+
+}
+
+.blacklist_from
+{
+  color: #BB0000;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#listcontrols
+{
+  font-size: 11px;
+  text-align: right;
+}
+
+#listcontrols a,
+#listcontrols a:active,
+#listcontrols a:visited
+{
+  color: #CC0000;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+#listcontrols a:hover
+{
+  text-decoration: underline;
+}
+
+table.generalprefstable td.title {
+  width: 155px;
+}

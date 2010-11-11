@@ -1,0 +1,27 @@
+<h1>Getting Started &mdash; Step 2 of 4</h1>
+
+<% form_for :timezone do |f| %>
+
+<table class="left noborder" style="margin-top: 3em">
+  <tr>
+    <th>Set Current Time</th>
+    <td><%= select_datetime() %></td>
+  </tr>
+  <tr>
+    <th>Timezone</th>
+    <td>
+      <%= select "timezone", "country", @timezone.countries %>
+        <span id="tz_city">
+          <%= render :partial => 'timezone_cities', :object => @timezone.cities %>
+        </span>
+    </td>
+  </tr>
+</table>
+
+<div style="clear: both;"><%= submit_tag "Next", {:id => "save"} %></div>
+
+<% end %>
+
+<%= observe_field("timezone_country", :update => :tz_city, 
+  :url => { :action => :timezone_change_country }, :on => "changed",
+  :with => "'country='+ escape($('timezone_country').value)") %>

@@ -1,0 +1,43 @@
+<h2>Generate a Certificate Signing Request</h2>
+
+<% form_for :certificate do |f| %>
+
+  <table class="system" style="width: auto;">
+    <tr>
+      <td>Country Name (2 letter code)</td>
+      <td><%= f.text_field "c", :size => 3, :maxlength => 2 %></td>
+    </tr>
+    <tr>
+      <td>State or Province Name (full name)</td>
+      <td><%= f.text_field "st" %></td>
+    </tr>
+    <tr>
+      <td>Locality Name (eg, city)</td>
+      <td><%= f.text_field "l" %></td>
+    </tr>
+    <tr>
+      <td>Organization Name (eg, company)</td>
+      <td><%= f.text_field "o" %></td>
+    </tr>
+    <tr>
+      <td>Organizational Unit Name (eg, section)</td>
+      <td><%= f.text_field "ou" %></td>
+    </tr>
+    <tr>
+      <td>Common Name (eg, fully qualified host name)</td>
+      <td>
+        <%= f.text_field "cn", :disabled => 'disabled' %>
+        <%= f.hidden_field "cn" %>
+      </td>
+    </tr>
+    <tr>
+      <td>Locality Name (eg, city)</td>
+      <td><%= f.text_field "email" %></td>
+    </tr>
+  </table>
+
+<%= submit_tag "Generate", { :id => "save" } %>
+
+<% end %>
+
+<%= render :partial => 'example' %>

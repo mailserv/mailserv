@@ -1,0 +1,28 @@
+<h2>Hostname Configuration</h2>
+
+<% form_for :hostname do |f| %>
+
+<table class="system" style="text-align: left; width: auto;">
+  <tr>
+    <th>Hostname</th>
+    <th>Domain</th>
+  </tr>
+  <tr>
+    <td><%= f.text_field "hostname" %></td>
+    <td><%= f.text_field "domain" %></td>
+  </tr>
+</table>
+
+  <%= submit_tag "Save", { :id => 'save' } %>
+<% end %>
+
+<%# render :partial => 'reloading' if flash[:notice] %>
+
+<div class="example">
+  <h2>Information</h2>
+
+  <h4>Licensing</h4>
+  <p>If you have activated the mailserver, the license key is tied to the hostname of the server. If you
+    change hostname, it will update the licensing information at update.allardsoft.com so a connection
+    there is requried. If you haven't activated the server, it won't try to connect to update.allardsoft.com.</p>
+</div>

@@ -1,0 +1,7 @@
+user=postfix
+password=postfix
+dbname=mail
+table=users
+select_field=id as uid
+where_field=email
+hosts=localhost

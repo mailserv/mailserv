@@ -1,0 +1,5 @@
+<tr class="ip_addressrow">
+  <td><input type="text" name="interface[ip][]"  size="15" maxlength="15" value="<%= network_ip.address -%>" /></td>
+  <td><input type="text" name="interface[netmask][]" size="15" maxlength="15" value="<%= network_ip.netmask -%>" /></td>
+  <td class="edit"><%= link_to_function "delete", "this.up('.ip_addressrow').remove()" %></td>
+</tr>

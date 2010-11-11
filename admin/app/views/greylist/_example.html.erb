@@ -1,0 +1,41 @@
+
+<div class="index_description">
+  <h2 style="margin-top: 40px">Description</h2>
+  <p>Greylisting is a very effective method of reducing spam and malware. It works by initially refusing connections
+    to the mailserver for a new server for 30 minutes, exploiting the fact that almost all spammers don't
+    use proper mail servers and cannot properly handling resending of messages. The drawback is that
+    emails from unknown mail servers will be delayed by at least 30 minutes.
+    The mailserver will accept the connection after 30 minutes, but relies on the sending mailserver
+    resending the message.</p>
+  <p>The default configuration is good enough in most cases and works by:</p>
+  <ul>
+    <li>Allow any mailserver that has previously passed the greylisting (in the last 30 days)</li>
+    <li>Allow any mailserver with a valid SPF record</li>
+    <li>Allow any user that authenticates before sending emails</li>
+    <li>Allow a fixed list of known good, but troublesome, mailservers like Yahoo groups and Amazon.com</li>
+    <li>Allow or block any emails, ip addresses or domains that matches the above Greylist Exceptions</li>
+    <li>Greylist all other incoming emails for 30 minutes</li>
+  </ul>
+
+  <h2 style="margin-top: 20px">Examples:</h2>
+  <p>A couple of examples of what you might want to do:</p>
+  <ul>
+    <li>Disable Greylisting for my local network &mdash; Whitelist, ip address: 10.1.2.0/24 192.1.1.0/24</li>
+    <li>Disable Greylisting from a specific domain &mdash; Whitelist, Match from domain: example.com</li>
+    <li>Disable Greylisting from a specific domain to a specific user &mdash; Whitelist, Match From Domain: example.com, Match Destination Email: joe@mailserver.com</li>
+  </ul>
+
+  <h2 style="margin-top: 20px">Syntax:</h2>
+  <p>The syntax for ip addresses:</p>
+  <ul>
+    <li>10.1.2.3</li>
+    <li>10.2.3.0/24</li>
+    <li>10.1.2.3 10.2.3.0/24 (space separated, not comma)</li>
+  </ul>
+
+  <p style="margin-top: 20px">Regular expressions, enclosed in /regexp/:</p>
+  <ul>
+    <li>Match anything &mdash; /.*/</li>
+  </ul>
+
+</div>

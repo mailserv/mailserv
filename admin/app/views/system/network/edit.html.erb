@@ -1,0 +1,55 @@
+<h2>Network Configuration: <%= @interface.name -%></h2>
+
+<%= form_tag :action => "edit", :id => params[:id] %>
+
+<table class="system" style="width: auto;">
+
+  <tr>
+    <th>Property</th>
+    <th>Value</th>
+  </tr>
+
+  <tr id="dhcp_setting">
+    <td>DHCP</td>
+    <td style="text-align: left;">
+      <label for="interface_dhcp_true" class="none">
+        <%= radio_button "interface", "dhcp", "true",  { :onclick =>
+           "$('interface_ip').disabled = true; 
+            $('interface_netmask').disabled = true;
+            $('interface_default_route').disabled = true;"
+          } %> Enabled</label>
+      <label for="interface_dhcp_false" class="none">
+        <%= radio_button "interface", "dhcp", "false", { :onclick => 
+          "$('interface_ip').disabled = false;
+           $('interface_netmask').disabled = false;
+           $('interface_default_route').disabled = false;" 
+        } %> Disabled</label>
+    </td>
+  </tr>
+
+  <tr>
+    <td>IP Address</td>
+    <td><%= ip_address_field(@interface.dhcp) %></td>
+  </tr>
+  <tr>
+    <td>Netmask</td>
+    <td><%= netmask_field(@interface.dhcp) %></td>
+  </tr>
+
+  <tr>
+    <td>Default Gateway</td>
+    <td><%= default_route_field(@interface.dhcp) %></td>
+  </tr>
+
+  <tr>
+    <td>Media, Speed &amp; Duplex</td>
+    <td>
+      <%= select "interface", "media", @interface.available_media %>
+    </td>
+  </tr>
+
+</table>
+
+<p>&nbsp;</p>
+<%= submit_tag "Save &amp; Enable", { :id => 'save' } %>
+</form>

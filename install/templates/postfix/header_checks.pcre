@@ -1,0 +1,8 @@
+/^Content-(Disposition|Type).*name\s*=\s*"?(.*(\.|=2E)(
+             ade|adp|asp|bas|bat|chm|cmd|com|cpl|crt|dll|exe|
+             hlp|ht[at]|
+             inf|ins|isp|jse?|lnk|md[betw]|ms[cipt]|nws|
+             \{[[:xdigit:]]{8}(?:-[[:xdigit:]]{4}){3}-[[:xdigit:]]{12}\}|
+             ops|pcd|pif|prf|reg|sc[frt]|sh[bsm]|swf|
+             vb[esx]?|vxd|ws[cfh]))(\?=)?"?\s*(;|$)/x
+               REJECT Invalid Attachment: $2

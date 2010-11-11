@@ -1,0 +1,9 @@
+<dl>
+  <dt>
+    <label for="record_destination">Deliver to</label>
+  </dt>
+  <dd>
+    <%= text_area_tag 'record[destination]', @record.destination, :size => "40x3" %>
+  </dd>
+</dl>
+<%= render :partial => 'example' %>

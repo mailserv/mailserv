@@ -1,0 +1,3 @@
+ntpd_flags=-s
+sendmail_flags="-bd -q30m"
+pf=YES

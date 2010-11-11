@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# This file is automatically regenerated, any local changes will be
+# overwritten.
+#
+awstats="/usr/bin/perl /usr/local/awstats/awstats.pl -config=localhost"
+outdir="/var/www/admin/public/awstats"
+
+$awstats -update
+$awstats -output                -staticlinks > $outdir/awstats.html
+$awstats -output=alldomains     -staticlinks > $outdir/awstats.localhost.alldomains.html
+$awstats -output=allemails      -staticlinks > $outdir/awstats.localhost.allemails.html
+$awstats -output=allemailr      -staticlinks > $outdir/awstats.localhost.allemailr.html
+$awstats -output=lastemails     -staticlinks > $outdir/awstats.localhost.lastemails.html
+$awstats -output=lastemailr     -staticlinks > $outdir/awstats.localhost.lastemailr.html
+$awstats -output=allhosts       -staticlinks > $outdir/awstats.localhost.allhosts.html
+$awstats -output=lasthosts      -staticlinks > $outdir/awstats.localhost.lasthosts.html
+$awstats -output=unknownip      -staticlinks > $outdir/awstats.localhost.unknownip.html
+$awstats -output=alllogins      -staticlinks > $outdir/awstats.localhost.alllogins.html
+$awstats -output=lastlogins     -staticlinks > $outdir/awstats.localhost.lastlogins.html
+$awstats -output=allrobots      -staticlinks > $outdir/awstats.localhost.allrobots.html
+$awstats -output=lastrobots     -staticlinks > $outdir/awstats.localhost.lastrobots.html
+$awstats -output=urldetail      -staticlinks > $outdir/awstats.localhost.urldetail.html
+$awstats -output=urlentry       -staticlinks > $outdir/awstats.localhost.urlentry.html
+$awstats -output=urlexit        -staticlinks > $outdir/awstats.localhost.urlexit.html
+$awstats -output=browserdetail  -staticlinks > $outdir/awstats.localhost.browserdetail.html
+$awstats -output=osdetail       -staticlinks > $outdir/awstats.localhost.osdetail.html
+$awstats -output=unknownbrowser -staticlinks > $outdir/awstats.localhost.unknownbrowser.html
+$awstats -output=unknownos      -staticlinks > $outdir/awstats.localhost.unknownos.html
+$awstats -output=refererse      -staticlinks > $outdir/awstats.localhost.refererse.html
+$awstats -output=refererpages   -staticlinks > $outdir/awstats.localhost.refererpages.html
+$awstats -output=keyphrases     -staticlinks > $outdir/awstats.localhost.keyphrases.html
+$awstats -output=keywords       -staticlinks > $outdir/awstats.localhost.keywords.html
+$awstats -output=errors404      -staticlinks > $outdir/awstats.localhost.errors404.html

@@ -1,0 +1,74 @@
+div.example {
+	margin-top: 3em;
+	margin-bottom: 3em;
+	border: 1px solid #ccc;
+}
+
+div.example h1, div.example h2, div.example h3, div.example h4, div.example h5 {
+	margin-bottom: 0.5em;
+}
+
+div.example h1, div.example h2 {
+	background-color: #edf3fe;
+	padding: 0.5em;
+}
+
+div.example h3, div.example h4 {
+	padding-left: 3em;
+	margin: 1em 0 0 0;
+	background-color: inherit;
+}
+
+div.example p, div.example li {
+	line-height: 1.4em;
+	font-size: 120%;
+}
+
+div.example p {
+	padding: 0.5em 3em;
+}
+
+div.example li {
+	list-style: disc;
+	padding-bottom: 1em;
+}
+
+div.example li.last {
+	padding-bottom: 0em;
+}
+
+div.example ul {
+	list-style: disc;
+	padding-left: 3em; 
+	margin-left: 3em; 
+	margin-top: 1em; 
+	margin-bottom: 1em;
+}
+
+div.example td, div.example th {
+	border: 0;
+}
+
+div.example th {
+	background-color: inherit;
+	font-size: small;
+    background-color: #edf3fe;
+	color: black;
+	font-weight: normal;
+}
+
+div.example table {
+	margin-left: 3em;
+	margin-right: 3em;
+	width: 93%;
+}
+
+div.example .border td, div.example .border th {
+	border: 1px solid #ccc;
+	padding: 0.3em;
+	font-size: small;
+}
+
+div.example .border caption {
+	padding-left: 2.5em;
+}

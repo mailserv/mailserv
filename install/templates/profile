@@ -1,0 +1,26 @@
+if [ -f /var/mailserver/config/console_disabled ]; then
+  echo ""
+  echo "Console access needs to be enabled in the web interface"
+  echo "before your can login to the console."
+  echo ""
+  exit
+fi
+
+export RAILS_ENV=production
+export PAGER=less
+export LESS=-sM
+export LESSOPEN="|lesspipe %s"
+export BLOCKSIZE=K
+export PS1='\u@\h:\w \$ '
+
+alias h='fc -l'
+alias j=jobs
+alias m=$PAGER
+alias ll='ls -lAgFo'
+alias l='ls -l'
+alias g='egrep -i'
+alias ls='ls -AF'
+alias mg='mg -n'
+
+export TMOUT=1800
+export PS1='\u@\h:\w \$ '

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<%= javascript_include_tag :defaults, 'yui/yahoo-dom-event', 'yui/container-min', 
+	  'yui/element-beta', 'yui/menu-min', 'yui/button-min',
+	  :cache => 'javascript' %>
+  <%= stylesheet_link_tag "yui/_reset-fonts-grids", 'yui/menu', 'yui/container', 
+    'yui/button', :cache => 'yui/stylesheet' %>
+  <%= stylesheet_link_tag '_base', 'application', 'example', 'menu', 'error', 
+    'password_strength', "system", :cache => 'stylesheet' %>
+	<title><%= page_title -%></title>
+</head>
+<body id="<%= page_id -%>" class="yui-skin-sam not_logged_in">
+<%# 
+  the id on the containing div determines the page width.
+  #doc = 750px; #doc2 = 950px; #doc3 = 100%; #doc4 = 974px
+%>
+<div id="doc2">
+  <div id="content">
+    <% if flash[:notice] -%>
+    <div class="notice"><%= flash[:notice] -%></div>
+    <% end -%>
+    <% if flash[:error] -%>
+    <div class="error"><%= flash[:error] -%></div>
+    <% end -%>
+
+  <%= @content_for_layout -%>
+  <div style="clear: both; height=1%;">&nbsp;</div>
+  </div>
+</div>
+
+</body>
+</html>

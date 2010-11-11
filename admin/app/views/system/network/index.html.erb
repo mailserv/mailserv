@@ -1,0 +1,30 @@
+<h2>Network Configuration</h2>
+
+<table class="system">
+  <tr>
+    <th>Interface Name</th>
+    <th>Status</th>
+    <th>Media</th>
+    <th>Link Layer Address</th>
+    <th>MTU</th>
+    <th>IP address</th>
+    <th>Netmask</th>
+    <th>Description</th>
+  </tr>
+
+  <% @interfaces['physical'].each do |iface| -%>
+  <tr>
+    <td rowspan="0"><%= iface['name'] -%></td>
+    <td rowspan="0"><%= iface['up?'] -%></td>
+    <td rowspan="0"><%= iface['media'] -%></td>
+    <td rowspan="0"><%= iface['lladdr'] -%></td>
+    <td rowspan="0"><%= iface['mtu'] -%></td>
+    <td><%= display_ip_addresses(iface['ip']) -%></td>
+    <td><%= display_netmasks(iface['ip']) -%></td>
+    <td rowspan="0"><%= iface['description'] -%></td>
+    <td rowspan="0" class="edit"><%= link_to "edit", :action => 'edit', :id => iface['name'] %></td>
+  </tr>
+  <% end -%>
+  <tr><%# I have no idea why this is needed to get the last line to appear in the output %></tr>
+</table>
+

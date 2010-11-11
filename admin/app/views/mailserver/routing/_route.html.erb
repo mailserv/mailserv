@@ -1,0 +1,5 @@
+<tr class="transportrow" id="<%= route.dom_id %>">
+  <td><%= route.destination -%></td>
+  <td><%= route.transport -%></td>
+  <td class="edit"><%= link_to_remote "Delete", :url => { :action => 'delete', :id => route.id } %></td>
+</tr>

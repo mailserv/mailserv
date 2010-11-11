@@ -1,0 +1,29 @@
+<h2>Enable Console Access</h2>
+
+<%= form_tag -%>
+
+  <div>
+    <label for="enable_console">
+      <input type="checkbox" name="enable_console"<%= @console_enabled ? " checked=\"checked\"" : "" %> value="enabled" />
+      Enable Console Access
+    </label>
+  </div>
+
+  <% if System.root_is_locked? %>
+  <div style="margin-top: 3em">
+    <label for="root_password">Root Password</label>
+    <input type="password" name="root_password" />
+    <p style="color: grey;">(It's only possible to set the root password here if previously unset, be careful)</p>
+  </div>
+  <% end %>
+
+  <div style="clear: both; padding-top: 1em;"><%= submit_tag "Save", { :id => 'save' } %></div>
+
+</form>
+
+<%#
+
+<input type="checkbox" name="enable_console"<%= @console_enabled ? " checked=\"checked\"" : "" %> 
+<%# value="enabled" />
+
+%>

@@ -1,0 +1,46 @@
+<dl>
+  <dt><label for="record_clause">Match From</label></dt>
+  <dd>
+    <%= select_tag 'record[clause]',
+          options_for_select([
+            ["No Source Match", ""],
+            ["IP Address", "addr"],
+            ["Domain", "domain"],
+            ["Email", "from"],
+            ], @record.clause), {
+              :onchange => "switch(this.value) {
+                  case 'addr':
+                    $('clause_description').innerHTML = 'Ex: 10.1.2.0/24 10.2.3.4';
+                    $('record_value_').disabled = '';
+                    break;
+                  case 'domain':
+                    $('clause_description').innerHTML = 'Ex: example.com';
+                    $('record_value_').disabled = '';
+                    break;
+                  case 'from':
+                    $('clause_description').innerHTML = 'Ex: grandma@gmail.com';
+                    $('record_value_').disabled = '';
+                    break;
+                  case '':
+                    $('record_value_').value = '';
+                    $('record_value_').disabled = 'disabled';
+                    $('clause_description').innerHTML = 'Only Match on Destination Email address';
+                    break;
+                }"
+            }
+    %>
+    <span class="description" id="clause_description">
+    <%= case @record.clause
+       when "addr"
+         "Ex: 10.1.2.0/24 10.2.3.4"
+       when "domain"
+         "Ex: example.com"
+       when "from"
+         "Ex. grandma@gmail.com"
+       else
+         "Only Match on Destination Email address"
+       end
+    %>
+    </span>
+  </dd>
+</dl>

@@ -1,0 +1,21 @@
+<h1>Getting Started &mdash; Step 1 of 4</h1>
+
+<h2>Set Hostname</h2>
+
+<% form_for :hostname do |f| %>
+
+<table class="system" style="text-align: left; width: auto;">
+  <tr>
+    <th>Hostname</th>
+    <th>Domain</th>
+  </tr>
+  <tr>
+    <td><%= f.text_field "hostname" %></td>
+    <td><%= f.text_field "domain" %></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+  <%= submit_tag "Save &amp; Continue", { :id => 'submit' } %>
+<% end %>

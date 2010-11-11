@@ -1,0 +1,2 @@
+module System::HostnameHelper
+end

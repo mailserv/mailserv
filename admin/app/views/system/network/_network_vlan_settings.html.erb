@@ -1,0 +1,24 @@
+      <tr id="vlan_setting">
+        <td>vlan id</td>
+        <td><input type="text" name="vlan" size="10" value="<?php print $hostname_if[0]['vlan'];?>" id="vlan"></td>
+        <td>Value between 1-1024 that identifies this VLAN.</td>
+      </tr>
+      <tr id="vlanprio_setting">
+        <td>vlan prioritet</td>
+        <td><input type="text" name="vlanprio" size="10" value="<?php print $hostname_if[0]['vlanprio'];?>" id="vlanprio"></td>
+        <td>Value between 0-7. Not needed</td>
+      </tr>
+      <tr id="vlandev_setting">
+        <td>vlan interface</td>
+        <td><select id="vlandev" name="vlandev">
+          <option value="" label=""></option>
+          <?php foreach (get_all_phys_if() as $if) {
+            print "<option value=\"". $if."\" label=\"". $if ."\"";
+            print ($hostname_if[0]['vlandev'] == $if ? "selected=\"selected\"": ""). ">". $if. "</option>";
+          }
+          ?>
+          </select>
+        </td>
+        <td>The Parent Interface</td>
+      </tr>
+      <?php } # End VLAN ?>

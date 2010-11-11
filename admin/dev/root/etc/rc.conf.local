@@ -1,0 +1,5 @@
+sendmail_flags="-bd -q30m"
+pf=YES
+httpd_flags="-u -DSSL"
+spamd_flags=""
+ntpd_flags=

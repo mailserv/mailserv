@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><roundcube:object name="pagetitle" /></title>
+<roundcube:include file="/includes/links.html" />
+<link rel="stylesheet" type="text/css" href="/this/sieverules.css" />
+<script type="text/javascript" src="/functions.js"></script>
+</head>
+<body class="iframe">
+<div id="prefs-title" class="boxtitle"><roundcube:object name="steptitle" /></div>
+
+<div class="boxcontent">
+<roundcube:object name="sieveruleform" addIcon="/this/add.png" deleteIcon="/this/delete.png" deleteIconPas="/this/deletePas.png" helpIcon="/this/help.gif" />
+
+<p><br />
+<roundcube:button command="plugin.sieverules.delete" type="input" class="button" label="delete" condition="env:action=='plugin.sieverules.edit'" style="margin-right:0.5em" />
+<roundcube:button command="plugin.sieverules.copy_rule" type="input" class="button" label="sieverules.copy" condition="env:action=='plugin.sieverules.edit' && config:sieverules_multiplerules == true" style="margin-right:0.5em" />
+<roundcube:button command="plugin.sieverules.save" type="input" class="button mainaction" label="save" />
+</p>
+</div>
+
+</body>
+</html>

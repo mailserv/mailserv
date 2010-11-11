@@ -1,0 +1,32 @@
+#	$OpenBSD: rc.shutdown,v 1.7 2006/06/22 00:41:59 deraadt Exp $
+#
+# If it exists, this script is run at system-shutdown by reboot(8),
+# halt(8).  If the architecture supports keyboard requested halting,
+# it is also run by init(8) when such an event happens.
+#
+
+powerdown=YES	# set to YES for powerdown
+
+echo ""
+echo -n "Shutting down"
+
+echo -n ' god'
+/usr/local/bin/god quit >/dev/null 2>&1
+
+echo -n " mongrel"
+/usr/local/bin/mongrel_rails stop -c /var/www/admin >/dev/null 2>&1
+/usr/local/bin/mongrel_rails stop -c /var/www/user/account >/dev/null 2>&1
+
+echo -n " postfix"
+/usr/local/sbin/postfix stop >/dev/null 2>&1
+
+echo -n " nginx"
+/usr/local/sbin/nginx -s stop >/dev/null 2>&1
+
+echo -n " dovecot"
+pkill dovecot
+
+echo -n " MySQL"
+/usr/local/bin/mysqladmin shutdown 2>/dev/null
+
+echo "."

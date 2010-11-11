@@ -1,0 +1,75 @@
+
+<div id="mainmenubar" class="yuimenubar yuimenubarnav">
+  <div class="bd">
+    <ul class="first-of-type">
+      <li class="yuimenubaritem first-of-type"><a class="yuimenubaritemlabel" href="/dashboard">Dashboard</a></li>
+      <li class="yuimenubaritem"><a class="yuimenubaritemlabel" href="/domains">Mailserver</a>
+        <div id="menu_mailserver" class="yuimenu">
+          <div class="bd">
+            <ul>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/domains">Users &amp; Domains</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/mailserver/spamconfig">Antispam Configuration</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/greylist">Greylisting</a>
+                <div id="menu_greylist" class="yuimenu">
+                    <div class="bd">
+                        <ul class="first-of-type">
+                            <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/greylist">Configuration</a></li>
+                            <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/greylist/whitelisted">Whitelisted</a></li>
+                            <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/greylist/greylisted">Greylisted</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+              </li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/mailserver/routing">Routing</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="yuimenubaritem"><a class="yuimenubaritemlabel" href="/stats/">Statistics</a></li>
+      <li class="yuimenubaritem"><a class="yuimenubaritemlabel" href="/system/update">System</a>
+        <div id="menu_system_config" class="yuimenu">
+          <div class="bd">
+            <ul>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/administrators">Administrators</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/hostname">Hostname</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/network">Network</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/dns">DNS</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/time">Time</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/console">Console Access</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/certificates">Certificates</a>
+                <div id="menu_certificates" class="yuimenu">
+                    <div class="bd">
+                        <ul class="first-of-type">
+                            <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/certificates">View Installed</a></li>
+                            <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/certificates/upload">Upload</a></li>
+                            <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/certificates/csr">Generate CSR</a></li>
+                        </ul>
+                    </div>
+                </div>
+                </li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/backup">Backup</a></li>
+              <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/system/backup/restore">Restore</a></li>
+              <li class="yuimenuitem"><a id="shutdownLink" class="yuimenuitemlabel" href="#">Shutdown/reboot</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="admin">
+        <%= link_to current_user.username + " logged in", logout_path-%>
+        <div id="menu_logout" class="yuimenu">
+          <div class="bd">
+            <ul class="first-of-type">
+              <li class="yuimenuitem">
+                <%= link_to "Logout " + current_user.username, logout_path -%>
+              </li>
+              <li class="yuimenuitem">
+                <%= link_to "Edit Account",
+                :controller => 'system/administrators', :action => 'edit', :id => current_user.id -%></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

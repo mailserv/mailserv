@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<%= javascript_include_tag :defaults, 'yui/yahoo-dom-event', 'yui/container-min', 
+	  'yui/element-beta', 'yui/menu-min', 'yui/button-min',
+	  :cache => 'javascript' %>
+	<%= stylesheet_link_tag "yui/_reset-fonts-grids", 'yui/menu', 'yui/container', 
+	  'yui/button', :cache => 'yui/stylesheet' %>
+	<%= stylesheet_link_tag '_base', 'application', 'example', 'menu', 'error', 
+	  'password_strength', :cache => 'stylesheet' %>
+	<title>Mailserver Administration</title>
+</head>
+<body id="<%= page_id -%>" class="yui-skin-sam">
+
+<div id="content">
+
+  <% if flash[:error] -%>
+  <div class="error"><%= flash[:error] -%></div>
+  <% end -%>
+  <% if flash[:notice] -%>
+  <div class="notice"><%= flash[:notice] -%></div>
+  <% end -%>
+
+	<h4><%= CONF['product'].capitalize %> Administration</h4>
+  <fieldset>
+    <% form_for :admin, Admin.new, :url => {:action => "login"} do |f| %>
+
+  		<p>
+  		  <%= f.label :username, "Username" %>
+  			<%= f.text_field :username -%>
+  		</p>
+
+  		<p>
+  		  <%= f.label :password, "Password" %>
+  			<%= f.password_field :password -%>
+  		</p>
+
+  		<p><%= submit_tag "Login", { :id => 'submit' } %></p>
+
+  	<% end %>
+
+  </fieldset>
+
+<div style="clear: both; height=1%;">&nbsp;</div>
+</div>
+</body>
+</html>
+

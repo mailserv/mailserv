@@ -1,0 +1,21 @@
+#!/usr/local/bin/ruby
+$stdout.sync = true
+
+unless Process::Sys.getuid.zero?
+  puts "You are not root!"
+  exit 1
+end
+
+ruby="/usr/local/bin/rake RAILS_ENV=production -f /var/www/admin/Rakefile"
+
+if ARGV.size.zero? || ARGV[0] == "-h" || ARGV[0] == "--help"
+  puts %x{#{ruby} -T mailserver | egrep -v '^\\\(in'}.gsub(/rake mailserver:/, "")
+  exit
+end
+
+case ARGV[0]
+when /db:/, /system:/
+  system("#{ruby} #{ARGV.join(' ')} | egrep -v '^\\\(in'")
+else
+  system("#{ruby} mailserver:#{ARGV.join(' ')} | egrep -v '^\\\(in'")
+end

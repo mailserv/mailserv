@@ -1,0 +1,118 @@
+#
+# Minimum OpenBSD Postfix configuration
+# Look in main.cf.dist for a complete configuration
+#
+
+#
+# Paths
+#
+queue_directory = /var/spool/postfix
+command_directory = /usr/local/sbin
+daemon_directory = /usr/local/libexec/postfix
+sendmail_path = /usr/local/sbin/sendmail
+newaliases_path = /usr/bin/newaliases
+mailq_path = /usr/local/sbin/mailq
+manpage_directory = /usr/local/man
+sample_directory = /etc/postfix
+readme_directory = /usr/local/share/doc/postfix/readme
+
+#
+# Ownership
+#
+mail_owner = _postfix
+setgid_group = _postdrop
+
+#
+# OpenBSD alias database
+#
+alias_maps = hash:/etc/mail/aliases
+alias_database = hash:/etc/mail/aliases
+unknown_local_recipient_reject_code = 450
+
+#
+# Networks and default destinations
+#
+mynetworks = 127.0.0.0/8, 10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12
+mydestination = $myhostname, localhost.$mydomain, localhost
+
+#
+# Virtual mailbox settings
+#
+virtual_alias_domains =
+virtual_alias_maps = 
+        proxy:mysql:/etc/postfix/sql/forwardings.cf
+        proxy:mysql:/etc/postfix/sql/email2email.cf
+
+virtual_mailbox_domains =   proxy:mysql:/etc/postfix/sql/domains.cf
+virtual_mailbox_maps =      proxy:mysql:/etc/postfix/sql/mailboxes.cf
+virtual_uid_maps =          proxy:mysql:/etc/postfix/sql/user.cf
+virtual_gid_maps =          proxy:mysql:/etc/postfix/sql/group.cf
+virtual_minimum_uid = 1000
+virtual_transport = dovecot
+dovecot_destination_recipient_limit = 1
+transport_destination_recipient_limit = 1
+spamassassin_destination_recipient_limit = 1
+transport_maps = proxy:mysql:/etc/postfix/sql/routing.cf
+relay_domains = proxy:mysql:/etc/postfix/sql/routing.cf
+recipient_delimiter = +
+
+proxy_read_maps = 
+    proxy:mysql:/etc/postfix/sql/routing.cf
+    proxy:mysql:/etc/postfix/sql/domains.cf
+    proxy:mysql:/etc/postfix/sql/mailboxes.cf
+    proxy:mysql:/etc/postfix/sql/user.cf
+    proxy:mysql:/etc/postfix/sql/group.cf
+    proxy:mysql:/etc/postfix/sql/forwardings.cf
+    proxy:mysql:/etc/postfix/sql/email2email.cf
+    proxy:unix:passwd.byname
+    unix:passwd.byname
+
+# RFC 821 Compliance
+
+strict_rfc821_envelopes = yes
+
+#
+# Authentication settings
+#
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_local_domain =
+
+# SMTP Requirements
+
+smtpd_delay_reject = yes
+smtpd_helo_required = yes
+smtpd_recipient_restrictions = 
+  permit_mynetworks,
+  permit_sasl_authenticated,
+  reject_unauth_destination,
+  reject_unauth_pipelining,
+  reject_invalid_hostname,
+  reject_unknown_sender_domain,
+  reject_unknown_recipient_domain,
+  reject_non_fqdn_sender,
+  reject_non_fqdn_recipient,
+  reject_rbl_client zen.spamhaus.org
+
+#
+# TLS Settings
+#
+smtpd_use_tls = yes
+smtpd_tls_auth_only = yes
+smtp_tls_cert_file = /etc/ssl/server.crt
+smtp_tls_key_file = /etc/ssl/private/server.key
+smtpd_tls_cert_file = /etc/ssl/server.crt
+smtpd_tls_key_file = /etc/ssl/private/server.key
+smtpd_tls_security_level = may
+smtp_tls_security_level = may
+smtpd_tls_received_header = yes
+
+message_size_limit = 27962027
+
+milter_default_action = tempfail
+milter_connect_macros = j {daemon_name} v _
+milter_header_checks = pcre:/etc/postfix/milter_header_checks
+header_checks = pcre:/etc/postfix/header_checks.pcre
+smtpd_milters =
+  inet:127.0.0.1:9323
+  unix:/tmp/clamav-milter.sock

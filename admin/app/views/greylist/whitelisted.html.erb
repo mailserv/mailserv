@@ -1,0 +1,31 @@
+<h2>Auto Whitelisted Entries (<%= @whitelisted.length %> entries)</h2>
+
+<p>When a mailserver gets whitelisted, it will stay whitelisted for about 1 month.
+  If within that month, another mail gets sent to or from that mailserver, the whitelist expiry timer will reset.</p>
+
+<% unless @whitelisted.length.zero? %>
+
+<table class="system" style="margin-top: 20px;">
+  <thead>
+  <tr>
+    <th>Address</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Expire</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @whitelisted.each_with_index do |whitelist, index| %>
+    <tr id="whitelist_<%= index %>">
+      <td nowrap="nowrap">
+        <%= whitelist[:ip] %>
+        </td>
+      <td><%=h whitelist[:from][1..-2] %></td>
+      <td><%=h whitelist[:to][1..-2] %></td>
+      <td nowrap="nowrap"><%= whitelist[:expire] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>

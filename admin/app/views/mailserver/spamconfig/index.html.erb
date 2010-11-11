@@ -1,0 +1,49 @@
+<% form_for :spamcontrol do |f| %>
+
+<h2>Global Antispam Configuration</h2>
+
+<table class="system">
+  <tr>
+    <th>Setting</th>
+    <th>Value</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Permitted/Trusted Networks</td>
+    <td><%= f.text_area :trusted_networks, :size => "40x3" %></td>
+    <td>
+      <p>Enter host or networks that are allowed to relay messages through the mailserver separated by space or comma.
+        This can be internal hosts or servers that needs to send emails or alerts.</p>
+      <p>Networks are entered using a CIDR format (i.e. 192.168.1.0/24).</p>
+    </td>
+  </tr>
+  <tr>
+    <td>Default Spam Level</td>
+    <td><%= f.text_field :required_score %></td>
+    <td>
+      Numerical field, default: 5.0, the higher the value, the less spam will be caught.
+      A lower value will catch more spam, and will give more false positives.
+      Individual users can change their own spam level in the webmail settings page.
+    </td>
+  </tr>
+  <tr>
+    <td>Spam Kill Level</td>
+    <td><%= f.text_field :kill_level %></td>
+    <td>
+      Numerical Spam level at which not to deliver the mail any more. Default: 20.
+      Set to higher than 50 to never delete any spam.
+    </td>
+  </tr>
+  <tr>
+    <td>Spam Subject</td>
+    <td><%= f.text_field :rewrite_header %></td>
+    <td>The Subject Line prefix for detected spam. Default: [SPAM  _SCORE_].
+      Please see the: <%= link_to "template tags", "http://spamassassin.apache.org/full/3.2.x/doc/Mail_SpamAssassin_Conf.html#template_tags" %>
+      for a complete list of available tags, _SCORE_ and _REQD_ are probably mostly applicable to subject rewrite. Leave empty to not rewrite the subject.
+    </td>
+  </tr>
+</table>
+
+
+<%= submit_tag "Save", { :id => 'save' } %>
+<% end %>

@@ -1,0 +1,33 @@
+Roundcube Webmail SpamAssassin User Prefs (SQL)
+===============================================
+This plugin adds the ability for users to edit they SpamAssassin user prefs from within RoundCube. It interacts with preferences storied in a database via SQL.
+Tested with SpamAssassin Version 3.2.3
+Inspiration for this plugin was taken from:
+WebUserPrefs <http://sourceforge.net/projects/webuserprefs/>
+
+Install
+=======
+* Place this plugin folder into plugins directory of RoundCube
+* Add sauserprefs to $rcmail_config['plugins'] in your RoundCube config
+NB: When downloading the plugin from GitHub you will need to create a directory called sauserprefs and place the files in there, ignoring the root directory in the downloaded archive
+
+Config
+======
+The default config file is plugins/sauserprefs/config.inc.php.dist
+Rename this to plugins/sauserprefs/config.inc.php
+* You must set the database connection string
+* Enter the table name, name of the username field, preference field, and value field
+
+Changing the order of the sections
+==================================
+To change the order of the sections add a sections attribute with the sections listed in the desired order to the sasectionslist object in skins/[skin]/templates/sauserprefs.html
+eg: <roundcube:object name="sasectionslist" id="sections-table" class="records-table" cellspacing="0" sections="general,tests,bayes,headers,report,addresses" />
+
+Whitelist Sync
+==============
+This plugin contains an option to synchronise changes to your RC address book and your SpamAssassin whitelist.
+
+Delete user bayesian data stored in database
+============================================
+If the bayesian data is stored in the same database as the user prefs then it is possible for users to delete their data from the UI.
+See config file for example SQL

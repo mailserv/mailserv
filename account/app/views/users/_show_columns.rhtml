@@ -1,0 +1,34 @@
+<h2><%= @user.fullname %> is administrator for these domains</h2>
+<div style="text-align: center; margin: 0 20%;">
+  <%= form_tag "/domains/#{@domain.id}/users/#{@user.id}/save_admin_domains", 
+    :onsubmit => "selectAllOptions('right_menu');" -%>
+  <table>
+    <tr>
+      <th style="color: white; text-align: center;">Available Domains</th>
+      <th></th>
+      <th style="color: white; text-align: center;">Is Domain Admin For</th>
+    </tr>
+    <tr>
+      <td align="center">
+        <select id="left_menu" multiple="true" size="7">
+          <% @domains.each do |domain| %>
+          <option value="<%= domain.id %>"><%= domain.domain %></option>
+          <% end %>
+        </select>
+      </td>
+      <td valign="middle" align="center">
+        <p><input type="button" id="moveRight2" value="&gt;" onclick="moveOptions('left_menu','right_menu')"></p>
+        <p><input type="button" id="moveLeft2" value="&lt;" onclick="moveOptions('right_menu','left_menu')"></p>
+      </td>
+      <td align="center">
+        <select name="domains[]" id="right_menu" multiple="true" size="7">
+          <% @user.admin_for.each do |domain| %>
+          <option value="<%= domain.id %>"><%= domain.domain %></option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <p><%= submit_tag "save", { :id => "save", :class => "add" } %></p>
+  </form>
+</div>
