@@ -95,3 +95,20 @@ chgrp 0 /etc/daily.local \
         /etc/rc.shutdown \
         /etc/shells /etc/syslog.conf \
         /etc/syslog.conf
+
+# --------------------------------------------------------------
+# /etc/god
+# --------------------------------------------------------------
+mkdir /etc/god
+install -m 644 /var/mailserv/install/templates/fs/god/* /etc/god
+
+mkdir -p /usr/local/lib/sasl2
+install -m 644 /var/mailserv/install/templates/smtpd.conf /usr/local/lib/sasl2
+
+install /var/mailserv/install/templates/fs/bin/* /usr/local/bin/
+install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
+
+mkdir -p /usr/local/share/mailserv
+mkdir -p /usr/local/share/mailserv/template
+install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
+install /var/mailserv/install/templates/fs/mailserv/template/* /usr/local/share/mailserv/template
