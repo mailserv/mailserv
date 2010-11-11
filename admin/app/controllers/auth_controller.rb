@@ -1,6 +1,5 @@
 class AuthController < ApplicationController
   layout nil
-  before_filter :clean_up, :only => [ :login ]
   before_filter :check_getting_started, :only => [ :index ]
   skip_before_filter :authenticate
 

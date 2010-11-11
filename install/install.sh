@@ -8,15 +8,6 @@ fi
 #export PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/pub/OpenBSD/`uname -r`/packages/`uname -m`/
 export PKG_PATH=http://mirror.internode.on.net/pub/OpenBSD/`uname -r`/packages/`uname -m`/
 
-echo "Downloading or updating the ports directory"
-echo "-------------------------------------------"
-VER="OPENBSD_"`uname -r | sed 's/\./_/'`
-if [ ! -d /usr/ports ]; then
-  cd /usr && cvs -d anoncvs@anoncvs.openbsd.org:/cvs get -r${VER} ports
-else
-  cd /usr/ports && cvs -q up -PAd -r${VER}
-fi
-
 echo "Added pre-built packages"
 echo "------------------------"
 pkg_add clamav
@@ -31,7 +22,6 @@ pkg_add cyrus-sasl--mysql
 pkg_add dovecot--mysql
 pkg_add dovecot-sieve
 pkg_add mysql-server
-pkg_add pcre
 pkg_add sqlgrey
 pkg_add php5-core
 pkg_add php5-mysql
@@ -40,6 +30,15 @@ pkg_add nginx--
 pkg_add git
 pkg_add god
 pkg_add gtar--
+
+echo "Downloading or updating the ports directory"
+echo "-------------------------------------------"
+VER="OPENBSD_"`uname -r | sed 's/\./_/'`
+if [ ! -d /usr/ports ]; then
+  cd /usr && cvs -d anoncvs@anoncvs.openbsd.org:/cvs get -r${VER} ports
+else
+  cd /usr/ports && cvs -q up -PAd -r${VER}
+fi
 
 echo "Building Custom packages"
 echo "------------------------"
