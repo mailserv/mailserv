@@ -11,7 +11,6 @@ if [ ! -f /etc/ssl/private/server.key ]; then
   echo -n '.'
   /usr/sbin/openssl x509 -req -days 1095 -in /tmp/server.csr \
     -signkey /etc/ssl/private/server.key -out /etc/ssl/server.crt 2>/dev/null
-  cp /etc/ssl/server.crt /etc/ssl/server_ca_chain.crt
   rm -f /tmp/server.csr
   echo '. done.'
 fi
