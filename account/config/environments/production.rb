@@ -6,6 +6,7 @@ config.cache_classes = true
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
+config.logger = Logger.new(Rails.root.join("log", Rails.env + ".log"),3,5*1024*1024)
 
 # Full error reports are disabled and caching is turned on
 config.action_controller.consider_all_requests_local = false

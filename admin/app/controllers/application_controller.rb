@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   layout proc{ |c| c.request.xhr? ? false : "application" }
-  include ExceptionNotification::Notifiable
 
   before_filter :https_check
   before_filter :authenticate

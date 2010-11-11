@@ -15,3 +15,5 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+config.logger = Logger.new(Rails.root.join("log", Rails.env + ".log"),3,5*1024*1024)

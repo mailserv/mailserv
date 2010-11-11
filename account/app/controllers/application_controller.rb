@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   before_filter :preflight_check
-  include ExceptionNotification::Notifiable
 
   def authenticate
     request.env["HTTPS"] = "on"
