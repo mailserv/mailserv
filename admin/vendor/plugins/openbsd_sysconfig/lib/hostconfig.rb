@@ -34,13 +34,6 @@ class Hostconfig
         sudo install -m 644 #{tf.path} /etc/myname
         sudo hostname #{hostname}
       }
-      license = License.find(:first)
-      if license
-        activation = Activation.find(license.code)
-        activation.put(:update_hostname, 
-          :updated_hostname => hostname,
-          :code => license.code)
-      end
       true
     else
       false

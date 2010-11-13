@@ -22,7 +22,7 @@ class Certificate
   end
 
   def gen_key
-    %x{openssl genrsa -out #{@keyfile} 1024 2>/dev/null}
+    %x{openssl genrsa -out #{@keyfile} 2048 2>/dev/null}
   end
 
   def gen_selfsigned(options = {})
@@ -39,7 +39,7 @@ class Certificate
     subj += "/OU=#{ou}" unless ou.blank?
     subj += "/CN=#{cn}" 
     subj += "/emailAddress=#{email}" unless email.empty?
-    %x{openssl req -new -key #{@keyfile} -subj "#{subj} -sha1" 2>/dev/null}.strip
+    %x{openssl req -new -key #{@keyfile} -subj "#{subj}" 2>/dev/null}.strip
   end
 
   def view

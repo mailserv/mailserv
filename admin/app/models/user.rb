@@ -90,9 +90,6 @@ class User < ActiveRecord::Base
 
   def validate_on_create
     errors.add("password1", "cannot be empty") if password.blank? && password1.blank?
-    if !License.find(:first) && User.count > 10
-      errors.add_to_base("You need to activate the virtual appliance to add more users")
-    end
   end
 
 end

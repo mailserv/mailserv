@@ -20,16 +20,6 @@ module ApplicationHelper
     end
   end
 
-  def display_version_info
-    out = ""
-    if !system_info.activated?
-      out += link_to( "No license installed, click here to install license", :controller => 'system/activate' )
-    else
-      out += "Appliance is licensed, thank you"
-    end
-    return out
-  end
-
   def application_javascript_tag
     name = controller.controller_name
     javascript_include_tag "#{name}" if File.exists? File.join(Rails.root, "public", "javascripts", "#{name}.js")
