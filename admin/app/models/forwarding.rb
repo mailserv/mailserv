@@ -8,12 +8,6 @@ class Forwarding < ActiveRecord::Base
     errors.add("source", "is for the wrong domain") unless $2 == domain.domain
   end
 
-  def validate_on_create
-    if !License.find(:first) && Forwarding.count > 10
-      errors.add_to_base("You need to activate the virtual appliance to add more forwardings")
-    end
-  end
-
   def to_label
     source
   end

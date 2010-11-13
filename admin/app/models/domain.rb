@@ -38,12 +38,6 @@ class Domain < ActiveRecord::Base
     write_attribute :domain, domain.downcase
   end
 
-  def validate_on_create
-    if !License.find(:first) && Domain.count > 0
-      errors.add_to_base("You need to activate the virtual appliance to add more domains")
-    end
-  end
-
   def after_update
     if Rails.env == "production" && @oldname != domain
       %x{sudo mv /var/mailserver/mail/#{@oldname} /var/mailserver/mail/#{domain}}
