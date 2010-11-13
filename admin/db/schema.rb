@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100606003705) do
+ActiveRecord::Schema.define(:version => 20101111233738) do
 
   create_table "administrators", :force => true do |t|
     t.integer  "domain_id"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(:version => 20100606003705) do
     t.string "transport",   :limit => 128
   end
 
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
   create_table "userpref", :primary_key => "prefid", :force => true do |t|
     t.string "username",   :limit => 100, :default => "", :null => false
     t.string "preference", :limit => 50,  :default => "", :null => false
@@ -95,6 +105,15 @@ ActiveRecord::Schema.define(:version => 20100606003705) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quota"
+  end
+
+  create_table "vacations", :force => true do |t|
+    t.integer "user_id",    :null => false
+    t.string  "subject",    :null => false
+    t.text    "message"
+    t.date    "expire"
+    t.date    "created_at"
+    t.date    "updated_at"
   end
 
 end

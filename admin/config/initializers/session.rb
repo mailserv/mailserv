@@ -17,7 +17,7 @@ ActionController::Base.session = {
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rake db:sessions:create")
-#ActionController::Base.session_store = :active_record_store
+ActionController::Base.session_store = :active_record_store
 
 # Expire sessions after a week
 #ActionController::Base.session_options[:expire_after] = 1.week

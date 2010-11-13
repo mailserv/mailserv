@@ -27,7 +27,8 @@ class Domain < ActiveRecord::Base
   end
 
   def after_create
-    %x{sudo mkdir -m 755 /var/mailserver/mail/#{domain}} if Rails.env == "production"
+    logger.info "Creating directory /var/mailserv/mail/#{domain}"
+    %x{sudo mkdir -m 755 /var/mailserv/mail/#{domain}}
   end
 
   def before_update
@@ -39,16 +40,17 @@ class Domain < ActiveRecord::Base
   end
 
   def after_update
-    if Rails.env == "production" && @oldname != domain
-      %x{sudo mv /var/mailserver/mail/#{@oldname} /var/mailserver/mail/#{domain}}
+    if @oldname != domain
+      %x{sudo mv /var/mailserv/mail/#{@oldname} /var/mailserv/mail/#{domain}}
     end
   end
 
   def after_save
-    system("/usr/local/bin/rake RAILS_ENV=production -f /var/www/admin/Rakefile mailserver:configure:domains &") if Rails.env == "production"
+    system("/usr/local/bin/rake RAILS_ENV=production -f /var/mailserv/admin/Rakefile mailserver:configure:domains &") if Rails.env.production?
   end
 
   def before_destroy
+    logger.info "Deleting domain: #{domain.domain}"
     @oldname = Domain.find(id).domain
     @oldid = id
     self.users.each do |user|
@@ -60,7 +62,7 @@ class Domain < ActiveRecord::Base
   end
 
   def after_destroy
-    %x{sudo rm -rf /var/mailserver/mail/#{@oldname}} if Rails.env == "production"
+    %x{sudo rm -rf /var/mailserv/mail/#{@oldname}}
   end
 
 end
