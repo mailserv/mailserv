@@ -1,9 +1,9 @@
 $stdout.sync = true
-namespace :mailserver do
+namespace :mailserv do
 
   desc "Fix the filsystem permissions for all users"
   task :fix_permissions => :environment do
-    %x{sudo chmod 755 /var/mailserver/mail/*}
+    %x{sudo chmod 755 /var/mailserv/mail/*}
     User.all.each do |user|
       mail_dir = "/var/mailserver/mail/#{user.domain.domain}/#{user.name}"
       %x{

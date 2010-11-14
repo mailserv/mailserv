@@ -3,9 +3,13 @@ class Forwarding < ActiveRecord::Base
   validates_presence_of :source, :destination
   validates_uniqueness_of :source, :case_sensitive => false
 
+  def before_validation
+    self.source = source + "@" + domain.name unless source.match(/@/)
+  end
+
   def validate
     source =~ /^([^@\s]*)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
-    errors.add("source", "is for the wrong domain") unless $2 == domain.domain
+    errors.add("source", "needs to be in the #{domain.name} domain") unless $2 == domain.name
   end
 
   def to_label
