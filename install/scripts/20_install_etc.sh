@@ -13,9 +13,7 @@ install /var/mailserv/install/templates/fs/bin/* /usr/local/bin/
 install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
 
 mkdir -p /usr/local/share/mailserv
-mkdir -p /usr/local/share/mailserv/template
 install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
-install /var/mailserv/install/templates/fs/mailserv/template/* /usr/local/share/mailserv/template
 
 
 template="/var/mailserv/install/templates"
