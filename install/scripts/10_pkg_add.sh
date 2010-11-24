@@ -28,6 +28,7 @@ case $1 in
      nginx-- \
      god \
      gtar--
+     ;;
 
   (upgrade):
     echo "  Upgrading Packages"

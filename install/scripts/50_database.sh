@@ -16,7 +16,7 @@ case $1 in
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/webmail.sql
     cd /var/mailserv/admin && /usr/local/bin/rake db:migrate RAILS_ENV=production > /dev/null 2>&1
 
-    /usr/local/bin/ruby /usr/local/share/mailserv/rrdmon_create.rb
+    /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
     echo "."
     ;;
 

@@ -43,7 +43,10 @@ namespace :system do
     tf = Tempfile.new("_awstats")
     tf.puts File.read("#{@templates}/awstats_cron-stats").gsub(/localhost/, @hostname)
     tf.close
-    %x{install -m 755 #{tf.path} /usr/local/awstats/cron-stats}
+    %x{
+      mkdir /usr/local/awstats
+      install -m 755 #{tf.path} /usr/local/awstats/cron-stats
+    }
 
     awstats = File.read("#{@templates}/awstats_awstats.localhost.conf")
     awstats.gsub!(/^SiteDomain=.*/, "SiteDomain=\"#{@hostname}\"")

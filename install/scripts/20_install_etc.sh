@@ -21,6 +21,7 @@ install -m 644 \
   ${template}/clamd.conf \
   ${template}/daily.local \
   ${template}/monthly.local \
+  ${template}/dovecot.conf \
   ${template}/dovecot-sql.conf \
   ${template}/freshclam.conf \
   ${template}/login.conf \
@@ -37,7 +38,6 @@ install -m 644 \
 install -m 600 ${template}/pf.conf /etc
 install -m 644 ${template}/nginx.conf /etc/nginx
 
-install -m 644 /usr/local/share/mailserv/template/dovecot.conf /etc
 install -m 644 /var/mailserv/install/templates/spamassassin_local.cf /etc/mail/spamassassin/local.cf
 install -m 644 /var/mailserv/install/templates/rc.local /etc
 
@@ -114,5 +114,3 @@ chgrp 0 /etc/daily.local \
 # --------------------------------------------------------------
 mkdir /etc/god
 install -m 644 /var/mailserv/install/templates/fs/god/* /etc/god
-
-
