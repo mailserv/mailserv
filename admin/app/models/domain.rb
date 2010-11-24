@@ -3,12 +3,12 @@ class Domain < ActiveRecord::Base
   has_many :forwardings
   has_many :administrators
   has_many :admins, :through => :administrators, :source => :user
-  validates_presence_of :domain
-  validates_uniqueness_of :domain
+  validates_presence_of :name
+  validates_uniqueness_of :name
   validates_numericality_of :quota, :quotamax, :only_integer => true
 
   def to_label
-    domain
+    name
   end
 
   def after_initialize
@@ -32,16 +32,16 @@ class Domain < ActiveRecord::Base
   end
 
   def before_update
-    @oldname = Domain.find(id).domain
+    @oldname = Domain.find(id).name
   end
 
-  def domain=(domain)
-    write_attribute :domain, domain.downcase
+  def name=(name)
+    write_attribute :name, name.downcase
   end
 
   def after_update
-    if @oldname != domain
-      %x{sudo mv /var/mailserv/mail/#{@oldname} /var/mailserv/mail/#{domain}}
+    if @oldname != name
+      %x{sudo mv /var/mailserv/mail/#{@oldname} /var/mailserv/mail/#{name}}
     end
   end
 
@@ -50,8 +50,8 @@ class Domain < ActiveRecord::Base
   end
 
   def before_destroy
-    logger.info "Deleting domain: #{domain.domain}"
-    @oldname = Domain.find(id).domain
+    logger.info "Deleting domain: #{domain.name}"
+    @oldname = Domain.find(id).name
     @oldid = id
     self.users.each do |user|
       user.destroy

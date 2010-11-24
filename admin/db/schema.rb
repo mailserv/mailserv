@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101111233738) do
+ActiveRecord::Schema.define(:version => 20101114014906) do
 
   create_table "administrators", :force => true do |t|
     t.integer  "domain_id"
@@ -36,14 +36,14 @@ ActiveRecord::Schema.define(:version => 20101111233738) do
   end
 
   create_table "domains", :force => true do |t|
-    t.string   "domain",     :limit => 128
+    t.string   "name",       :limit => 128
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quota"
     t.integer  "quotamax"
   end
 
-  add_index "domains", ["domain"], :name => "domain_uniq", :unique => true
+  add_index "domains", ["name"], :name => "domain_uniq", :unique => true
 
   create_table "forwardings", :force => true do |t|
     t.integer  "domain_id",                  :default => 0,  :null => false
@@ -65,9 +65,19 @@ ActiveRecord::Schema.define(:version => 20101111233738) do
     t.datetime "updated_at"
   end
 
-  create_table "licenses", :force => true do |t|
-    t.string "hostname", :limit => 256
-    t.string "code",     :limit => 40
+  create_table "hostconfigs", :force => true do |t|
+    t.text     "interfaces"
+    t.text     "routes"
+    t.text     "nameservers"
+    t.text     "ntpservers"
+    t.text     "certificate"
+    t.text     "certificate_key"
+    t.text     "certificate_ca"
+    t.string   "hostname"
+    t.string   "timezone"
+    t.boolean  "ntp_enabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "routings", :force => true do |t|
@@ -105,15 +115,6 @@ ActiveRecord::Schema.define(:version => 20101111233738) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quota"
-  end
-
-  create_table "vacations", :force => true do |t|
-    t.integer "user_id",    :null => false
-    t.string  "subject",    :null => false
-    t.text    "message"
-    t.date    "expire"
-    t.date    "created_at"
-    t.date    "updated_at"
   end
 
 end

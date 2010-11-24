@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
 
   def before_save
     self.name.downcase!
-    self.email = name + "@" + domain.domain
-    self.home = "/var/mailserv/mail/" + self.domain.domain + "/" + name + "/home"
+    self.email = name + "@" + domain.name
+    self.home = "/var/mailserv/mail/" + self.domain.name + "/" + name + "/home"
     self.quota = self.domain.quota if self.domain && self.domain.quota && !self.quota
   end
 
@@ -27,34 +27,33 @@ class User < ActiveRecord::Base
   end
 
   def after_create
-#    WebmailUser.new(
-#      :username => self.email,
-#      :last_login => Time.new.strftime("%F %T"),
-#      :alias => self.fullname,
-#      :created => Time.new.strftime("%F %T"),
-#      :language => "en_US",
-#      :mail_host => "localhost",
-#      :preferences => 'a:2:{s:16:"message_sort_col";s:4:"date";s:18:"message_sort_order";s:4:"DESC";}'
-#    ).save
-#    vm = WebmailUser.find(:first, :conditions => [ "username = ?", self.email ])
-#    vmi = WebmailIdentity.new(
-#      :user_id => vm.user_id,
-#      :name => self.fullname,
-#      :email => self.email,
-#      :del => "0",
-#      :standard => "1",
-#      :html_signature => "0",
-#      :organization => '',
-#      :bcc => '',
-#      :signature => ''
-#    )
-#    vmi["reply-to"] = self.email
-#    vmi.save
-    puts %x{
-      sudo cp -r /var/mailserv/config/default_maildir /var/mailserv/mail/#{domain.domain}/#{name}
-      sudo chown -R #{id}:#{id} /var/mailserv/mail/#{domain.domain}/#{name}
-      find /var/mailserv/mail/#{domain.domain}/#{name} -type f -name .gitignore | xargs sudo rm
-      find /var/mailserv/mail/#{domain.domain}/#{name} -type d | xargs sudo chmod 750
+    WebmailUser.create!(
+      :username     => self.email,
+      :last_login   => Time.new.strftime("%F %T"),
+      :alias        => self.fullname,
+      :created      => Time.new.strftime("%F %T"),
+      :language     => "en_US",
+      :mail_host    => "localhost",
+      :preferences  => 'a:2:{s:16:"message_sort_col";s:4:"date";s:18:"message_sort_order";s:4:"DESC";}'
+    )
+    vm = WebmailUser.find_by_username(self.email)
+    WebmailIdentity.create!(
+      :user_id => vm.user_id,
+      :name => self.fullname,
+      :email => self.email,
+      :del => "0",
+      :standard => "1",
+      :html_signature => "0",
+      :organization => '',
+      :bcc => '',
+      :signature => '',
+      "reply-to" => self.email
+    )
+    %x{
+      sudo cp -r /var/mailserv/config/default_maildir /var/mailserv/mail/#{domain.name}/#{name}
+      sudo chown -R #{id}:#{id} /var/mailserv/mail/#{domain.name}/#{name}
+      find /var/mailserv/mail/#{domain.name}/#{name} -type f -name .gitignore | xargs sudo rm
+      find /var/mailserv/mail/#{domain.name}/#{name} -type d | xargs sudo chmod 750
     }
   end
 
@@ -63,8 +62,8 @@ class User < ActiveRecord::Base
   end
 
   def after_update
-    File.rename("/var/mailserv/mail/" + domain.domain + "/" + @oldname, 
-        "/var/mailserv/mail/" + domain.domain + "/" + name)
+    File.rename("/var/mailserv/mail/" + domain.name + "/" + @oldname, 
+        "/var/mailserv/mail/" + domain.name + "/" + name)
   end
 
   def before_destroy
@@ -85,7 +84,7 @@ class User < ActiveRecord::Base
   end
 
   def after_destroy
-    %x{sudo rm -rf /var/mailserv/mail/#{domain.domain}/#{@oldname}}
+    %x{sudo rm -rf /var/mailserv/mail/#{domain.name}/#{@oldname}}
   end
 
   def validate
