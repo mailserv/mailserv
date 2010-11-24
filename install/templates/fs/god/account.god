@@ -2,6 +2,7 @@
 #
 
 RAILS_ROOT = "/var/mailserv/account"
+RAILS_GEM_VERSION = %x{pkg_info | egrep "^ruby-rails" | awk '{print $1}'}.match(/-([\d\.]+)/)[1]
 
 God.watch do |w|
   w.name = "account"

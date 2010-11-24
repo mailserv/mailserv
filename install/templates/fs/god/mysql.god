@@ -1,6 +1,11 @@
 # run with:  god -c /etc/god/mysql.god
 #
 
+%x{
+  mkdir /var/run/mysql 2>/dev/null
+  chown -R _mysql:_mysql /var/run/mysql
+}
+
 God.watch do |w|
   w.name = "mysql"
   w.interval = 30.seconds # default

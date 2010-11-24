@@ -3,8 +3,8 @@
 # This file is automatically regenerated, any local changes will be
 # overwritten.
 #
-awstats="/usr/bin/perl /usr/local/awstats/awstats.pl -config=localhost"
-outdir="/var/www/admin/public/awstats"
+awstats="/usr/bin/perl /usr/local/awstats/wwwroot/cgi-bin/awstats.pl -config=localhost"
+outdir="/var/mailserv/admin/public/awstats"
 
 $awstats -update
 $awstats -output                -staticlinks > $outdir/awstats.html

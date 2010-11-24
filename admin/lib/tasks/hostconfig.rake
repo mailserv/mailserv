@@ -1,7 +1,7 @@
 $stdout.sync = true
 require 'tempfile'
 namespace :system do
-  @templates = "/usr/local/share/mailserver/template"
+  @templates = "/var/mailserv/install/templates"
   @hostname = %x{hostname}.strip
 
   desc "Update hostname, generate certificates and reload services"

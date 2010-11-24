@@ -2,13 +2,14 @@
 #
 
 RAILS_ROOT = "/var/mailserv/admin"
+RAILS_GEM_VERSION = %x{pkg_info | egrep "^ruby-rails" | awk '{print $1}'}.match(/-([\d\.]+)/)[1]
 
 God.watch do |w|
   w.name = "admin"
   w.group = "mailserver"
   w.interval = 30.seconds # default      
   w.start = "/usr/local/bin/mongrel_rails start -c #{RAILS_ROOT} -p 4213 -a 127.0.0.1 -d -e production \
-    -P #{RAILS_ROOT}/log/mongrel.pid"
+    --user _mailserv --group _mailserv -P #{RAILS_ROOT}/log/mongrel.pid"
   w.stop = "/usr/local/bin/mongrel_rails stop -P #{RAILS_ROOT}/log/mongrel.pid"
   w.restart = "/usr/local/bin/mongrel_rails restart -P #{RAILS_ROOT}/log/mongrel.pid"
   w.start_grace = 10.seconds

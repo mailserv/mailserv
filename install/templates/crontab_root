@@ -25,4 +25,4 @@ HOME=/var/log
 #
 # Collect System stats
 #
-*/5	*	*	*	*	/usr/local/sbin/rrdmon-poll >/dev/null 2>&1
+*/5	*	*	*	*	/var/mailserv/scripts/rrdmon-poll >/dev/null 2>&1
