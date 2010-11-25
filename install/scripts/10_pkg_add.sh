@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ X"$PKG_PATH" == X"" ]; then
+  PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/pub/OpenBSD/`uname -r`/packages/`uname -m`/
+  export PKG_PATH
+fi
+
 case $1 in
 
   (install):
@@ -31,8 +36,6 @@ case $1 in
     #
     # Upgrade all existing packages
     #
-    PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/pub/OpenBSD/`uname -r`/packages/`uname -m`/
-    export PKG_PATH
     /usr/sbin/pkg_add -v -u -F update -F updatedepends
     ;;
 
