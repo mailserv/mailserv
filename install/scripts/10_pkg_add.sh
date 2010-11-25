@@ -4,11 +4,7 @@ case $1 in
 
   (install):
     echo "Installing packages"
-    mkdir /var/db/spamassassin
-    groupadd -g 200 _postdrop
-    groupadd -g 201 _postfix
-    useradd -u 201 -g 201 -s /sbin/nologin -d /nonexistent \
-      -c "Disgruntled Postal Worker" _postfix
+    mkdir /var/db/spamassassin 2>/dev/null
     pkg_add clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \

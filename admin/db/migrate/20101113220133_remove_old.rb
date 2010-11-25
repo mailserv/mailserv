@@ -1,6 +1,5 @@
 class RemoveOld < ActiveRecord::Migration
   def self.up
-    drop_table :licenses
     drop_table :vacations
     rename_column :domains, :domain, :name
   end
@@ -14,10 +13,6 @@ class RemoveOld < ActiveRecord::Migration
       t.date    "expire"
       t.date    "created_at"
       t.date    "updated_at"
-    end
-    create_table "licenses", :force => true do |t|
-      t.string "hostname", :limit => 256
-      t.string "code",     :limit => 40
     end
   end
 

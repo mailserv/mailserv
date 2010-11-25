@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [[ "$1" == "install" ]]; then
-    /usr/local/bin/mysql_install_db > /dev/null
+    /usr/local/bin/mysql_install_db > /dev/null 2>&1
 fi
 
 /usr/local/bin/mysqld_start
@@ -13,7 +13,6 @@ case $1 in
     unset VERSION
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/mail.sql
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/spamcontrol.sql
-    /usr/local/bin/mysql < /var/mailserv/install/templates/sql/webmail.sql
     cd /var/mailserv/admin && /usr/local/bin/rake db:migrate RAILS_ENV=production > /dev/null 2>&1
 
     /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb

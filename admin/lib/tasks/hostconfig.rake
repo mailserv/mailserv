@@ -62,7 +62,7 @@ namespace :system do
     tf = Tempfile.new("_awstats")
     tf.puts '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=awstats.html">'
     tf.close
-    %x{install -m 644 #{tf.path} /var/www/admin/public/awstats/awstats.#{@hostname}.html}
+    %x{install -m 644 #{tf.path} /var/mailserv/admin/public/awstats/awstats.#{@hostname}.html}
     system("/usr/local/awstats/cron-stats > /dev/null 2>&1 &")
   end
 

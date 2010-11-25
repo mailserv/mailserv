@@ -1,12 +1,3 @@
-if [ -f /var/mailserver/config/console_disabled ]; then
-  echo ""
-  echo "Console access needs to be enabled in the web interface"
-  echo "before your can login to the console."
-  echo ""
-  exit
-fi
-
-export RAILS_ENV=production
 export PAGER=less
 export LESS=-sM
 export LESSOPEN="|lesspipe %s"
