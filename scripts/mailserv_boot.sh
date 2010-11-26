@@ -2,11 +2,6 @@
 
 echo -n "Starting mailserv daemons:"
 
-if [[ -f /var/tmp/run_once.sh ]]; then
-  . /var/tmp/run_once.sh
-  rm /var/tmp/run_once.sh
-fi
-
 # ensure correct file permissions are set
 /usr/local/sbin/postfix set-permissions >/dev/null 2>&1
 chgrp _dovecot /usr/local/libexec/dovecot/deliver
@@ -46,10 +41,6 @@ if [ -f /usr/local/awstats/awstats.pl ]; then
   perl /usr/local/awstats/awstats.pl -config=`hostname` -update > /dev/null &
 fi
 
-rm -f /var/www/admin/log/mongrel.pid /var/www/user/account/log/mongrel.pid
-/usr/local/bin/mongrel_rails start -d -e production -p 4213 -a 127.0.0.1 -c /var/www/admin
-/usr/local/bin/mongrel_rails start -d -e production -p 4214 -a 127.0.0.1 -c /var/www/user/account
-
 if [ -x /usr/local/sbin/nginx ]; then
   echo -n ' nginx'
   /usr/local/sbin/nginx
@@ -60,5 +51,3 @@ if [ -x /usr/local/bin/god ]; then
   echo -n ' god'
   /usr/local/bin/god -c /etc/god/god.conf
 fi
-
-/usr/local/share/mailserv/console.rb

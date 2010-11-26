@@ -16,6 +16,7 @@ case $1 in
     cd /var/mailserv/admin && /usr/local/bin/rake db:migrate RAILS_ENV=production > /dev/null 2>&1
 
     /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
+    /usr/local/bin/mysqladmin shutdown
     echo "."
     ;;
 

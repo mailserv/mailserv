@@ -1,3 +1,2 @@
 
-/bin/sh /usr/local/share/mailserv/init.sh
-
+/bin/sh /var/mailserv/scripts/mailserv_boot.sh
