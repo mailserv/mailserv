@@ -118,7 +118,7 @@ class IfconfigPhysical
     @dhcp = false
     @status = "up"
     @available_media = [["default", ""]]
-    @available_media += `ifconfig -m #{ifname} | egrep "media " | sed 's/\t*media\s*//'`.split("\n")
+    @available_media += `ifconfig #{ifname} media | egrep "media " | sed 's/\t*media\s*//'`.split("\n")
     if File.exist?("/etc/mygate")
       @default_route = File.open("/etc/mygate").read.strip
     else
@@ -126,7 +126,7 @@ class IfconfigPhysical
     end
 
     raise "no such interface" unless `ifconfig | egrep "^[a-z]+[0-9]+:" | awk '{print $1}' | sed 's/://'`.include? ifname
-    File.open("/etc/hostname.#{ifname}").read.each_line do |line|
+    Sudo.read("/etc/hostname.#{ifname}").each_line do |line|
       next if line =~ /\s*#/  # Don't parse comments
   
       if line =~ /media ([a-zA-Z0-9]+ mediaopt [a-zA-Z0-9-_]+)/ or line =~ /media ([a-zA-Z0-9]+)/
@@ -190,23 +190,21 @@ class IfconfigPhysical
   def save
     if self.valid?
       output = String.new
-      media = " media #{@media}" unless @media.empty?
+      media = " media #{@media}" if @media.present?
       if @dhcp
         output = "dhcp NONE NONE NONE" + media.to_s + "\n"
       else
         output = "inet #{@ip} #{@netmask} NONE" + media.to_s + "\n"
       end
-      File.open("/etc/hostname.#{@name}", "w") {|f|
-        f.puts output
-      }
-      File.open("/etc/mygate", "w") do |f|
-        f.puts @default_route
-      end
-      RAILS_DEFAULT_LOGGER.info %x{/bin/sh /etc/netstart #{@name}}
+      Sudo.write("/etc/hostname.#{@name}", output)
+      Sudo.write("/etc/mygate", @default_route)
+      Sudo.exec("/bin/sh /etc/netstart #{@name}")
       if @dhcp
-        RAILS_DEFAULT_LOGGER.info %x{rm /etc/mygate}
+        Sudo.rm("/etc/mygate")
+        RAILS_DEFAULT_LOGGER.info %x{sudo rm /etc/mygate}
       else
-        RAILS_DEFAULT_LOGGER.info %x{route delete default; route add default #{@default_route}}
+        Sudo.exec("route delete default")
+        Sudo.exec("route add default #{@default_route}")
       end
       return true
     else

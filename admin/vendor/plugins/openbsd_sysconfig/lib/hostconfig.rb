@@ -26,14 +26,9 @@ class Hostconfig
   def save
     if self.valid?
       hostname = @hostname
-      hostname += "." + @domain unless @domain.blank?
-      tf = Tempfile.new("_myname")
-      tf.puts hostname
-      tf.close
-      %x{
-        sudo install -m 644 #{tf.path} /etc/myname
-        sudo hostname #{hostname}
-      }
+      hostname += "." + @domain if @domain.present?
+      Sudo.write("/etc/myname", hostname)
+      Sudo.exec("hostname #{hostname}")
       true
     else
       false

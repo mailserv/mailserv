@@ -40,7 +40,7 @@ class Ntp < ActiveRecord::BaseWithoutTable
     out += (is_pool?(name_1) ? "servers" : "server") + " #{name_1}\n" unless name_1.blank?
     out += (is_pool?(name_2) ? "servers" : "server") + " #{name_2}\n" unless name_2.blank?
     out += (is_pool?(name_3) ? "servers" : "server") + " #{name_3}\n" unless name_3.blank?
-    Sudo.write(out, "/etc/ntpd.conf", :mode => 644)
+    Sudo.write("/etc/ntpd.conf", out, :mode => 644)
 
     out = ""
     ntp_is_set = false
@@ -57,10 +57,10 @@ class Ntp < ActiveRecord::BaseWithoutTable
     unless ntp_is_set
       out += "ntpd_flags=\"-s\"" if enabled
     end
-    Sudo.write(out, "/etc/rc.conf.local")
+    Sudo.write("/etc/rc.conf.local", out)
     if %x{uname -s}.strip == "OpenBSD"
       if enabled && %x{pgrep ntpd > /dev/null; echo $?}.to_i.zero?
-        system "sudo /usr/sbin/ntpd -s"
+        Sudo.exec("/usr/sbin/ntpd -s")
       elsif !enabled
         %x{pkill ntpd}
       end

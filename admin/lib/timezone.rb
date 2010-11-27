@@ -6,14 +6,8 @@ class Timezone
     @country, @city, @locality = readlink
   end
 
-  def readlink
-    if File.symlink?("#{FILESYS_ROOT}/etc/localtime")
-      File.readlink("#{FILESYS_ROOT}/etc/localtime").gsub(/.*zoneinfo\//, "").split(/\//)
-    end
-  end
-
   def countries
-    zone = %x{ls #{FILESYS_ROOT}/usr/share/zoneinfo/}.split
+    zone = Sudo.ls("/usr/share/zoneinfo/").split
     zone.delete("posixrules")
     zone.delete("zone.tab")
     zone.delete("iso3166.tab")
@@ -30,8 +24,8 @@ class Timezone
   end
 
   def cities
-    if File.directory?("#{FILESYS_ROOT}/usr/share/zoneinfo/#{@country}/")
-      %x{ls #{FILESYS_ROOT}/usr/share/zoneinfo/#{@country}/}.split
+    if Sudo.directory?("/usr/share/zoneinfo/#{@country}/")
+      Sudo.ls("/usr/share/zoneinfo/#{@country}/").split
     else
       []
     end
@@ -42,8 +36,8 @@ class Timezone
   end
 
   def localities
-    if @city && File.directory?("#{FILESYS_ROOT}/usr/share/zoneinfo/#{@country}/#{@city}")
-      %x{ls #{FILESYS_ROOT}/usr/share/zoneinfo/#{@country}/#{@city}}.split
+    if @city && Sudo.directory?("/usr/share/zoneinfo/#{@country}/#{@city}")
+      Sudo.ls("/usr/share/zoneinfo/#{@country}/#{@city}").split
     else
       []
     end
@@ -60,13 +54,23 @@ class Timezone
   end
 
   def save
-    %x{rm #{FILESYS_ROOT}/etc/localtime}
-    if @locality.blank? && @city.blank?
-      %x{cd #{FILESYS_ROOT}/etc && ln -s ../usr/share/zoneinfo/#{@country} localtime}      
-    elsif @locality.nil?
-      %x{cd #{FILESYS_ROOT}/etc && ln -s ../usr/share/zoneinfo/#{@country}/#{@city} localtime}
+    Sudo.rm("/etc/localtime")
+    if locality.blank? && @city.blank?
+      Sudo.ln_s("/usr/share/zoneinfo/#{@country}", "/etc/localtime")
+    elsif locality.blank?
+      Sudo.ln_s("/usr/share/zoneinfo/#{@country}/#{@city}", "/etc/localtime")
     else
-      %x{cd #{FILESYS_ROOT}/etc && ln -s ../usr/share/zoneinfo/#{@country}/#{@city}/#{@locality} localtime}
+      Sudo.ln_s("/usr/share/zoneinfo/#{@country}/#{@city}/#{@locality}", "/etc/localtime")
+    end
+  end
+
+  private
+
+  def readlink
+    if Sudo.symlink?("/etc/localtime")
+      Sudo.readlink("/etc/localtime").gsub(/.*zoneinfo\//, "").split(/\//)
+    else
+      ["GMT"]
     end
   end
 

@@ -21,7 +21,7 @@ class Sudo
     datafile.path
   end
 
-  def self.write(data, destination, options = {})
+  def self.write(destination, data, options = {})
     f = Tempfile.new("_write")
     f.puts data
     f.close
@@ -108,11 +108,14 @@ class Sudo
   end
 
   def self.ln_s(source, destination, options = {})
+    flags  = "-s"
+    flags  = ""  if options[:hard]
+    flags += "f" if options[:force]
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
-      %x{sudo ln -s #{source} #{destination} 2>/dev/null}
+      %x{sudo ln #{flags} #{source} #{destination} 2>/dev/null}
     else
-      %x{ln -s #{Rails.root}/tmp/root/#{Rails.env}/#{source} #{Rails.root}/tmp/root/#{Rails.env}/#{destination}}
+      %x{ln #{flags} #{Rails.root}/tmp/root/#{Rails.env}/#{source} #{Rails.root}/tmp/root/#{Rails.env}/#{destination}}
     end
   end
 

@@ -46,9 +46,7 @@ class ResolvConf
     }
     output += "search #{@search}\n" unless @search.empty?
     output += "lookup file bind\n"
-    File.open(@resolv_conf, "w") {|f|
-      f.puts(output)
-    }
+    Sudo.write(@resolv_conf, output)
   end
 
   def check_servers
