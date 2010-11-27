@@ -10,7 +10,13 @@ ActionController::Routing::Routes.draw do |map|
     domain.resources :users, :active_scaffold => true
     domain.resources :forwardings, :active_scaffold => true
   end
-  map.resources :greylists, :active_scaffold => true, :active_scaffold_sortable => true
+
+  map.namespace :greylist do |greylist|
+    greylist.resources :greylisted, :active_scaffold => true
+    greylist.resources :whitelist, :active_scaffold => true
+  end
+
+  map.resources :greylist, :active_scaffold => true
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'

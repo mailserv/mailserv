@@ -1,3 +1,5 @@
+/* @override https://172.16.5.138:4200/stylesheets/application.css?1290847364 */
+
 /* @group Undo html */
 
 /* SET BASE FONT ATTRUBUTES */
@@ -248,4 +250,13 @@ table.left {
 
 #date_hour {
   margin-left: 1em;
+}
+
+.active-scaffold .description {
+  font-weight: bold;
+  color: #555 !important;
+}
+
+.active-scaffold label {
+  font-weight: bold !important;
 }

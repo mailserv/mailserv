@@ -13,7 +13,6 @@ class DomainsController < ApplicationController
 
     config.create.columns.exclude :id
     config.update.columns.exclude :id
-    
   end
 
   def show

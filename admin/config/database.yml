@@ -43,3 +43,11 @@ webmail_db_dev:
 File.exist?(socket) 
 } %>
   reconnect: true
+
+sqlgrey_db:
+  adapter: mysql
+  database: sqlgrey
+  username: sqlgrey
+  password: sqlgrey
+  socket: /var/run/mysql/mysql.sock
+  reconnect: true
