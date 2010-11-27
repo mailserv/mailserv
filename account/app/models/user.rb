@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :whiteblacklists
-  has_one :vacation
   belongs_to :domain
   has_many :administrators
   has_many :admin_for, :through => :administrators, :source => :domain
@@ -18,8 +16,8 @@ class User < ActiveRecord::Base
 
   def before_save
     self.name.downcase!
-    self.email = name + "@" + domain.domain
-    self.home = "/var/mailserv/mail/" + self.domain.domain + "/" + name + "/home"
+    self.email = name + "@" + domain.name
+    self.home = "/var/mailserv/mail/" + self.domain.name + "/" + name + "/home"
     self.quota = self.domain.quota if self.domain && self.domain.quota && !self.quota
   end
 
@@ -52,8 +50,12 @@ class User < ActiveRecord::Base
     )
     vmi["reply-to"] = self.email
     vmi.save
-    cp_r("/var/mailserv/config/default_maildir", "/var/mailserv/mail/#{domain.domain}/#{name}")
-    File.chown(id, id, "/var/mailserv/mail/" + domain.domain + "/" + name) if ENV['RAILS_ENV'] == "production"
+    %x{
+      sudo cp -r /var/mailserv/config/default_maildir /var/mailserv/mail/#{domain.name}/#{name}
+      sudo chown -R #{id}:#{id} /var/mailserv/mail/#{domain.name}/#{name}
+      find /var/mailserv/mail/#{domain.name}/#{name} -type f -name .gitignore | xargs sudo rm
+      find /var/mailserv/mail/#{domain.name}/#{name} -type d | xargs sudo chmod 750
+    }
   end
 
   def before_update
@@ -61,8 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def after_update
-    File.rename("/var/mailserv/mail/" + domain.domain + "/" + @oldname, 
-        "/var/mailserv/mail/" + domain.domain + "/" + name)
+    %x{sudo mv /var/mailserv/mail/#{domain.name}/#{@oldname} /var/mailserv/mail/#{domain.name}/#{name}}
   end
 
   def before_destroy
@@ -78,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def after_destroy
-    %x{rm -rf /var/mailserv/mail/#{domain.domain}/#{@oldname}}
+    %x{sudo rm -rf /var/mailserv/mail/#{domain.name}/#{@oldname}}
   end
 
   def validate
@@ -100,9 +101,6 @@ class User < ActiveRecord::Base
 
   def validate_on_create
     errors.add("password1", "cannot be empty") if !password && !password1
-    if !License.find(:first) && User.count > 10
-      errors.add_to_base("You need to activate the virtual appliance to add more users")
-    end
   end
 
 end

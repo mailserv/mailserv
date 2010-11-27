@@ -7,7 +7,7 @@ class Domain < ActiveRecord::Base
   validates_numericality_of :quota, :quotamax, :only_integer => true, :allow_blank => true
 
   def to_label
-    domain
+    name
   end
 
   def user_count
@@ -19,29 +19,26 @@ class Domain < ActiveRecord::Base
   end
 
   def after_create
-    Dir.mkdir("/var/mailserv/mail/" + domain)
+    logger.info "Creating directory /var/mailserv/mail/#{name}"
+    logger.info %x{sudo mkdir -m 755 /var/mailserv/mail/#{name}}
   end
 
   def before_update
-    @oldname = Domain.find(id).domain
-  end
-
-  def validate_on_create
-    if !License.find(:first) && Domain.count > 0
-      errors.add_to_base("You need to activate the virtual appliance to add more domains")
-    end
+    @oldname = Domain.find(id).name
   end
 
   def after_update
-    File.rename("/var/mailserv/mail/" + @oldname, "/var/mailserv/mail/" + domain)
+    if @oldname != name
+      %x{sudo mv /var/mailserv/mail/#{@oldname} /var/mailserv/mail/#{name}}
+    end
   end
 
   def after_save
-    system("/usr/local/bin/rake RAILS_ENV=production -f /var/mailserv/admin/Rakefile mailserver:configure:domains &")
+    system("sudo /usr/local/bin/rake RAILS_ENV=production -f /var/mailserv/admin/Rakefile mailserver:configure:domains &")
   end
 
   def before_destroy
-    @oldname = Domain.find(id).domain
+    @oldname = Domain.find(id).name
     @oldid = id
     self.users.each do |user|
       user.destroy
@@ -52,7 +49,7 @@ class Domain < ActiveRecord::Base
   end
 
   def after_destroy
-    rm_rf("/var/mailserv/mail/" + @oldname)
+    %x{sudo rm -rf /var/mailserv/mail/#{@oldname}}
   end
 
 end
