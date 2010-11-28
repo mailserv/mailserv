@@ -1,5 +1,4 @@
 class Mailserver::RoutingController < ApplicationController
-  before_filter :authorize
 
   def index
     @routes = Routing.find(:all)
