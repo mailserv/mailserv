@@ -6,6 +6,7 @@ class DomainsController < ApplicationController
     config.list.per_page = 20
     config.show.link.label = "Manage"
     config.show.link.page = true
+    config.columns[:name].label = "Domain"
     config.columns[:quota].label = "Default Quota"
     config.columns[:quota].description = "MB. If no quota is set when adding a user, this is what will be set"
     config.columns[:quotamax].label = "Max Allowed Quota"

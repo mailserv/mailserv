@@ -1,11 +1,15 @@
 class AuthController < ApplicationController
 
   def autologin
-    session[:user] = User.new.get_from_session(params[:id]).id
-    if current_user.admin_for.count.zero?
-      redirect_to :action => :unauthorized
+    if session[:user] = User.new.get_from_session(params[:id]).id
+      if current_user.admin_for.count.zero?
+        redirect_to :action => :unauthorized
+      else
+        redirect_to :controller => :domains
+      end
     else
-      redirect_to :controller => :domains
+      flash[:error] = "Could not find user session"
+      redirect_to "/"
     end
   end
 

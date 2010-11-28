@@ -4,6 +4,12 @@
 RAILS_ROOT = "/var/mailserv/admin"
 RAILS_GEM_VERSION = %x{pkg_info | egrep "^ruby-rails" | awk '{print $1}'}.match(/-([\d\.]+)/)[1]
 
+%x{
+  touch #{RAILS_ROOT}/log/production.log
+  touch #{RAILS_ROOT}/log/production.log
+  chown -R _mailserv:_mailserv #{RAILS_ROOT}/log
+}
+
 God.watch do |w|
   w.name = "admin"
   w.group = "mailserver"

@@ -1,6 +1,5 @@
 class AuthController < ApplicationController
   layout nil
-  before_filter :check_getting_started, :only => [ :index ]
   skip_before_filter :authenticate
 
   def login
@@ -22,12 +21,6 @@ class AuthController < ApplicationController
     session[:admin] = nil
     reset_session
     redirect_to root_path
-  end
-
-  private
-
-  def check_getting_started
-    redirect_to :controller => "getting_started" if Admin.count.zero?
   end
 
 end

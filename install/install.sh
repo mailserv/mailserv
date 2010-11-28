@@ -5,9 +5,6 @@ if [[ `uname -s` != "OpenBSD" ]]; then
   exit 1
 fi
 
-#export PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/pub/OpenBSD/`uname -r`/packages/`uname -m`/
-export PKG_PATH=http://mirror.internode.on.net/pub/OpenBSD/`uname -r`/packages/`uname -m`/
-
 cat <<EOF >> /etc/ssh/ssh_config
 Host github.com
   StrictHostKeyChecking no
@@ -22,3 +19,17 @@ done
 
 /var/mailserv/scripts/mailserv_boot.sh
 
+echo ""
+echo ""
+echo "#############################################"
+echo ""
+echo "All components added."
+echo ""
+
+rake -s -f /var/mailserv/admin/Rakefile  mailserv:add_admin
+
+echo ""
+echo "Installation complete."
+echo ""
+echo "Please browse to port 4200 to continue setting up Mailserv."
+echo ""

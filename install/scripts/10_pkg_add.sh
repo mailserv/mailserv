@@ -10,7 +10,7 @@ case $1 in
   (install):
     echo "Installing packages"
     mkdir /var/db/spamassassin 2>/dev/null
-    pkg_add clamav \
+    pkg_add -v -m clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \
      ruby-rrd \

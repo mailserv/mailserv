@@ -62,8 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def after_update
-    File.rename("/var/mailserv/mail/" + domain.name + "/" + @oldname, 
-        "/var/mailserv/mail/" + domain.name + "/" + name)
+    %x{sudo mv /var/mailserv/mail/#{domain.name}/#{@oldname} /var/mailserv/mail/#{domain.name}/#{name}}
   end
 
   def before_destroy

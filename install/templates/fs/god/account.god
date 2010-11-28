@@ -9,7 +9,7 @@ God.watch do |w|
   w.group = "mailserver"
   w.interval = 30.seconds # default      
   w.start = "/usr/local/bin/mongrel_rails start -c #{RAILS_ROOT} -p 4214 -a 127.0.0.1 -d -e production \
-    -P #{RAILS_ROOT}/log/mongrel.pid"
+    --user _mailserv --group _mailserv -P #{RAILS_ROOT}/log/mongrel.pid"
   w.stop = "/usr/local/bin/mongrel_rails stop -P #{RAILS_ROOT}/log/mongrel.pid"
   w.restart = "/usr/local/bin/mongrel_rails restart -P #{RAILS_ROOT}/log/mongrel.pid"
   w.start_grace = 10.seconds

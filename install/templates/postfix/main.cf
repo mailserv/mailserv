@@ -86,6 +86,7 @@ smtpd_recipient_restrictions =
   permit_mynetworks,
   permit_sasl_authenticated,
   reject_unauth_destination,
+  check_policy_service inet:127.0.0.1:2501,
   reject_unauth_pipelining,
   reject_invalid_hostname,
   reject_unknown_sender_domain,
@@ -114,5 +115,4 @@ milter_connect_macros = j {daemon_name} v _
 milter_header_checks = pcre:/etc/postfix/milter_header_checks
 header_checks = pcre:/etc/postfix/header_checks.pcre
 smtpd_milters =
-  inet:127.0.0.1:9323
   unix:/tmp/clamav-milter.sock

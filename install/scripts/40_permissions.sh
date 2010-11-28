@@ -7,6 +7,9 @@ case $1 in
     echo "_mailserv   ALL=(ALL) NOPASSWD: SETENV: ALL" >> /etc/sudoers
     cd /var/mailserv/admin && chown -R _mailserv:_mailserv log db public
     cd /var/mailserv/admin/public && chown _mailserv:_mailserv javascripts stylesheets
+
+    cd /var/mailserv/account && chown -R _mailserv:_mailserv log db public
+    cd /var/mailserv/account/public && chown _mailserv:_mailserv javascripts stylesheets
     ;;
 
 esac
@@ -17,3 +20,4 @@ esac
 #
 chgrp _dovecot /usr/local/libexec/dovecot/deliver
 chmod 4750 /usr/local/libexec/dovecot/deliver
+mkdir /var/mailserv/mail >/dev/null 2>&1
