@@ -31,7 +31,6 @@ else
 
   echo "Updating Custom packages"
   echo "------------------------"
-  cd /usr/ports/mail/postfix/stable       && env FLAVOR="mysql sasl2" make update clean
+  cd /usr/ports/mail/postfix/stable   && env FLAVOR="mysql sasl2" make update clean
 
 fi
-

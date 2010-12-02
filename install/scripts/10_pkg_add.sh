@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ X"$PKG_PATH" == X"" ]; then
-  PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/pub/OpenBSD/`uname -r`/packages/`uname -m`/
+  PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/`uname -r`/packages/`uname -m`/
   export PKG_PATH
 fi
 
