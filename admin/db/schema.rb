@@ -79,6 +79,11 @@ ActiveRecord::Schema.define(:version => 20101127045346) do
     t.datetime "updated_at"
   end
 
+  create_table "licenses", :force => true do |t|
+    t.string "hostname", :limit => 256
+    t.string "code",     :limit => 40
+  end
+
   create_table "routings", :force => true do |t|
     t.string "destination", :limit => 128
     t.string "transport",   :limit => 128
@@ -118,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20101127045346) do
 
   create_table "whitelists", :force => true do |t|
     t.string   "value"
-    t.boolean  "ip"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

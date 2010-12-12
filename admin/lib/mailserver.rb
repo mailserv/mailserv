@@ -12,10 +12,14 @@ class Mailserver
   end
 
   def updates
+    begin
     {
       :spamassassin => File.ctime("/var/db/spamassassin/" + `ls -t /var/db/spamassassin/ | head -1`.strip),
       :clam => File.ctime("/var/db/clamav/" + `ls -t /var/db/clamav/ | head -1`.strip)
     }
+    rescue
+      {:spamassassin => Date.today, :clam => Date.today}
+    end
   end
 
 end

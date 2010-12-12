@@ -4,29 +4,25 @@ class Certificate
   def initialize
     @keyfile            = "/etc/ssl/private/server.key"
     @certfile           = "/etc/ssl/server.crt"
-    @key                = File.read(@keyfile)
-    @cert               = File.read(@certfile)
+    @key                = Sudo.read(@keyfile)
+    @cert               = Sudo.read(@certfile)
     @cn                 = %x{hostname}.strip
   end
 
   def key=(key)
-    File.open(@keyfile, "w") do |f|
-      f.puts key
-    end
+    Sudo.write(@keyfile, key)
   end
 
   def cert=(cert)
-    File.open(@certfile, "w") do |f|
-      f.puts cert
-    end
+    Sudo.write(@certfile, cert)
   end
 
   def gen_key
-    %x{openssl genrsa -out #{@keyfile} 2048 2>/dev/null}
+    Sudo.exec("openssl genrsa -out #{@keyfile} 2048 2>/dev/null")
   end
 
   def gen_selfsigned(options = {})
-    system("/usr/local/bin/mailserver system:reload_hostname")
+    Sudo.exec("/usr/local/bin/mailserver system:reload_hostname")
   end
 
   def gen_csr(c = "", st = "", l = "", o = "", ou = "", cn = "", email = "")

@@ -11,7 +11,7 @@ class Spamcontrol < ActiveRecord::BaseWithoutTable
     self.required_score = ActiveRecord::Base.connection.execute("select value from userpref where preference='required_score'").fetch_row.first.to_f rescue 5.0
     self.rewrite_header = ActiveRecord::Base.connection.execute("select value from userpref where preference='rewrite_header Subject'").fetch_row.first.to_s rescue "[SPAM _SCORE_]"
     self.trusted_networks = find_trusted_networks.join(", ")
-    self.kill_level = Sudo.read("/etc/postfix/header_checks.pre").match(/X\-Spam\-Level.*\{(\d+)/)[1] rescue 15
+    self.kill_level = Sudo.read("/etc/postfix/header_checks.pcre").match(/X\-Spam\-Level.*\{(\d+)/)[1] rescue 15
   end
 
   def find_trusted_networks
@@ -34,7 +34,7 @@ class Spamcontrol < ActiveRecord::BaseWithoutTable
       trusted_networks_a = ["127.0.0.0/8"]
       trusted_networks_a += trusted_networks.split(/[\s,]+/).compact.uniq
       Sudo.exec("/usr/local/sbin/postconf -e 'mynetworks=#{trusted_networks_a.join(" ")}'")
-      Sudo.write(header_checks(kill_level), "/etc/postfix/header_checks.pcre")
+      Sudo.write("/etc/postfix/header_checks.pcre", header_checks(kill_level))
       Sudo.exec("/usr/local/sbin/postfix reload")
       true
     end
