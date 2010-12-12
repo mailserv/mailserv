@@ -51,22 +51,15 @@ date >> /etc/motd
 echo "" >> /etc/motd
 
 # --------------------------------------------------------------
-# /etc/rc.local
-# --------------------------------------------------------------
-
-/usr/local/bin/ruby -pi -e '
-  $_.gsub!("[ -f /etc/rc.local ] && . /etc/rc.local", "")
-  $_.gsub!(/^date/, "[ -f /etc/rc.local ] && . /etc/rc.local")
-  ' /etc/rc
-
-# --------------------------------------------------------------
 # /etc/services
 # --------------------------------------------------------------
+if [ `grep sieve /etc/services | wc -l` -eq 0 ]; then
 cat <<EOF >> /etc/services
 smtps             465/tcp             # SMTPs
 managesieve       2000/tcp            # Sieve Remote Management
 mailadm           4200/tcp            # Mailserver admin port
 EOF
+fi
 
 # --------------------------------------------------------------
 # /etc/daily
@@ -86,12 +79,19 @@ install -m 600 /var/mailserv/install/templates/crontab_root /var/cron/tabs/root
 # --------------------------------------------------------------
 # /etc/mail/aliases
 # --------------------------------------------------------------
+
+# either we're upgrading
+/usr/local/bin/ruby -pi -e '$_.gsub!(/\/usr\/local\/share\/mailserver\/sysmail.rb/, "/usr/local/share/mailserv/sysmail.rb")' /etc/mail/aliases
+
+# or do a fresh install
+if [[ `grep sysmail.rb /etc/mail/aliases | wc -l` -eq 0 ]]; then
 cat <<EOF >> /etc/mail/aliases
 #
-# Email system messages to the mailserver admins
+# Email system messages to the mailserv admins
 #
 root: |/usr/local/share/mailserv/sysmail.rb
 EOF
+fi
 /usr/bin/newaliases >/dev/null 2>&1
 
 # --------------------------------------------------------------
