@@ -7,7 +7,7 @@ namespace :mailserver do
     task :full => [:environment, :init, :mysql] do
       begin
         filename  = "backup-#{`hostname`.strip}.full.tgz"
-        tar_command = "#{@gtar} /var/mailserver /etc/mail/greylist.conf"
+        tar_command = "#{@gtar} /var/mailserver"
 
         STDERR.puts header(filename)
 
@@ -24,7 +24,7 @@ namespace :mailserver do
     task :incremental => [:environment, :init, :mysql] do
       begin
         filename  = "backup-#{`hostname`.strip}.incr.#{`date +%d`.strip}.tgz"
-        tar_command = "#{@gtar} --newer-mtime=#{`date +%Y-%m-`.strip}01 /var/mailserver /etc/mail/greylist.conf"
+        tar_command = "#{@gtar} --newer-mtime=#{`date +%Y-%m-`.strip}01 /var/mailserver"
 
         STDERR.puts header(filename)
 
