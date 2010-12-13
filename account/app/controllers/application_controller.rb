@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_filter :preflight_check
+  
+  filter_parameter_logging :password, :authenticity_token if Rails.env.production?
 
   def authenticate
     request.env["HTTPS"] = "on"

@@ -21,7 +21,6 @@ case $1 in
     /usr/local/bin/mysql mail < /var/mailserv/install/templates/sql/mail.sql
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/spamcontrol.sql
     /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
-    /usr/local/bin/mysqladmin shutdown
     echo "."
     ;;
 
@@ -37,4 +36,4 @@ case $1 in
     ;;
 
 esac
-
+/usr/local/bin/mysqladmin shutdown

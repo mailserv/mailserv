@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   # See ActionController::RequestForgeryProtection for details
   protect_from_forgery
+  filter_parameter_logging :password, :authenticity_token if Rails.env.production?
 
   rescue_from ActionController::InvalidAuthenticityToken, :with => :session_expired
 
