@@ -45,7 +45,7 @@ class Spamcontrol < ActiveRecord::BaseWithoutTable
     Sudo.read("/etc/postfix/header_checks.pcre").each_line do |line|
       out += line unless line.match(/X\-Spam\-Level/)
     end rescue ""
-    "/^X-Spam-Level:\s+\*{#{kill_level},}/ DISCARD\n" + out
+    '/^X-Spam-Level:\s+\*{' + kill_level.to_s + ',}/ DISCARD' + "\n" + out
   end
 
 end
