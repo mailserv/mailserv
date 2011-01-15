@@ -12,7 +12,7 @@
       <td align="center">
         <select id="left_menu" multiple="true" size="7">
           <% @domains.each do |domain| %>
-          <option value="<%= domain.id %>"><%= domain.domain %></option>
+          <option value="<%= domain.id %>"><%= domain.name %></option>
           <% end %>
         </select>
       </td>
@@ -23,7 +23,7 @@
       <td align="center">
         <select name="domains[]" id="right_menu" multiple="true" size="7">
           <% @user.admin_for.each do |domain| %>
-          <option value="<%= domain.id %>"><%= domain.domain %></option>
+          <option value="<%= domain.id %>"><%= domain.name %></option>
           <% end %>
         </select>
       </td>

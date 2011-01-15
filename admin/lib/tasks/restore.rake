@@ -1,6 +1,6 @@
 $stdout.sync = true
 require 'tempfile'
-namespace :mailserver do
+namespace :mailserv do
   
   desc "Restore the Mailserver from a backup"
   task :restore => [:environment] do

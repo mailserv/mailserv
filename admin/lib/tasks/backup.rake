@@ -1,6 +1,6 @@
 $stdout.sync = true
 require 'tempfile'
-namespace :mailserver do
+namespace :mailserv do
   namespace :backup do
 
     desc "Make a full backup of the Mailserver"

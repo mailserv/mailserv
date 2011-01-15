@@ -1,4 +1,4 @@
-namespace :mailserver do
+namespace :mailserv do
   
   task :load_hostconfig => [:environment] do
     h = Hostconfig.first || Hostconfig.new

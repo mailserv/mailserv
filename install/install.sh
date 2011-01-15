@@ -5,22 +5,10 @@ if [[ `uname -s` != "OpenBSD" ]]; then
   exit 1
 fi
 
-if [[ ! -f /usr/bin/gcc ]]; then
-  echo "You need to install the compXX.tgz package for this to work"
-  exit 1
-fi
-
 if [[ ! -d /usr/X11R6 ]]; then
   echo "You need to install the xbaseXX.tgz package for this to work"
   exit 1
 fi
-
-cat <<EOF >> /etc/ssh/ssh_config
-Host github.com
-  StrictHostKeyChecking no
-Host anoncvs.openbsd.org
-  StrictHostKeyChecking no
-EOF
 
 for file in `ls /var/mailserv/install/scripts/*`; do
   echo $file

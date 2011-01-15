@@ -6,9 +6,6 @@
 # --------------------------------------------------------------
 # sasl and filesystem stuff
 # --------------------------------------------------------------
-mkdir -p /usr/local/lib/sasl2
-install -m 644 /var/mailserv/install/templates/smtpd.conf /usr/local/lib/sasl2
-
 install /var/mailserv/install/templates/fs/bin/* /usr/local/bin/
 install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
 

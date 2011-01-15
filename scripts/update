@@ -1,0 +1,28 @@
+#!/usr/local/bin/ruby
+
+install_dir = "#{File.dirname(__FILE__)}/../"
+
+`ls #{install_dir}/install/scripts/*`.split.each do |file|
+  system("#{file} upgrade")
+end
+
+`ls #{install_dir}/install/updates/*`.split.each do |file_with_path|
+  if version = File.basename(file_with_path).match(/^(\d+)/)[1] rescue false
+    if %x{/usr/local/bin/mysql mail -rNe "select * from system_migrations where version='#{version}'" | wc -l}.to_i.zero?
+      system(file_with_path)
+      %x{/usr/local/bin/mysql mail -e "insert into system_migrations (version) values ('#{version}')"}
+    end
+  end
+end
+
+
+#for file in `ls /var/mailserv/install/scripts/*`; do
+#  echo $file
+#  $file upgrade 2>&1 | tee -a /var/log/install.log
+#end
+
+#for file in `ls /var/mailserv/install/updates/*`; do
+#  echo $file
+#  $file upgrade 2>&1 | tee -a /var/log/install.log
+#done
+

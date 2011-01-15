@@ -26,6 +26,7 @@ case $1 in
      php5-core \
      php5-mysql \
      php5-fastcgi \
+     postfix-mysql \
      nginx-- \
      god \
      gtar--

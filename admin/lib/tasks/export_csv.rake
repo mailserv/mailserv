@@ -1,4 +1,4 @@
-namespace :mailserver do
+namespace :mailserv do
 
   desc "Export the users as csv."
   task :export_csv => :environment do
