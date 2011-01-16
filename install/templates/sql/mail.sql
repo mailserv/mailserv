@@ -1,6 +1,4 @@
 
-ALTER TABLE users AUTO_INCREMENT = 2000;
-
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'required_score', '5.0', NULL);
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'rewrite_header Subject', '[SPAM _SCORE_]', NULL);
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'report_safe', '0', NULL);
