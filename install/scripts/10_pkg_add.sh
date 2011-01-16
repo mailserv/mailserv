@@ -18,7 +18,16 @@ the first version.
 Fetching versions:
 
 __EOT
-    pkg_add -v -m mysql-server
+    pkg_add -v -m \
+     ruby-rails \
+     ruby-rrd \
+     ruby-mysql \
+     ruby-mongrel \
+     ruby-fastercsv \
+     ruby-highline \
+     mysql-server \
+     nginx-- \
+     god
      ;;
 
 esac
