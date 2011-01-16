@@ -1,15 +1,25 @@
 #!/usr/local/bin/ruby
 
+%x{
+  echo "" >> /var/log/upgrade.log
+  echo "--------------------------------------------------------------------------------" >> /var/log/upgrade.log
+  echo -n "update started" >> /var/log/upgrade.log
+  date >> /var/log/upgrade.log
+  echo ""
+}
+
 install_dir = "#{File.dirname(__FILE__)}/../"
 
 `ls #{install_dir}/install/scripts/*`.split.each do |file|
-  system("#{file} upgrade")
+  system("#{file} upgrade 2>&1 | tee -a /var/log/upgrade.log")
 end
+
+system("/usr/local/bin/mysqld_start")
 
 `ls #{install_dir}/install/updates/*`.split.each do |file_with_path|
   if version = File.basename(file_with_path).match(/^(\d+)/)[1] rescue false
     if %x{/usr/local/bin/mysql mail -rNe "select * from system_migrations where version='#{version}'" | wc -l}.to_i.zero?
-      system(file_with_path)
+      system("#{file_with_path} 2>&1 | tee -a /var/log/upgrade.log")
       %x{/usr/local/bin/mysql mail -e "insert into system_migrations (version) values ('#{version}')"}
     end
   end
@@ -25,3 +35,12 @@ if [[ `ps -ax | grep god | grep -v grep | wc -l` -gt 0 ]]; then
   /usr/local/bin/god start mailserv >/dev/null 2>&1
 fi  
 }
+
+%x{
+  echo "" >> /var/log/upgrade.log
+  echo -n "update finished" >> /var/log/upgrade.log
+  date >> /var/log/upgrade.log
+  echo "--------------------------------------------------------------------------------" >> /var/log/upgrade.log
+  echo ""
+}
+

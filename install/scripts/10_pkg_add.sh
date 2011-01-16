@@ -11,8 +11,11 @@ case $1 in
     echo "Installing packages"
     mkdir /var/db/spamassassin 2>/dev/null
     cat <<__EOT
+    
 You will be prompted to install a postfix version. The recommendation is to install
-the latest stable version:
+the first version.
+
+Fetching versions:
 
 __EOT
     pkg_add -i postfix--mysql
@@ -36,13 +39,5 @@ __EOT
      god \
      gtar--
      ;;
-
-  (upgrade):
-    echo "  Upgrading Packages"
-    #
-    # Upgrade all existing packages
-    #
-    /usr/sbin/pkg_add -v -u -F update -F updatedepends
-    ;;
 
 esac
