@@ -1,5 +1,6 @@
 #!/bin/sh
 
+exit
 if [[ "$1" == "install" ]]; then
 
   /usr/local/bin/mysqld_start

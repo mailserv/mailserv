@@ -69,7 +69,7 @@ class InitialSchema < ActiveRecord::Migration
       t.column "banned_rulenames",          :string,  :limit => 64
     end
   
-    create_table "users" do |t|
+    create_table "users", :options => "auto_increment = 2000" do |t|
       t.column "domain_id",  :integer
       t.column "email",      :string,   :limit => 128, :default => "", :null => false
       t.column "name",       :string,   :limit => 128

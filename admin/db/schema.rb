@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20101216072412) do
 
   add_index "userpref", ["username"], :name => "username"
 
-  create_table "users", :force => true do |t|
+  create_table "users", :force => true, :options => "auto_increment = 2000" do |t|
     t.integer  "domain_id"
     t.string   "email",      :limit => 128, :default => "", :null => false
     t.string   "name",       :limit => 128
