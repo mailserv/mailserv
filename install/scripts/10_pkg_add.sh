@@ -18,7 +18,7 @@ the first version.
 Fetching versions:
 
 __EOT
-    pkg_add -i postfix--mysql
+    pkg_add -v -m -i postfix--mysql
     pkg_add -v -m clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \

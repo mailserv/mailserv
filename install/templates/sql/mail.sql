@@ -1,4 +1,6 @@
 
+ALTER TABLE users AUTO_INCREMENT = 2000;
+
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'required_score', '5.0', NULL);
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'rewrite_header Subject', '[SPAM _SCORE_]', NULL);
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'report_safe', '0', NULL);
@@ -11,5 +13,3 @@ INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  '
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'use_razor2', '0', NULL);
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'use_pyzor', '0', NULL);
 INSERT INTO userpref (username, preference, value, prefid) VALUES ('@GLOBAL',  'ok_locales', '1', NULL);
-
-ALTER TABLE users AUTO_INCREMENT = 2000;

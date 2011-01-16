@@ -1,3 +1,4 @@
+/^X-Spam-Level:\s+\*{15,}/ DISCARD
 /^Content-(Disposition|Type).*name\s*=\s*"?(.*(\.|=2E)(
              ade|adp|asp|bas|bat|chm|cmd|com|cpl|crt|dll|exe|
              hlp|ht[at]|
