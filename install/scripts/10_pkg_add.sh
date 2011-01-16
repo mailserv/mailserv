@@ -10,6 +10,12 @@ case $1 in
   (install):
     echo "Installing packages"
     mkdir /var/db/spamassassin 2>/dev/null
+    cat <<__EOT
+You will be prompted to install a postfix version. The recommendation is to install
+the latest stable version:
+
+__EOT
+    pkg_add -i postfix--mysql
     pkg_add -v -m clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \
@@ -26,7 +32,6 @@ case $1 in
      php5-core \
      php5-mysql \
      php5-fastcgi \
-     postfix-mysql \
      nginx-- \
      god \
      gtar--

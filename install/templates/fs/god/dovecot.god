@@ -3,7 +3,7 @@
 
 God.watch do |w|
   w.name = "dovecot"
-  w.group = "mailserver"
+  w.group = "mailserv"
   w.interval = 30.seconds # default
   w.start = "/usr/local/sbin/dovecot"
   w.stop = "kill `cat /var/dovecot/master.pid`"

@@ -6,7 +6,7 @@ RAILS_GEM_VERSION = %x{pkg_info | egrep "^ruby-rails" | awk '{print $1}'}.match(
 
 God.watch do |w|
   w.name = "account"
-  w.group = "mailserver"
+  w.group = "mailserv"
   w.interval = 30.seconds # default      
   w.start = "/usr/local/bin/mongrel_rails start -c #{RAILS_ROOT} -p 4214 -a 127.0.0.1 -d -e production \
     --user _mailserv --group _mailserv -P #{RAILS_ROOT}/log/mongrel.pid"

@@ -27,9 +27,7 @@ case $1 in
   (upgrade):
     echo -n "  Updating database schema"
     # Update the database
-    if [[ ! -d /install/system/ ]]; then
-      cd /var/mailserv/admin && /usr/local/bin/rake RAILS_ENV=production db:migrate > /dev/null
-    fi
+    cd /var/mailserv/admin && /usr/local/bin/rake RAILS_ENV=production db:migrate
     # Delete the cached javascript and stylesheet caches
     rm -f /var/sfta/app/public/javascripts/all.js /var/sfta/app/public/stylesheets/all.css 2>/dev/null
     echo "."

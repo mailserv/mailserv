@@ -15,14 +15,13 @@ end
   end
 end
 
-
-#for file in `ls /var/mailserv/install/scripts/*`; do
-#  echo $file
-#  $file upgrade 2>&1 | tee -a /var/log/install.log
-#end
-
-#for file in `ls /var/mailserv/install/updates/*`; do
-#  echo $file
-#  $file upgrade 2>&1 | tee -a /var/log/install.log
-#done
-
+%x{
+if [[ `ps -ax | grep god | grep -v grep | wc -l` -gt 0 ]]; then
+  /usr/local/bin/god stop admin    >/dev/null  # seems to be needed to get
+  /usr/local/bin/god stop account  >/dev/null  # the caches to be recreated
+  /usr/local/bin/god stop greylist >/dev/null 
+  sleep 2
+  /usr/local/bin/god restart mailserv >/dev/null 2>&1
+  /usr/local/bin/god start mailserv >/dev/null 2>&1
+fi  
+}

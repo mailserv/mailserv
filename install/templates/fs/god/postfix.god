@@ -3,7 +3,7 @@
 
 God.watch do |w|
   w.name = "postfix"
-  w.group = "mailserver"
+  w.group = "mailserv"
   w.interval = 30.seconds # default
   w.start = "/usr/local/sbin/postfix start"
   w.stop = "/usr/local/sbin/postfix stop"

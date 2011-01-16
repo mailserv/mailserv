@@ -3,7 +3,7 @@
 
 God.watch do |w|
   w.name = "spamd"
-  w.group = "mailserver"
+  w.group = "mailserv"
   w.interval = 30.seconds # default
   w.start = @spamd_command
   w.stop = "kill `cat /var/run/spamd.pid`"

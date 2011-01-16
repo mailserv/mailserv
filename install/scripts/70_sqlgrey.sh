@@ -11,4 +11,4 @@ if [[ "$1" == "install" ]]; then
   /usr/local/bin/mysql sqlgrey -e "alter table connect add id int primary key auto_increment first;"
   /usr/local/bin/mysqladmin shutdown
 
-esac
+fi

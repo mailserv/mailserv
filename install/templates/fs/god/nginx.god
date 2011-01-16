@@ -3,7 +3,7 @@
 
 God.watch do |w|
   w.name = "nginx"
-  w.group = "mailserver"
+  w.group = "mailserv"
   w.interval = 30.seconds # default      
   w.start = "/usr/local/sbin/nginx"
   w.stop = "/usr/local/sbin/nginx -s quit"
