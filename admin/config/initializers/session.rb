@@ -21,3 +21,8 @@ ActionController::Base.session_store = :active_record_store
 
 # Expire sessions after a week
 #ActionController::Base.session_options[:expire_after] = 1.week
+
+# Absolutely ensure that autoincrement is set
+if %x{/usr/local/bin/mysqldump mail users | grep AUTO_INCREMENT=2000 | wc -l}.to_i.zero?
+  ActiveRecord::Base.connection.execute("ALTER TABLE users AUTO_INCREMENT = 2000;")
+end
