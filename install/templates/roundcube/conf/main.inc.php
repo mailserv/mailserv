@@ -117,18 +117,18 @@ $rcmail_config['virtuser_query'] = '';
 // To use SSL/TLS connection, enter hostname with prefix ssl:// or tls://
 // If left blank, the PHP mail() function is used
 // Use %h variable as replacement for user's IMAP hostname
-$rcmail_config['smtp_server'] = 'tls://127.0.0.1';
+$rcmail_config['smtp_server'] = '127.0.0.1';
 
 // SMTP port (default is 25; 465 for SSL)
 $rcmail_config['smtp_port'] = 587;
 
 // SMTP username (if required) if you use %u as the username RoundCube
 // will use the current username for login
-$rcmail_config['smtp_user'] = '%u';
+$rcmail_config['smtp_user'] = '';
 
 // SMTP password (if required) if you use %p as the password RoundCube
 // will use the current user's password for login
-$rcmail_config['smtp_pass'] = '%p';
+$rcmail_config['smtp_pass'] = '';
 
 // SMTP AUTH type (DIGEST-MD5, CRAM-MD5, LOGIN, PLAIN or empty to use
 // best server supported one)

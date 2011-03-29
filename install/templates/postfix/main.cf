@@ -56,7 +56,7 @@ transport_maps = proxy:mysql:/etc/postfix/sql/routing.cf
 relay_domains = proxy:mysql:/etc/postfix/sql/routing.cf
 recipient_delimiter = +
 
-proxy_read_maps = 
+proxy_read_maps =
     proxy:mysql:/etc/postfix/sql/routing.cf
     proxy:mysql:/etc/postfix/sql/domains.cf
     proxy:mysql:/etc/postfix/sql/mailboxes.cf
@@ -84,7 +84,7 @@ smtpd_sasl_local_domain =
 
 smtpd_delay_reject = yes
 smtpd_helo_required = yes
-smtpd_recipient_restrictions = 
+smtpd_recipient_restrictions =
   permit_mynetworks
   permit_sasl_authenticated
   permit_auth_destination
@@ -101,7 +101,7 @@ smtpd_client_restrictions =
   reject_rbl_client zen.spamhaus.org
   reject_rbl_client bl.spamcop.net
 
-smtpd_sender_restrictions = 
+smtpd_sender_restrictions =
   reject_unknown_sender_domain
   reject_non_fqdn_sender
 
