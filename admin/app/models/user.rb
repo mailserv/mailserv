@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   def before_create
     self.quota = self.domain.quota if self.domain && self.domain.quota && !self.quota
+    ActiveRecord::Base.connection.execute("ALTER TABLE users AUTO_INCREMENT = 2000;") if User.count.zero?
   end
 
   def before_save

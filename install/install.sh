@@ -15,6 +15,7 @@ for file in `ls /var/mailserv/install/scripts/*`; do
   $file install 2>&1 | tee -a /var/log/install.log
 done
 
+/usr/local/bin/god quit
 /var/mailserv/scripts/mailserv_boot.sh
 
 echo ""

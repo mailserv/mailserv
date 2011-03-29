@@ -1,10 +1,20 @@
 #!/bin/sh
 
 if [[ "$1" == "install" ]]; then
-    /usr/local/bin/mysql_install_db > /dev/null 2>&1
+  /usr/local/bin/mysql_install_db > /dev/null 2>&1
 fi
 
-/usr/local/bin/mysqld_start
+pgrep -f god > /dev/null
+if [[ $? -eq 1 ]]; then
+  /usr/local/bin/god -c /etc/god/mysql.god
+else
+  /usr/local/bin/god load /etc/god/mysql.god
+fi
+/usr/local/bin/mysqladmin ping >/dev/null 2>&1
+while [ $? -ne 0 ]; do
+  sleep 1; /usr/local/bin/mysqladmin ping >/dev/null 2>&1
+done
+# We now know that the database is running
 
 case $1 in
 
@@ -13,11 +23,10 @@ case $1 in
     unset VERSION
     /usr/local/bin/mysql -e "grant select on mail.* to 'postfix'@'localhost' identified by 'postfix';"
     /usr/local/bin/mysql -e "grant all privileges on mail.* to 'mailadmin'@'localhost' identified by 'mailadmin';"
-    
-    cd /var/mailserv/admin && /usr/local/bin/rake db:setup RAILS_ENV=production > /dev/null 2>&1
-    cd /var/mailserv/admin && /usr/local/bin/rake db:migrate RAILS_ENV=production > /dev/null 2>&1
+
+    cd /var/mailserv/admin && /usr/local/bin/rake -s db:setup RAILS_ENV=production
+    cd /var/mailserv/admin && /usr/local/bin/rake -s db:migrate RAILS_ENV=production
     /usr/local/bin/mysql mail < /var/mailserv/install/templates/sql/mail.sql
-    /usr/local/bin/mysql mail -e "ALTER TABLE users AUTO_INCREMENT = 2000;"
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/spamcontrol.sql
     /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
     echo "."
@@ -33,4 +42,3 @@ case $1 in
     ;;
 
 esac
-/usr/local/bin/mysqladmin shutdown

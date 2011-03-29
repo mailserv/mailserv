@@ -2,7 +2,6 @@
 
 if [[ "$1" == "install" ]]; then
 
-  /usr/local/bin/mysqld_start
   mkdir -p /var/www/webmail
   echo "<?php header( 'Location: webmail/' ); ?>" > /var/www/webmail/index.php
   /var/mailserv/scripts/install_roundcube
@@ -11,6 +10,5 @@ if [[ "$1" == "install" ]]; then
   /usr/local/bin/mysql webmail -e "grant all privileges on webmail.* to 'webmail'@'localhost' identified by 'webmail'"
 
   /var/mailserv/scripts/install_awstats
-  /usr/local/bin/mysqladmin shutdown
 
 fi

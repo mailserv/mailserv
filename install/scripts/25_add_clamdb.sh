@@ -6,6 +6,6 @@ if [ ! -f /var/db/clamav/main.cld ]; then
   touch /var/log/clam-update.log && chown _clamav:_clamav /var/log/clam-update.log
   touch /var/log/freshclam.log && chown _clamav:_clamav /var/log/freshclam.log
   
-  /usr/local/bin/freshclam
+  /usr/local/bin/freshclam --no-warnings
   chown -R _clamav:_clamav /var/db/clamav
 fi
