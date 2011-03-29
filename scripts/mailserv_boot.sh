@@ -19,7 +19,7 @@ if [ -x /usr/local/bin/freshclam ]; then
   echo -n ' freshclam'
   touch /var/run/freshclam.pid
   chown _clamav:_clamav /var/run/freshclam.pid
-  /usr/local/bin/freshclam --daemon
+  /usr/local/bin/freshclam --daemon --no-warnings
 fi
 
 # ClamAV Startup

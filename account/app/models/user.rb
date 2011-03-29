@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   def get_from_session(session)
-    WebmailSession.find_by_sess_id(session).vars =~ /username.*?\"(.*?)\"/
+    ActiveSupport::Base64.decode64(WebmailSession.find_by_sess_id(session).vars) =~ /username.*?\"(.*?)\"/
     User.find_by_email $1
   end
 
