@@ -51,9 +51,8 @@ class Domain < ActiveRecord::Base
 
   def before_destroy
     begin
-      logger.info "Deleting domain: #{domain.name}"
-      @oldname = Domain.find(id).name
-      @oldid = id
+      logger.info "Deleting domain: #{self.name}" rescue ""
+      @oldname = self.name
       self.users.each do |user|
         user.destroy
       end
@@ -67,7 +66,7 @@ class Domain < ActiveRecord::Base
   end
 
   def after_destroy
-    %x{sudo rm -rf /var/mailserv/mail/#{@oldname}}
+    %x{sudo rm -rf /var/mailserv/mail/#{@oldname}} if @oldname.present?
   end
 
 end
