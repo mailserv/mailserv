@@ -59,6 +59,29 @@ EOF
 fi
 
 # --------------------------------------------------------------
+# Symlinks for ruby stuff 
+# --------------------------------------------------------------
+ln -sf /usr/local/bin/python2.6 /usr/local/bin/python
+ln -sf /usr/local/bin/python2.6-config /usr/local/bin/python-config
+ln -sf /usr/local/bin/pydoc2.6  /usr/local/bin/pydoc
+
+ln -sf /usr/local/bin/ruby18 /usr/local/bin/ruby
+ln -sf /usr/local/bin/erb18 /usr/local/bin/erb
+ln -sf /usr/local/bin/irb18 /usr/local/bin/irb
+ln -sf /usr/local/bin/rdoc18 /usr/local/bin/rdoc
+ln -sf /usr/local/bin/ri18 /usr/local/bin/ri
+ln -sf /usr/local/bin/testrb18 /usr/local/bin/testrb
+
+ln -sf /usr/local/bin/gem18 /usr/local/bin/gem
+ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
+
+# --------------------------------------------------------------
+# Update your RAILS_GEM_VERSION
+# --------------------------------------------------------------
+
+/usr/local/bin/gem install -v=2.3.4 rails 
+
+# --------------------------------------------------------------
 # /etc/daily
 # --------------------------------------------------------------
 /usr/local/bin/ruby -pi -e '$_.gsub!(/\/var\/spool\/mqueue/, "Mail queue")' /etc/daily
