@@ -78,8 +78,8 @@ ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
 # --------------------------------------------------------------
 # Update your RAILS_GEM_VERSION
 # --------------------------------------------------------------
-
-/usr/local/bin/gem install -v=2.3.4 rails 
+echo "Updating rails:"
+/usr/local/bin/gem install -V -v=2.3.4 rails 
 
 # --------------------------------------------------------------
 # /etc/daily
