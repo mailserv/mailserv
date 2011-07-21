@@ -66,7 +66,7 @@ fi
 hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false
 "; }'`
 
-
+#version check
 if [[ $hi_ver_check == "true"  ]]; then
      ln -sf /usr/local/bin/python2.6 /usr/local/bin/python
      ln -sf /usr/local/bin/python2.6-config /usr/local/bin/python-config
