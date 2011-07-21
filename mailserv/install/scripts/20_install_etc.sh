@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 # Only run on install
 [[ "$1" != "install" ]] && exit 1
 
@@ -59,27 +60,33 @@ EOF
 fi
 
 # --------------------------------------------------------------
-# Symlinks for ruby stuff 
-# --------------------------------------------------------------
-ln -sf /usr/local/bin/python2.6 /usr/local/bin/python
-ln -sf /usr/local/bin/python2.6-config /usr/local/bin/python-config
-ln -sf /usr/local/bin/pydoc2.6  /usr/local/bin/pydoc
-
-ln -sf /usr/local/bin/ruby18 /usr/local/bin/ruby
-ln -sf /usr/local/bin/erb18 /usr/local/bin/erb
-ln -sf /usr/local/bin/irb18 /usr/local/bin/irb
-ln -sf /usr/local/bin/rdoc18 /usr/local/bin/rdoc
-ln -sf /usr/local/bin/ri18 /usr/local/bin/ri
-ln -sf /usr/local/bin/testrb18 /usr/local/bin/testrb
-
-ln -sf /usr/local/bin/gem18 /usr/local/bin/gem
-ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
-
-# --------------------------------------------------------------
-# Update your RAILS_GEM_VERSION
+# Symlinks for ruby stuff v4.9 
 # --------------------------------------------------------------
 
-/usr/local/bin/gem install -v=2.3.4 rails 
+hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false
+"; }'`
+
+
+if [[ $hi_ver_check == "true"  ]]; then
+     ln -sf /usr/local/bin/python2.6 /usr/local/bin/python
+     ln -sf /usr/local/bin/python2.6-config /usr/local/bin/python-config
+     ln -sf /usr/local/bin/pydoc2.6  /usr/local/bin/pydoc
+     ln -sf /usr/local/bin/ruby18 /usr/local/bin/ruby
+     ln -sf /usr/local/bin/erb18 /usr/local/bin/erb
+     ln -sf /usr/local/bin/irb18 /usr/local/bin/irb
+     ln -sf /usr/local/bin/rdoc18 /usr/local/bin/rdoc
+     ln -sf /usr/local/bin/ri18 /usr/local/bin/ri
+     ln -sf /usr/local/bin/testrb18 /usr/local/bin/testrb
+
+     ln -sf /usr/local/bin/gem18 /usr/local/bin/gem
+     ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
+
+     # -----------------------------------------------------
+     # Update your RAILS_GEM_VERSION
+     # -----------------------------------------------------
+     echo "Updating rails:"
+    /usr/local/bin/gem install -V -v=2.3.4 rails 
+fi 
 
 # --------------------------------------------------------------
 # /etc/daily
