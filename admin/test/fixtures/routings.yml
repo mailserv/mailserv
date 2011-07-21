@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  destination: shellbyville.com
+  transport: smtp:1.2.3.4
+
+two:
+  id: 2
+  destination: washington.com
+  transport: smtp:2.3.4.5
+
+three:
+  id: 3
+  destination: springfield.com
+  transport: ":"

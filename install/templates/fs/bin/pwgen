@@ -1,0 +1,21 @@
+#!/usr/local/bin/ruby
+
+def gen_password
+	# List of vowels and vowel sounds
+	v = ['a', 'e', 'i', 'o', 'u', 'ae', 'ou', 'io','ea', 'ou', 'ia', 'ai']
+
+	#
+	# List of consonants and consonant sounds
+	#
+	c = ['b', 'c', 'd', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'u', 'v',
+			'w', 'tr', 'cr', 'fr', 'dr', 'wr', 'pr', 'th', 'ch', 'ph', 'st', 'sl', 'cl']
+
+	retval = ""
+	while retval.length < 8
+	    retval += c[rand(c.length)] + v[rand(v.length)]
+	end
+
+	return retval
+end
+
+print gen_password + "\n"

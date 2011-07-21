@@ -1,0 +1,37 @@
+<h1>Getting Started &mdash; Step 4 of 4</h1>
+
+<h2>Add System Administrator</h2>
+
+<%= error_messages_for :admin %>
+
+<% form_for :admin do |f| -%>
+
+<table class="system">
+
+  <tr>
+    <th><%= f.label :username, "Username" %></th>
+    <td><%= f.text_field :username, :size => 25 -%></td>
+  </tr>
+
+  <tr>
+    <th><%= f.label :email, "Email" %></th>
+    <td><%= f.text_field :email, :size => 25 -%></td>
+  </tr>
+
+  <tr>
+    <th><%= f.label :password, "Password" %></th>
+    <td><%= f.password_field :password, :size => 25  %></td>
+  </tr>
+
+  <tr>
+    <th><%= f.label :password_confirmation, "Confirm Password" %></th>
+    <td><%= f.password_field :password_confirmation, :size => 25  %></td>
+  </tr>
+
+</table>
+
+<div style="margin-top: 1em;">
+  <%= submit_tag "Finish", { :id => 'submit' }  %>
+</div>
+
+<% end %>

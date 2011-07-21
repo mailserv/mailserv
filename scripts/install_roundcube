@@ -1,0 +1,53 @@
+#!/usr/local/bin/ruby
+require 'rubygems'
+require 'fileutils'
+include FileUtils
+
+basedir = "/var/www/webmail"
+mkdir_p basedir
+
+puts "Getting latest Roundcube version"
+roundcube_file=`lynx -dump http://sourceforge.net/projects/roundcubemail/files/ | egrep "(roundcubemail-[0-9\.]+\.tar\.gz\/download$)" | awk '{print $2}' | head -1`.strip
+
+rc_dir = "/var/www/webmail/" + roundcube_file.match(/(roundcubemail-[\d\.]+)\.tar/)[1]
+
+puts "Downloading Roundcube version " + roundcube_file.match(/([\d\.]+)\.tar/)[1].to_s
+system "ftp -Vmo - #{roundcube_file} | tar zxf - -C /var/www/webmail"
+
+# Linking 
+rm_f "#{basedir}/webmail"
+ln_s rc_dir, "#{basedir}/webmail"
+
+puts "Downloading plugins"
+system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sieverules.tar.gz  | tar zxf - -C #{basedir}/webmail/plugins/"
+system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sauserprefs.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+
+puts "Installing Configuration"
+install "/var/mailserv/install/templates/roundcube/conf/main.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
+install "/var/mailserv/install/templates/roundcube/conf/db.inc.php",            "#{basedir}/webmail/config/", :mode => 0644
+install "/var/mailserv/install/templates/roundcube/messagesize/config.inc.php", "#{basedir}/webmail/plugins/messagesize/", :mode => 0644
+install "/var/mailserv/install/templates/roundcube/sieverules/config.inc.php",  "#{basedir}/webmail/plugins/sieverules/",  :mode => 0644
+install "/var/mailserv/install/templates/roundcube/sauserprefs/config.inc.php", "#{basedir}/webmail/plugins/sauserprefs/", :mode => 0644
+install "/var/mailserv/install/templates/roundcube/password/config.inc.php",    "#{basedir}/webmail/plugins/password/",    :mode => 0644
+
+taskbar = File.read("/var/www/webmail/webmail/skins/default/includes/taskbar.html")
+File.open("/var/www/webmail/webmail/skins/default/includes/taskbar.html", "w") do |f|
+  taskbar.each do |line|
+    if line =~ /\<div id="taskbar"\>/
+      f.puts line
+      f.puts "<a href=\"../../../account/auth/autologin?id=<roundcube:var name='request:roundcube_sessid' />\">Admin</a>"
+    elsif line =~ /account\/auth\/autologin/
+      next
+    else
+      f.puts line
+    end
+  end
+end
+
+puts "Finished\n\n"
+puts "If you have updated, please have a look at /var/www/webmail/webmail/SQL/mssql.upgrade.sql"
+puts "and apply as needed.\n\n"
+puts "Also, please test the plugins (especially sive/filter, spam and password)."
+puts "This is especially true if you have installed a new major release.\n\n"

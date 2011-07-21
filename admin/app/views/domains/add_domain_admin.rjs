@@ -1,0 +1,10 @@
+#if @entry.errors.empty?
+  page.insert_html(:bottom, 'domain_admins', :partial => 'domain_admin', :object => @domain_admin, :locals => {:domain => @domain})
+  page.visual_effect :highlight, "domain_admins_#{@domain_admin.id}", :duration => 1
+#else
+#  page.replace_html 'errors', :partial => "errors", :object => @entry.errors
+#  page.visual_effect :appear, "error_box", :duration => 0.3
+#  page.delay(4) do
+#    page.visual_effect :fade, "error_box"
+#  end
+#end

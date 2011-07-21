@@ -1,0 +1,61 @@
+<h2>Restore</h2>
+
+<div id="restoreprogress">
+  <%= render :partial => "restore_progress" -%>
+</div>
+
+<%= form_tag %>
+
+<table>
+  <tr>
+    <th>Select Archive</th>
+    <th>Select what to restore</th>
+  </tr>
+  <tr valign="top">
+    <td style="width: 30%;">
+    <% @restore.each do |filename| %>
+      <p><input type="radio" name="restore[file]" value="<%= filename %>"> <%= display_filename(filename) %></input></p>
+    <% end %>
+    </td>
+    <td>
+      
+      <div>
+        <label for="restore[all]" class="none">
+        <input id="all" type="checkbox" name="restore[all]" value="all" checked="checked" /> restore all files from this archive</label>
+        <input type="hidden" name="restore[all]" value="none" />
+      </div>
+
+      <div style="clear: both;" class="margin-top2">
+        <label for="restore[user]" class="none">Restore all deleted emails for domain/user</label>
+        <select id="user" name="restore[user]" disabled="disabled">
+          <%= options_for_select @content %>
+        </select>
+      </div>
+      
+      <div class="margin-top2">
+        <%= submit_tag "restore files", {:id => "save"} %>
+      </div>
+    </td>
+  </tr>
+</table>
+
+</form>
+
+<%= observe_field "all", :update => 'user', :function => update_page {|page|
+    page << "if ($('all').checked) {
+        $('user').disabled = true
+      } else {
+        $('user').disabled = false
+      }"
+  } %>
+
+<%= periodically_call_remote(:url => { :action => 'restore_progress', :id => @restore_pid}, :frequency => 3, :update => 'restoreprogress') if Backup.restore_is_running? %>
+
+<div class="example">
+  <h2>Information</h2>
+  
+  <p>When restoring a users or domains file from an archive, the operation is safe, in the sense that no 
+    newer mails will ever be overwritten. The only thing that will happen is that any deleted (or moved) 
+    mails for a user or for that domain will reappear again.</p>
+  <p>When restoring all files, this will also reload the database with the restored database backup file.</p>
+</div>

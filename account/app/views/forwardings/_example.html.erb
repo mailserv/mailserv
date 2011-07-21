@@ -1,0 +1,32 @@
+<p>&nbsp;</p>
+<div class="example" style="background-color: white;">
+  <h2>Example, when a mail</h2>
+
+  <table>
+    <tr>
+      <th>arrives to</th>
+      <th>deliver to</th>
+      <th>effect</th>
+    </tr>
+    <tr>
+      <td>postmaster@example.com</td>	
+      <td>john@example.com</td>
+      <td style="text-align: left;">Redirect emails for postmaster to john.</td>
+    </tr>
+    <tr>
+      <td>@example.com</td>
+      <td>jane@example.com</td>
+      <td style="text-align: left;">Forward all email to email addresses in the domain example.com to jane. This does not apply to users in the `email` table though (like tina@example.com). So more specific users of a domain always have a higher precedence than these so called "catch-all" accounts.</td>
+    </tr>
+    <tr>
+      <td>@example.com</td>
+      <td>@another.domain</td>
+      <td style="text-align: left;">This is a whole domain redirection. Every email address in the example.com domain will be directed to the same user at another.domain. So john@example.com will be redirected to john@another.domain.</td>
+    </tr>
+    <tr>
+      <td>jane@example.com</td>
+      <td>dilbert@example.com,dilbert@gmail.com</td>
+      <td style="text-align: left;">Forward email that is sent to jane@example.com to the two email addresses listed on the right side. Both users get a copy.</td>
+    </tr>
+  </table>
+</div>

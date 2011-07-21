@@ -1,0 +1,49 @@
+#shutdown {
+  font-size: 130%;
+}
+
+#shutdown form {
+  padding: 10px 0px;
+}
+
+#shutdown form a {
+  border: 2px solid gray; 
+  padding: 0.4em 1em; 
+  background-color: #efefef; 
+  margin: 10px 10px; 
+}
+
+#mainmenuheader
+{
+	background: url(/images/blueback.png) repeat-x;
+	color: #fff;
+	margin: 0;
+	padding: 5px 10px 5px 10px;
+	font-size: 25px;
+	border: 0;
+}
+
+#mainmenubar {
+	margin: 0 0 10px 0;      
+}
+
+#mainmenubar a {
+  font-size: 13px;
+}
+#mainmenubar ul li a:visited {
+  color: black;
+}
+#mainmenubar ul li a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+#mainmenubar ul li.admin {
+	float: right;
+	padding: 0;
+	margin: 0;
+}
+
+.yuimenubarnav li {
+	font-size: small;
+}

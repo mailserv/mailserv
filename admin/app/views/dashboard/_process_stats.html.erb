@@ -1,0 +1,60 @@
+      <table class="small">
+        <caption style="padding-top: 0;">Key Processes</caption>
+        <tr>
+          <th colspan="2" nowrap="nowrap">Processes</th>
+          <th nowrap="nowrap">Last Update</th>
+        </tr>
+        <tr>
+          <td>ClamAV</td>
+          <td><%= display_enabled(@proc[:clamd]) %></td>
+          <td nowrap="nowrap"><%= @updates[:clam].strftime("%x %H:%M") %></td>
+        </tr>
+        <tr>
+          <td>SpamAssassin</td>
+          <td><%= display_enabled(@proc[:freshclam]) %></td>
+          <td><%= @updates[:spamassassin].strftime("%x %H:%M") %></td>
+        </tr>
+        <tr>
+          <td>Postfix</td>
+          <td><%= display_enabled(@proc[:postfix]) %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Dovecot</td>
+          <td><%= display_enabled(@proc[:dovecot]) %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>MySQL</td>
+          <td><%= display_enabled(@proc[:mysqld]) %></td>
+          <td>-</td>
+        </tr>
+      </table>
+
+      <table class="noborder small">
+        <caption>Connectivity</caption>
+        <tr>
+          <th>Type</th>
+          <th class="center">Verified</th>
+        </tr>
+        <tr>
+          <td>DNS</td>
+          <td class="center" id="dns_test"><span style="color: #bbb">checking</span></td>
+        </tr>
+        <tr>
+          <td>http</td>
+          <td class="center" id="http_test"><span style="color: #bbb">checking</span></td>
+        </tr>
+        <tr>
+          <td>https</td>
+          <td class="center" id="https_test"><span style="color: #bbb">checking</span></td>
+        </tr>
+      </table>
+
+<% javascript_tag do %>
+Event.observe(window, 'load', function() {
+  <%= remote_function(:update => "dns_test", :url => { :action => :dns_test }) %>
+  <%= remote_function(:update => "http_test", :url => { :action => :http_test }) %>
+  <%= remote_function(:update => "https_test", :url => { :action => :https_test }) %>
+});
+<% end %>

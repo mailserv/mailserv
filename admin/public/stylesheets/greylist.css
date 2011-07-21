@@ -1,0 +1,19 @@
+.value-input, .rcpt-input {
+  width: 600px;
+  vertical-align: center;
+}
+
+.index_description ul {
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.index_description li {
+  list-style-type: disc;
+}
+
+#clause_description {
+  font-weight: bold;
+  color: #505050;
+  font-size: 95%;
+}

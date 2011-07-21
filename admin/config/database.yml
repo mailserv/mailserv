@@ -1,0 +1,53 @@
+development:
+  adapter: mysql
+  database: mail
+  username: mailadmin
+  password: mailadmin
+  socket: <%= ["/opt/local/var/run/mysql5/mysqld.sock", "/var/run/mysql/mysql.sock"].detect{|socket| 
+File.exist?(socket) 
+} %>
+  reconnect: true
+
+test:
+  adapter: mysql
+  database: mail_test
+  username: root
+  password:
+  socket: <%= ["/opt/local/var/run/mysql5/mysqld.sock", "/var/run/mysql/mysql.sock"].detect{|socket| 
+File.exist?(socket) 
+} %>
+  reconnect: true
+
+production:
+  adapter: mysql
+  database: mail
+  username: mailadmin
+  password: mailadmin
+  socket: /var/run/mysql/mysql.sock
+  reconnect: true
+
+webmail_db:
+  adapter: mysql
+  database: webmail
+  username: webmail
+  password: webmail
+  socket: /var/run/mysql/mysql.sock
+  reconnect: true
+
+webmail_db_dev:
+  adapter: mysql
+  database: webmail
+  username: root
+  password: 
+  socket: <%= ["/opt/local/var/run/mysql5/mysqld.sock", "/var/run/mysql/mysql.sock"].detect{|socket| 
+File.exist?(socket) 
+} %>
+  reconnect: true
+
+sqlgrey_db:
+  adapter: mysql
+  database: sqlgrey
+  username: sqlgrey
+  password: sqlgrey
+  socket: /var/run/mysql/mysql.sock
+  reconnect: true

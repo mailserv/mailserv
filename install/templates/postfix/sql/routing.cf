@@ -1,0 +1,7 @@
+user = postfix
+password = postfix
+dbname = mail
+table = routings
+select_field = transport
+where_field = destination
+hosts = localhost

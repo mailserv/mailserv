@@ -1,0 +1,88 @@
+<%- content_for :head do %>
+<script type="text/javascript">
+YAHOO.util.Event.onContentReady("backup", function() {
+  var oLinkButton1 = new YAHOO.widget.Button("backup_now"); 
+  var oLinkButton2 = new YAHOO.widget.Button("abort_backup"); 
+});
+</script>
+<% end %>
+<%= error_messages_for :backup %>
+
+
+<div class="yui-ge">
+  <div class="yui-u first">
+    <h2>Backup</h2>
+
+    <% form_for :backup do |f| %>
+
+      <table class="system">
+        <tr>
+          <th style="width: 10%"><%= f.label "location" %></th>
+          <td><%= f.text_field "location", { :size => 64 } %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "encryption_key" %></th>
+          <td><%= f.password_field "encryption_key", { :size => 32 } %> (optional)</td>
+        </tr>
+        <tr>
+          <th><%= f.label "encryption_key_confirmation" %></th>
+          <td><%= f.password_field "encryption_key_confirmation", { :size => 32 } %></td>
+        </tr>
+      </table>
+
+      <div>
+        <%= submit_tag "save", { :id => "save", :class => "add" } %>
+      </div>
+
+    <% end %>
+  </div>
+  <div class="yui-u">
+  <% if Backup.first %>
+  <h2>Backup Control</h2>
+  <table class="system">
+    <tr>
+      <td>
+        <% if Backup.is_running? %>
+        <p>Backup is currently running</p>
+        <% else %>
+        <p>No Backup is currently running</p>
+        <% end %>
+        <p>&nbsp;</p>
+        <p>
+          <% if Backup.is_running? %>
+          <%= link_to "Abort Backup", { :action => 'abort_backup' }, :id => 'abort_backup' %>
+          <% else %>
+          <%= link_to "Start Full Backup", { :action => 'start_backup' }, :id => 'backup_now' %>
+          <% end %>
+        </p>
+      </td>
+    </tr>
+  </table>
+  <% end %>
+  </div>
+</div>
+
+<div class="example">
+  <h2>Configuration information</h2>
+  <p>The location is on the format of <tt>proto://user:pass@server/directory</tt>, example:</p>
+  <ul>
+    <li><tt>sftp://backup:backup@backup.example.com/mailserver</tt></li>
+    <li><tt>ftp://backup_user:password@10.2.3.4/mailserver</tt></li>
+  </ul>
+  <p>Currently, only ftp and sftp are valid protocols.</p>
+  <p>If you enter an encryption key (completely optional), please make sure that you store it safely as you won't be able to
+    restore the mail server without it. The backups will be encrypted using 256 bit AES encryption.</p>
+</div>
+
+<div class="example">
+  <h2>General Information</h2>
+  <p>The <%= CONF['product'].capitalize %> is scheduled to backup itself every day on to a remote sftp server.</p>
+  <p>On the 1st of every month, a full backup of the <%= CONF['product'].capitalize %> directory and configuration is performed,
+    and on every other day of the month is a differential backup performed. In the differential backup
+    is all the data and configuration changes that has occurred since the first of every month.</p>
+  <p>On the first of the month, the previous month backup is save as last month so at any given moment,
+    there should be backups for the current and the previous month available. If backups needs to be
+    kept for longer than that, it is recommended that the <%= CONF['product'].capitalize %> backup directory itself is
+    being backed up on the backup server.</p>
+</div>
+

@@ -1,0 +1,1 @@
+page.visual_effect :Fade, "ip_#{@del_id}", :duration => 0.2

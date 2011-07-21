@@ -1,0 +1,24 @@
+<div class="example">
+<h2>A Couple of notes about Certificates</h2>
+
+  <ul>
+    <li>Please read the <a href="http://docs.allardsoft.com/mailserver/certificates" target="_blank">documentation</a> for a
+      full description on the fields and what to do.</li>
+
+    <li>The only required field is the CN (Common Name) which must match the hostname of the machine.</li>
+
+    <li>You only have to generate a new key if the old one has been compromised.</li>
+
+    <li>There's a one-way relationship between a certificate and it's key. You can generate a new certificate without
+      generating a new key but if you generate a new key, you also have to generate a new certificate.</li>
+
+    <li>With a self-signed certificate, you will always get a warning when connecting that they certificate cannot be verified.</li>
+
+    <li>The only way to get a secure connection without being warned every time the client connects is by using
+      a CA signed certificate. This can typically be purchased from you domain registrar. When registering for a new
+      CA signed certificate, generate a new <%= link_to "CSR (Certificate Signing Request)", :action => 'csr' %> and 
+      post this to the CA. The CA will return a Certificate that it has signed and this can be 
+      <%= link_to "uploaded", :action => 'upload' %> to the server.</li>
+  </ul>
+
+</div>

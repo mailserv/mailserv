@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title><%= page_title -%></title>
+
+  <%= javascript_include_tag :defaults, 'yui/yahoo-dom-event', 'yui/container-min',
+    'yui/element-beta', 'yui/menu-min', 'yui/button-min', :cache => 'javascript' %>
+  <%= application_javascript_tag %>
+  <%= stylesheet_link_tag "yui/_reset-fonts-grids", 'yui/menu', 'yui/container',
+    'yui/button', :cache => 'yui/stylesheet' %>
+  <%= stylesheet_link_tag '_base', 'application', 'example', 'menu', 'error',
+    'password_strength', 'system' %>
+  <%= application_stylesheet_tag %>
+  <%= active_scaffold_includes %>
+  <%= yield(:head) -%>
+</head>
+
+<body id="<%= page_id -%>" class="yui-skin-sam">
+  <%# 
+    the id on the containing div determines the page width.
+    #doc = 750px; #doc2 = 950px; #doc3 = 100%; #doc4 = 974px
+  %>
+  <div id="doc3">
+    <h1 style="border: 0; margin: 0; padding: 5px; color: #4B7399;">Mailserv Admin Console</h1>
+    <div id="hd">
+    <%= render :partial => 'layouts/menubar' %>
+    </div><!-- id="hd" -->
+
+    <%= render :partial => 'layouts/notice_error_display' %>
+    <div id="bd" style="padding: 10px 30px">
+      <%= yield %>
+      <%= render :partial => 'layouts/shutdown' %>
+    </div><!-- id="bd" -->
+
+    <div style="clear: both; height=1%;">&nbsp;</div>
+    <div id="footer">
+    </div>
+  </div>
+
+</body>
+</html>

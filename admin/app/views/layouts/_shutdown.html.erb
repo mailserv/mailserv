@@ -1,0 +1,8 @@
+<div id="shutdown" style="visibility: hidden;">
+	<div class="bd" style="padding: 2em 0; text-align: center;">
+	  <%= form_tag %>
+    <%= link_to_remote "Shutdown", { :url => { :controller => 'system/shutdown', :action => 'shutdown' }} %>
+    <%= link_to_remote "Reboot", :url => { :controller => 'system/shutdown', :action => 'reboot' } %>
+    </form>
+	</div>
+</div>

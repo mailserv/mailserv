@@ -1,0 +1,85 @@
+<%# 
+  self.title = "Time"
+  documentation_link("installation/time")
+%>
+
+<% form_for :timezone do |f| %>
+
+  <% fields_for :ntp do |ntp_form| %>
+
+<table class="left">
+  <tr>
+    <th>Timezone</th>
+    <td>
+      <%= select "timezone", "country", @timezone.countries %>
+      <span id="tz_city">
+      <%= render :partial => 'timezone_cities', :object => @timezone.cities %>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <th>NTP configuration</th>
+    <td>
+      <%= ntp_form.check_box :enabled %> NTP enabled
+    </td>
+  </tr>
+  <tr>
+    <th rowspan="3">NTP Servers</th>
+      <td><%= ntp_form.text_field :name_1, :class => "input" %></td>
+      <td id="ntp_name_1_test" class="edit center"></td>
+        </tr>
+  </tr>
+  <tr>
+    <td><%= ntp_form.text_field :name_2, :class => "input" %></td>
+    <td id="ntp_name_2_test" class="edit center"></td>
+  </tr>
+  <tr>
+    <td><%= ntp_form.text_field :name_3, :class => "input" %></td>
+    <td id="ntp_name_3_test" class="edit center"></td>
+  </tr>
+</table>
+
+  <% end %>
+
+<div class="save"><%= submit_tag "Save", {:id => "saveButton"} %></div>
+
+<% end %>
+<% javascript_tag do %>
+Event.observe(window, 'load', function() {
+  if ($('ntp_name_1').value != '') {
+    show_spinner(ntp_name_1_test);
+    <%= remote_function :update => :ntp_name_1_test, :url => {:action => 'check_ntp'},
+          :with => "'server=' + $('ntp_name_1').value" %>
+  }
+
+  if ($('ntp_name_2').value != '') {
+    show_spinner(ntp_name_2_test);
+    <%= remote_function :update => :ntp_name_2_test, :url => {:action => 'check_ntp'},
+          :with => "'server=' + $('ntp_name_2').value" %>
+  }
+
+  if ($('ntp_name_3').value != '') {
+    show_spinner(ntp_name_3_test);
+    <%= remote_function :update => :ntp_name_3_test, :url => {:action => 'check_ntp'},
+          :with => "'server=' + $('ntp_name_3').value" %>
+  }
+});
+<% end %>
+<%= observe_field(:ntp_name_1, :function => "show_spinner(ntp_name_1_test);") %>
+<%= observe_field(:ntp_name_1, :url => {:action => 'check_ntp'}, 
+    :update => :ntp_name_1_test,
+    :with => 'server') %>
+
+<%= observe_field(:ntp_name_2, :function => "show_spinner(ntp_name_2_test);") %>
+<%= observe_field(:ntp_name_2, :url => {:action => 'check_ntp'}, 
+    :update => :ntp_name_2_test,
+    :with => 'server') %>
+
+<%= observe_field(:ntp_name_3, :function => "show_spinner(ntp_name_3_test);") %>
+<%= observe_field(:ntp_name_3, :url => {:action => 'check_ntp'}, 
+    :update => :ntp_name_3_test,
+    :with => 'server') %>
+
+<%= observe_field("timezone_country", :update => :tz_city, 
+  :url => { :action => :timezone_change_country }, :on => "changed",
+  :with => "'country='+ escape($('timezone_country').value)") %>

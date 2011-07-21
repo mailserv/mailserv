@@ -1,0 +1,102 @@
+h1. Drag-Drop Sortable for ActiveScaffold
+
+The master branch is compatible with rails 2.3. For Rails 2.2 compatibility, use the rails-2.2 branch.
+
+h2. Overview
+
+This plugin enables those slicker-than-snot ajax drag-drop sortable elements on your active-scaffold page, with so little configuration you almost get it for free.
+
+h2. Installation
+
+You'll need the corresponding branch of ActiveScaffold to use this.
+
+
+<pre>
+# rails 2.0
+git clone git://github.com/activescaffold/active_scaffold_sortable.git vendor/plugins/active_scaffold_sortable
+</pre>
+
+h2. Usage
+
+h4. Step 1
+
+Create a model with a column named 'position':
+
+<pre>
+# app/models/entry.rb
+
+# id           integer
+# title        string(255)
+# birthday     date
+# position     integer
+
+class Entry < ActiveRecord::Base
+end
+</pre>
+
+h4. Step 2
+
+Create your scaffold controller 
+
+<pre>
+# app/controllers/entries_controller.rb
+
+class EntryController < ApplicationController
+  active_scaffold :entries do |config|
+    config.actions << :sortable
+  end
+end
+</pre>
+
+and layout
+
+<pre>
+# app/views/layouts/application.rhtml
+<html>
+<head>
+  <title>active scaffold demo application</title>
+  <%= javascript_include_tag :defaults %>
+  <%= active_scaffold_includes %>
+</head>
+<body>
+  <%= yield %>
+</body>
+</html>
+</pre>
+
+h4. Step 3
+
+If you're using restful routes, append this to your route in routes.rb:
+
+<pre>
+  map.resources :tasks, :active_scaffold => true, :active_scaffold_sortable => true
+</pre>
+
+h2. Notice:
+
+If you'd like to use a different column name, put this line in your controller:
+
+<pre>
+...
+active_scaffold :entries do |config|
+  config.sortable.column = :position
+end
+...
+</pre>
+
+h2. Support
+
+If you have issues installing the plugin, search / post to the "Active Scaffold ":http://groups.google.com/group/activescaffold forum or "Create an issue":http://code.google.com/p/activescaffold/issues/list
+
+h2. Contributing
+
+Fork, hack, push, and request a pull:
+
+http://github.com/activescaffold/active_scaffold_sortable/
+
+h2. Author
+
+Contact me:
+<pre>
+  Tim Harper - irb(main):001:0> ( 'tim_see_harperATgmail._see_om'.gsub('_see_', 'c').gsub('AT', '@') )
+</pre>

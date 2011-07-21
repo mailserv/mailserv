@@ -1,0 +1,20 @@
+#!/usr/local/bin/ruby
+
+# Check if this service is already running
+unless %x{ps -axww | grep -v grep | grep learnspam | egrep -v "^#{Process.pid}" | wc -l}.to_i.zero?
+  exit 1
+end
+
+#
+# Learn Spam
+#
+%x{find /var/mailserver/mail/*/*/.Spam.LearnAsSpam/*/* 2>/dev/null}.each do |spamfile|
+  %x{/usr/local/bin/sa-learn --spam #{spamfile} > /dev/null && rm #{spamfile} 2>/dev/null}
+end
+
+#
+# Learn Ham
+#
+%x{find /var/mailserver/mail/*/*/.Spam.LearnAsNotSpam/*/* 2>/dev/null}.each do |spamfile|
+  %x{/usr/local/bin/sa-learn --ham #{spamfile} > /dev/null && rm #{spamfile} 2>/dev/null}
+end

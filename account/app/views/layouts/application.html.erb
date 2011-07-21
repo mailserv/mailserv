@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<head>
+  <title><%= @page_title + " | " if @page_title -%>Account setup</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= stylesheet_link_tag "_reset-fonts-grids", 'menu', 'container', 'button', 
+    'button-skin', :cache => 'stylesheet' %>
+  <%= stylesheet_link_tag 'application', 'password_strength' %>
+  <%= javascript_include_tag :defaults, 'yui/yahoo-dom-event', 'yui/container_core', 
+    'yui/menu', 'yui/element-beta', 'yui/button' %>
+  <%= active_scaffold_includes %>
+  <%= yield(:head) %>
+</head>
+
+<body id="page_<%= page_id %>" class="yui-skin-sam page_<%= controller.controller_name %>">
+
+<%# 
+  the id on the containing div determines the page width.
+  #doc = 750px; #doc2 = 950px; #doc3 = 100%; #doc4 = 974px
+%>
+<div id="doc3">
+
+  <div style="float: right; margin: 0; padding: 0; font-size: small;">
+    <%= link_to "Close &amp; Return to Webmail", {:controller => :auth, :action => :logout} -%>
+  </div>
+
+  <div id="mainmenubar" class="yuimenubar yuimenubarnav">
+    <div class="bd">
+      <ul class="first-of-type">
+        <% unless current_user.admin_for.count.zero? -%>
+        <li class="yuimenubaritem first-of-type"><%= link_to "Domain Admin", {:controller => :domains}, {:class => "yuimenubaritemlabel"} -%></li>
+        <% end -%>
+      </ul>            
+    </div>
+  </div>
+  
+  <% if flash[:notice] -%>
+  <div class="notice"><%= flash[:notice] -%></div>
+  <% flash[:notice] = nil; end -%>
+  <% if flash[:error] -%>
+  <div class="error"><%= flash[:error] -%></div>
+  <% end -%>
+  
+  <div id="content">
+  <%= yield %>
+  <div style="clear: both; height=1%;">&nbsp;</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<p style="margin-bottom: 2em;"><%= link_to "Back to the domains", domains_path -%></p>
+
+<%= render :active_scaffold => "users",
+           :constraints => { :domain_id => @domain.id }, :params => {:domain_id => @domain.id} %>
+
+<p>&nbsp;</p>
+
+<%= render :active_scaffold => "forwardings",
+           :constraints => { :domain_id => @domain.id } %>

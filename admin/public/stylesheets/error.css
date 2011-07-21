@@ -1,0 +1,76 @@
+.fieldWithErrors input, .fieldWithErrors textarea, .fieldWithErrors select  {
+  border: 2px solid #7F1310;
+  display: inline;
+  padding: 2px;
+}
+
+div.error
+{
+  background-color: #ff686e;
+  padding: 1em 2em;
+  margin: 1em auto;
+  font-size: small;
+  font-weight: bold;
+}
+
+#errorExplanation {
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #FFE3E3;
+}
+
+#errorExplanation h2 {
+  background-color: #7F1310;
+  color: white;
+  font-size: 115%;
+  font-weight: bold;
+  padding: 3px 6px;
+}
+
+#errorExplanation p {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 115%;
+}
+
+#errorExplanation ul {
+  margin-top: 1em;
+  margin-left: 4em;
+  font-size: 115%;
+}
+
+#errorExplanation li {
+  list-style-type: disc;
+}
+
+#form_row div.fieldWithErrors {
+  display: inline;
+  padding-right: 2px;
+}
+
+#form_row div.fieldWithErrors input, input.fieldWithErrors {
+  background-color: #fcc;
+}
+
+div.error p {
+  font-weight: bold;
+}
+
+div.error ul {
+  margin: 1em 3em;
+}
+
+div.error li {
+  list-style-type: circle;
+  line-height: 1.5em;
+  font-size: 120%;
+}
+
+div.notice {
+  background-color: #7cfe5e;
+  padding: 1em 2em;
+  margin: 1em auto;
+  font-size: small;
+  font-weight: bold;
+}

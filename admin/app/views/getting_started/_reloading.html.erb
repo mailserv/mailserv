@@ -1,0 +1,13 @@
+<script type="text/javascript">
+  var updatePanel = new YAHOO.widget.Panel("wait", 
+    { width:"240px", close: false, draggable: false, zindex: 4,
+      fixedcenter: true, modal: true, visible: false }
+  );
+  
+  updatePanel.setHeader("Reloading services, please wait...");
+  updatePanel.setBody('<img src="/images/loading.gif" />');
+  updatePanel.render(document.body);
+  updatePanel.show();
+
+  setTimeout("window.location = 'step2'",5000);
+</script>

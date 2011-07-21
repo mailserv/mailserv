@@ -1,0 +1,18 @@
+<h2>Hostname Configuration</h2>
+
+<% form_for :hostname do |f| %>
+
+<table class="system" style="text-align: left; width: auto;">
+  <tr>
+    <th>Hostname</th>
+    <th>Domain</th>
+  </tr>
+  <tr>
+    <td><%= f.text_field "hostname" %></td>
+    <td><%= f.text_field "domain" %></td>
+  </tr>
+</table>
+
+  <%= submit_tag "Save", { :id => 'save' } %>
+<% end %>
+

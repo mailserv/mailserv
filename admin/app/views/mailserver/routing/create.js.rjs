@@ -1,0 +1,2 @@
+page.insert_html :bottom, 'routing_list', :partial => 'route', :object => @route
+page['route_form'].reset

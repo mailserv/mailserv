@@ -1,0 +1,22 @@
+      <?php if ($set_pfsync) {?>
+        <tr>
+          <td>Sync Device</td>
+          <td>
+            <input type="text" name="syncdev" size="15" value="<?php print $hostname_if[0]['syncdev'];?>" id="syncdev">
+          </td>
+          <td>Send and receive pfsync packets on this interface.</td>
+        </tr>
+        <tr>
+          <td>Sync Peer</td>
+          <td>
+            <input type="text" name="syncpeer" size="15" value="<?php print $hostname_if[0]['syncpeer'];?>" id="syncpeer">
+          </td>
+          <td>(Not mandatory) By default, state change messages are sent out on the synchronisation 
+              interface using IP multicast packets. When a peer address
+              is specified, the peer address is used as a
+              destination for the pfsync traffic, and the traffic can then be protected
+              using ipsec(4).  In such a configuration, the syncdev should be set to
+              the enc(4) interface (i.e. enc0)</td>
+        </tr>
+      
+      <?php } ?>

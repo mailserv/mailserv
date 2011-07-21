@@ -1,0 +1,262 @@
+/* @override https://172.16.5.138:4200/stylesheets/application.css?1290847364 */
+
+/* @group Undo html */
+
+/* SET BASE FONT ATTRUBUTES */
+
+
+.mini td {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.mini th {
+  border: 0;
+}
+
+/* @end */
+
+/* @end */
+
+.submit
+{
+  margin-left: 13em;
+  margin-top: 1em;
+}
+
+#save
+{
+  margin-top: 1em;
+}
+
+.center
+{
+  text-align: center;
+}
+
+.margin-top2
+{
+  margin-top: 2em;
+}
+
+.margin-top4
+{
+  margin-top: 4em;
+}
+
+.margin-bottom2 {
+  margin-bottom: 2em;
+}
+
+.margin-bottom4 {
+  margin-bottom: 4em;
+}
+
+#content 
+{
+  border: 1px solid #e5e5e5;
+  padding: 2em;
+  font-size: 110%;
+  background-color: #fff;
+}
+
+div.scrolling
+{
+  overflow:auto;
+  border: 1px solid #ccc;
+  margin: 2em 4em;
+  padding: 0.5em;
+}
+
+/* @group Example */
+
+
+
+/* @end */
+
+/* @group Menu */
+
+#header
+{
+  background: url(/images/blueback.png) repeat-x;
+}
+
+#logintext, #logintext a {
+  text-align: right;
+  padding-bottom: 0.1em;
+  font-weight: normal;
+  color: #fff;
+}
+
+#footer
+{
+  color: #696969;
+  background-color: #efefef;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 1em;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+}
+
+/* @end */
+
+/* @group Page Styles */
+
+/* @group Dashboard */
+
+
+/* @end */
+
+/* @group login */
+
+#login
+{
+  text-align: center
+}
+
+#login fieldset
+{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  border: 1px solid orange;
+  width: 300px;
+  padding: 30px;
+}
+
+#login fieldset legend
+{
+  padding: 0.5em 1em;
+  color: gray;
+}
+
+#login label
+{
+  font-weight: bold;
+  color: gray;
+  margin-right: 0.5em;
+  width: 7em;
+  text-align: right;
+}
+
+#login form p
+{
+  text-align: right;
+  margin-right: 4em;
+}
+
+input
+{
+  font-size: 140%;
+}
+
+#auth #content {
+  margin: 180px auto;
+  padding: 0;
+  width: 500px;
+  border: 3px solid #003d85;
+  border: 1px solid black;
+}
+#auth h4 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 140%;
+}
+#auth form p {
+  padding: 3px;
+}
+#auth #submit {
+  margin-top: 10px;
+}
+#auth div.error, #auth div.notice {
+  margin: 10px 10px 10px 10px;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+/* @end */
+
+/* @group Not logged in */
+
+.not_logged_in {
+  text-align: left;
+}
+
+.not_logged_in h3 {
+  background-color: inherit;
+  text-align: left;
+}
+
+.not_logged_in table {
+  width: auto;
+}
+
+.not_logged_in td, .not_logged_in th {
+  border: 1px solid #bbb;
+  padding: 5px;
+}
+
+.not_logged_in .fieldWithErrors
+{
+  background-color: inherit;
+  border: none;
+  padding: 0;
+  display: inline;
+}
+
+.not_logged_in .fieldWithErrors input {
+  border: 4px solid red;
+}
+
+.not_logged_in .fieldWithErrors label {
+  background-color: inherit;
+}
+
+/* @end */
+
+/* @end */
+
+.percent
+{
+  font-size: 80%;
+  color: #757575;
+  font-weight: bold;
+}
+
+table.left td {
+  padding: 0.3em;
+}
+
+table.left th {
+  padding-right: 15px;
+  border-right: 1px solid #e5e5e5;
+  font-weight: bold;
+}
+
+table.left td {
+  padding: 5px 10px;
+}
+
+table.left {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border: 0;
+}
+
+#date_hour {
+  margin-left: 1em;
+}
+
+.active-scaffold .description {
+  font-weight: bold;
+  color: #555 !important;
+}
+
+.active-scaffold label {
+  font-weight: bold !important;
+}

@@ -1,0 +1,35 @@
+<h2>DNS Configuration</h2>
+
+<%= form_tag %>
+
+<table class="system" style="text-align: left;">
+  <tr>
+    <th>Setting</th>
+    <th>Value</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Nameserver</td>
+    <td><input type="text" name="nameservers[0]" value="<%= @dns.nameservers[0] -%>" id="nameserver[0]" /></td>
+    <td rowspan="3">A total a 3 name (DNS) servers can be specified. 
+      If there are multiple servers, the resolver library queries them in the order listed.</td>
+  </tr>
+  <tr>
+    <td>Nameserver</td>
+    <td><input type="text" name="nameservers[1]" value="<%= @dns.nameservers[1] -%>" id="nameserver[1]" /></td>
+  </tr>
+  <tr>
+    <td>Nameserver</td>
+    <td><input type="text" name="nameservers[2]" value="<%= @dns.nameservers[2] -%>" id="nameserver[2]" /></td>
+  </tr>
+  <tr>
+    <td>Search</td>
+    <td><input type="text" name="search" value="<%= @dns.search -%>" id="search" size="30" /></td>
+    <td>Comma separated search list for hostname lookup. The search list is currently limited to six domains with a
+            total of 1024 characters.
+    </td>
+  </tr>
+</table>
+
+  <p><%= submit_tag "Save", { :id => 'save' } %></p>
+</form>

@@ -1,0 +1,9 @@
+development:
+  product: mailserver
+  web_client_url: http://update.allardsoft.com/
+
+production:
+  product: mailserver
+  web_client_url: http://update.allardsoft.com/
+
+test:

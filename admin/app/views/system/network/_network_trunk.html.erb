@@ -1,0 +1,34 @@
+      <?php if ($set_trunk) { ?>
+        <tr>
+          <td>Trunk Protocol</td>
+          <td>
+            <select id="media" name="media">
+              <option value="" label="Default">Default</option>
+              <option value="roundrobin" label="Round Robin">Round Robin</option>
+              <option value="failover" label="Failover">Failover</option>
+              <option value="loadbalance" label="Load Balance">Load Balance</option>
+              <option value="none" label="None">None</option>
+            </select>
+          </td>
+          <td>
+            <p><strong>Round Robin:</strong>   Distributes outgoing traffic using a round-robin scheduler
+                              through all active ports and accepts incoming traffic from
+                              any active port.</p>
+
+            <p><strong>Failover:</strong>     Sends and receives traffic only through the master port.  If
+                              the master port becomes unavailable, the next active port is
+                              used.  The first interface added is the master port; any in-
+                              terfaces added after that are used as failover devices.</p>
+
+            <p><strong>Load Balance:</strong>  Balances outgoing traffic across the active ports based on
+                              hashed protocol header information and accepts incoming
+                              traffic from any active port.  The hash includes the Ether-
+                              net source and destination address, and, if available, the
+                              VLAN tag, and the IP source and destination address.</p>
+
+            <p><strong>None:</strong>         This protocol is intended to do nothing: it disables any
+                              traffic without disabling the trunk interface itself.</p>
+            
+          </td>
+        </tr>
+      <?php } ?>

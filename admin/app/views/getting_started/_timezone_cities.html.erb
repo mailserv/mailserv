@@ -1,0 +1,13 @@
+<% unless @timezone.cities.size.zero? -%>
+<%= select "timezone", "city", timezone_cities, { :id => 'timezone_city' } %>
+
+<span id="tz_locality">
+<%= render :partial => 'timezone_localities', :object => @timezone.localities %>
+</span>
+
+
+<%= observe_field("timezone_city", :update => :tz_locality, 
+  :url => { :action => :timezone_change_locality }, :on => "changed",
+  :with => "'country='+ escape($('timezone_country').value) + '&city=' + escape(value)") %>
+<% end -%>
+

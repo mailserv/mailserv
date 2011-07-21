@@ -1,0 +1,76 @@
+<h2>Mail Routing</h2>
+
+<%= form_remote_tag :url => { :action => 'create' }, :html => { :id => 'route_form' } %>
+
+<table class="system" style="width: 70%;">
+  <thead>
+  <tr>
+    <th>Destination</th>
+    <th>Transport</th>
+  </tr>
+  </thead>
+  <tbody id="routing_list">
+    <%= render :partial => "route", :collection => @routes %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class="edit" style="padding-top: 20px;">
+        <label for="route_destination">Destination</label>
+        <%= text_field 'route', 'destination' %>
+      </td>
+      <td class="edit" style="padding-top: 20px;">
+        <label for="route_transport">Transport</label>
+        <%= text_field 'route', 'transport' %>
+      </td>
+      <td class="edit" style="margin: 0; padding-top: 23px;" nowrap=nowrap>
+        <%= submit_tag 'add route', { :id => 'save' } %>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class="example">
+  <h2>Examples</h2>
+
+<table>
+  <tr>
+    <th>Destination</th>
+    <th>Transport</th>
+    <th>Effect</th>
+  </tr>
+  <tr>
+    <td>example.com</td>
+    <td>smtp:10.1.2.3</td>
+    <td>Will deliver all mails destined for anyuser@example.com to ip 10.1.2.3 via smtp.</td>
+  </tr>
+  <tr>
+    <td>.example.com</td>
+    <td>smtp:10.1.2.3:587</td>
+    <td>Will deliver all mails destined for anyuser@anysubdomain.example.com to ip 10.1.2.3 via smtp on port 587.</td>
+  </tr>
+  <tr>
+    <td>joe@example.com<br />example.com</td>
+    <td>smtp:10.1.2.3<br />smtp:10.2.3.4</td>
+    <td>Will deliver all mails destined for joe@example.com to ip 10.1.2.3 via smtp and any other user in the
+      domain example.com will be relayed to ip 10.2.3.4 via smtp.</td>
+  </tr>
+  <tr>
+    <td>example.com</td>
+    <td>:</td>
+    <td>Will deliver mails to example.com locally (to this mailserver).</td>
+  </tr>
+  <tr>
+    <td>joe@example.com<br/>example.com</td>
+    <td>:<br />smtp:10.1.2.3</td>
+    <td>Will deliver emails to joe@example.com to this mailserver if that user and domain is defined, and deliver
+      mails for any other user in the example.com domain to ip 10.1.2.3.</td>
+  </tr>
+  <tr>
+    <td>example.com<br/>*</td>
+    <td>:<br />smtp:smtp.isp.com</td>
+    <td>Will deliver emails to example.com locally and deliver mails for any other domain via smtp.isp.com.</td>
+  </tr>
+</table>
+<p><em>Please see <a href="http://www.postfix.org/transport.5.html" target="_blank">http://www.postfix.org/transport.5.html</a>
+  for all options and complete descriptions.</em></p>
+</div>

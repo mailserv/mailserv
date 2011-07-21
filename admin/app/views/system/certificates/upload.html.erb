@@ -1,0 +1,21 @@
+<h2>Upload new certificate and key</h2>
+
+<%= form_tag %>
+
+<table class="system" style="width: auto">
+  <tr><th>Certificate &amp; Certificate Chain</th></tr>
+  <tr><td><%= text_area "certificate", "cert", :cols => 70, :rows => 32, :style => 'font-family: courier-new, courier, monospace'  %></td></tr>
+</table>
+
+<table class="system" style="width: auto; margin-top: 2em;">
+  <tr><th>Key</th></tr>
+  <tr><td><%= text_area "certificate", "key", :cols => 70, :rows => 16, :style => 'font-family: courier-new, courier, monospace' %></td></tr>
+</table>
+
+<p style="margin-top: 2em;"><%= submit_tag "Save &amp; reload services", { :id => "save" } %></p>
+
+</form>
+
+<%= render :partial => 'reloading' if flash[:notice] %>
+
+<%= render :partial => 'example' %>

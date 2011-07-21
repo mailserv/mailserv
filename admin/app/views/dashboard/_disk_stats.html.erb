@@ -1,0 +1,18 @@
+      <table class="small">
+        <tr>
+          <th>Disk</th>
+          <th>Size</th>
+          <th>Used</th>
+          <th>Avail</th>
+          <th>Capacity</th>
+        </tr>
+        <%- system_info.disk_utilization.each do |disk| -%>
+        <tr>
+          <td><%= disk[:mounted_on] %></td>
+          <td><%= disk[:size] %></td>
+          <td><%= disk[:used] %></td>
+          <td><%= disk[:avail] %></td>
+          <td><%= disk[:capacity] %></td>
+        </tr>
+        <%- end -%>
+      </table>
