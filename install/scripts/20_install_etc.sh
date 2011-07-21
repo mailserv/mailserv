@@ -63,8 +63,8 @@ fi
 # Symlinks for ruby stuff v4.9 
 # --------------------------------------------------------------
 
-hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false
-"; }'`
+hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false" }'`
+
 
 #version check
 if [[ $hi_ver_check == "true"  ]]; then
@@ -85,7 +85,7 @@ if [[ $hi_ver_check == "true"  ]]; then
      # Update your RAILS_GEM_VERSION
      # -----------------------------------------------------
      echo "Updating rails:"
-    /usr/local/bin/gem install -V -v=2.3.4 rails 
+    /usr/local/bin/gem install -V -v=2.3.4 rails; 
 fi 
 
 # --------------------------------------------------------------
