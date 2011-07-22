@@ -20,7 +20,8 @@ ln_s rc_dir, "#{basedir}/webmail"
 
 puts "Downloading plugins"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
-system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+# system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+system "git clone http://github.com/JohnDoh/Roundcube-Plugin-Message-Size.git #{basedir}/webmail/plugins/messagesize"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sieverules.tar.gz  | tar zxf - -C #{basedir}/webmail/plugins/"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sauserprefs.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
 
