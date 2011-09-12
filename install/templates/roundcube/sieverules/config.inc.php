@@ -98,13 +98,15 @@ $rcmail_config['sieverules_adveditor'] = 0;
 $rcmail_config['sieverules_multiplerules'] = FALSE;
 
 // Default (or global) sieve rule file
-$rcmail_config['sieverules_default_file'] = '/etc/dovecot/sieve/default';
+#$rcmail_config['sieverules_default_file'] = '/etc/dovecot/sieve/default';
+$rcmail_config['sieverules_default_file'] = FALSE;
 
 // Auto load default sieve rule file if no rules exist and no import filters match
 $rcmail_config['sieverules_auto_load_default'] = FALSE;
 
 // Example sieve rule file
-$rcmail_config['sieverules_example_file'] = '/etc/dovecot/sieve/example';
+#$rcmail_config['sieverules_example_file'] = '/etc/dovecot/sieve/example';
+$rcmail_config['sieverules_example_file'] = FALSE;
 
 // Force the :addresses line to always be added to new vacation rules
 // Some sieve setups require that the :address part of a vacation rule is always present for the message to be sent
