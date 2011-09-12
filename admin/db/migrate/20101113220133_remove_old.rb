@@ -1,6 +1,6 @@
 class RemoveOld < ActiveRecord::Migration
   def self.up
-    drop_table :vacations
+#    drop_table :vacations
     rename_column :domains, :domain, :name
   end
 
