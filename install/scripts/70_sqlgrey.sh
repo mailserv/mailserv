@@ -8,5 +8,6 @@ if [[ "$1" == "install" ]]; then
   /usr/local/sbin/sqlgrey -d
   sleep 2
   /usr/local/bin/mysql sqlgrey -e "alter table connect add id int primary key auto_increment first;"
-
+  touch /etc/sqlgrey/clients_fqdn_whitelist.local 
+  touch /etc/sqlgrey/clients_ip_whitelist.local 
 fi
