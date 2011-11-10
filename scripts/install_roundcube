@@ -7,7 +7,8 @@ basedir = "/var/www/webmail"
 mkdir_p basedir
 
 puts "Getting latest Roundcube version"
-roundcube_file=`lynx -dump http://sourceforge.net/projects/roundcubemail/files/ | egrep "(roundcubemail\/[0-9\.]+\/roundcubemail-[0-9\.]+\.tar\.gz\/download)" | awk '{print $2}' | head -1`.strip
+roundcube_file=`lynx -dump http://roundcube.net/download | egrep "(roundcubemail\/[0-9\.]+\/roundcubemail-[0-9\.]+\.tar\.gz\/download)" | head -1 | awk '{print $2}'`.strip
+
 
 rc_dir = "/var/www/webmail/" + roundcube_file.match(/(roundcubemail-[\d\.]+)\.tar/)[1]
 
