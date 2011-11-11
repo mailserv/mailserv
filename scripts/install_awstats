@@ -7,7 +7,8 @@ basedir = "/usr/local"
 mkdir_p basedir
 
 puts "Getting latest AWStats version"
-aw_file=`lynx -dump http://sourceforge.net/projects/awstats/files/AWStats/ | egrep -i "awstats-[0-9\.]+\.(zip|tar.gz)\/download" | awk '{print $2}' | head -1`.strip
+aw_file=`lynx -dump -listonly http://sourceforge.net/projects/awstats/files/AWStats/ | egrep "([0-9\.]\/)" | head -1 | awk '{print $2}' | xargs lynx -dump | egrep "(awstats-[0-9\.]+\.tar\.gz\/download)" | head -1 | awk '{ print $2 }'
+`.strip
 
 rc_dir = "/var/www/webmail/" + aw_file.match(/(awstats-[\d\.]+)\.(tar|zip)/)[1]
 
