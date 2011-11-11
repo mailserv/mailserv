@@ -15,3 +15,13 @@ table.system th {
 .system td.edit {
   border: none;
 }
+
+.logdata {
+  font-family: "DejaVu Sans Mono", Menlo, Consolas, "Andale Mono", monospace;
+  font-size: 11px;
+  margin-bottom: 2.5em;
+  width: 100%;
+}
+.lognote {
+  margin-bottom: 1.2em;
+}
