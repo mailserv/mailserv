@@ -19,3 +19,16 @@ touch /var/log/imap
 chgrp _dovecot /usr/local/libexec/dovecot/deliver
 chmod 4750 /usr/local/libexec/dovecot/deliver
 mkdir /var/mailserv/mail >/dev/null 2>&1
+
+#
+# Create custom log files for log viewer admin interface
+#
+touch /var/log/imap_webmin
+touch /var/log/maillog_webmin
+touch /var/log/messages_webmin.log
+
+chmod 644 /var/log/imap_webmin
+chmod 644 /var/log/maillog_webmin
+chmod 644 /var/log/messages_webmin.log
+
+
