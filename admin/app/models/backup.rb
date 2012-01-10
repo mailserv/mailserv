@@ -26,9 +26,9 @@ class Backup < ActiveRecord::Base
 
   def list_content(filename = "")
     out = []
-    Sudo.exec("ls /var/mailserver/mail").split.each do |dir|
+    Sudo.exec("ls /var/mailserv/mail").split.each do |dir|
       out << dir
-      Sudo.exec("ls /var/mailserver/mail/#{dir}").split.each do |user|
+      Sudo.exec("ls /var/mailserv/mail/#{dir}").split.each do |user|
         out << "#{dir}/#{user}"
       end
     end
