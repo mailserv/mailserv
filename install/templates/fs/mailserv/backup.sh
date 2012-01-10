@@ -14,10 +14,10 @@
 # ----------------------------------------------------------------------
 
 # Need a config file and a ssh key
-[[ ! -f /var/mailserver/config/backup_location ]] && exit 1
-[[ ! -f /var/mailserver/config/backup_key ]] && exit 1
+[[ ! -f /var/mailserv/config/backup_location ]] && exit 1
+[[ ! -f /var/mailserv/config/backup_key ]] && exit 1
 
-location=`cat /var/mailserver/config/backup_location`
+location=`cat /var/mailserv/config/backup_location`
 
 logtemp=`mktemp /tmp/_logtemp.XXXXXXXXXX`  || exit 1
 sshtemp=`mktemp /tmp/_sshtemp.XXXXXXXXXX`  || exit 1
@@ -34,7 +34,7 @@ else
 fi
 
 # What to back up
-files="/var/mailserver /var/db/spamd /var/db/milter-greylist"
+files="/var/mailserv /var/db/spamd /var/db/milter-greylist"
 
 echo > $logtemp
 echo "------------------------------------------------" | tee -a $logtemp
@@ -44,11 +44,11 @@ echo "------------------------------------------------" | tee -a $logtemp
 # If this is a monthly backup, start with moving the current file
 # to a one month backup file
 [[ "$oldname" != "" ]] && ssh -o StrictHostKeyChecking=no \
-  -i /var/mailserver/config/backup_key $location "mv $name $oldname" >/dev/null 2>&1
+  -i /var/mailserv/config/backup_key $location "mv $name $oldname" >/dev/null 2>&1
 
 /usr/local/bin/gtar zvcpf - $timestamp $files 2>> $logtemp |\
   ssh -o StrictHostKeyChecking=no \
-  -i /var/mailserver/config/backup_key $location "cat > $name" 2>$sshtemp
+  -i /var/mailserv/config/backup_key $location "cat > $name" 2>$sshtemp
 
 if [[ $? -ne 0 ]]; then
   echo "================================================"

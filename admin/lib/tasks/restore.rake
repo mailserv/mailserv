@@ -28,12 +28,12 @@ namespace :mailserv do
 
       if restore_path.blank?
         if file =~ /full/
-          db_backup_file = %x{ls -t /var/mailserver/backup | head -1}.strip
+          db_backup_file = %x{ls -t /var/mailserv/backup | head -1}.strip
         else
           file =~ /incr.(\d+).tgz/
-          db_backup_file = %x{ls /var/mailserver/backup | grep #{$1} | head -1}.strip  
+          db_backup_file = %x{ls /var/mailserv/backup | grep #{$1} | head -1}.strip  
         end
-        Sudo.exec "/usr/bin/gzip -cd /var/mailserver/backup/#{db_backup_file} | /usr/local/bin/mysql"
+        Sudo.exec "/usr/bin/gzip -cd /var/mailserv/backup/#{db_backup_file} | /usr/local/bin/mysql"
         Sudo.rake "db:migrate"
       end
     rescue
