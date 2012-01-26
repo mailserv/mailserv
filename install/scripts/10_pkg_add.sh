@@ -17,7 +17,9 @@ the first version.
 Fetching versions:
 
 __EOT
-    pkg_add -v -m -i postfix--mysql
+    pkg_add -v -m -i postfix--mysql \
+     php-mysql \
+     php-fastcgi \
     pkg_add -v -m clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \
@@ -26,13 +28,11 @@ __EOT
      ruby-mongrel \
      ruby-fastercsv \
      ruby-highline \
-     dovecot--mysql \
-     dovecot-sieve \
+     dovecot-mysql \
+     dovecot-pigeonhole \
      mysql-server \
      sqlgrey \
-     php5-core \
-     php5-mysql \
-     php5-fastcgi \
+     php \
      nginx-- \
      god \
      gtar--

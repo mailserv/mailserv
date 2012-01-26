@@ -16,8 +16,8 @@ cd /var/mailserv/account/public && chown _mailserv:_mailserv javascripts stylesh
 # (needed for delivery to different userids)
 #
 touch /var/log/imap
-chgrp _dovecot /usr/local/libexec/dovecot/deliver
-chmod 4750 /usr/local/libexec/dovecot/deliver
+chgrp _dovecot /usr/local/libexec/dovecot/dovecot-lda
+chmod 4750 /usr/local/libexec/dovecot/dovecot-lda  
 mkdir /var/mailserv/mail >/dev/null 2>&1
 
 #
