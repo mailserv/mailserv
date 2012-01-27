@@ -3,7 +3,7 @@ God.watch do |w|
   w.uid = "_nginx"
   w.gid = "_nginx"
   w.interval = 30.seconds # default
-  w.start = "env PHP_FCGI_CHILDREN=2 /usr/local/bin/php-fastcgi -b /tmp/php.sock"
+  w.start = "env PHP_FCGI_CHILDREN=2 /usr/local/bin/php-fastcgi-5.2 -b /tmp/php.sock"
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
 

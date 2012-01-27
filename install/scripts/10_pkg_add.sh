@@ -19,7 +19,7 @@ Fetching versions:
 __EOT
     pkg_add -v -m -i postfix--mysql \
      php-mysql \
-     php-fastcgi \
+     php-fastcgi 
     pkg_add -v -m clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \
