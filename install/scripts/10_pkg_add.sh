@@ -17,9 +17,8 @@ the first version.
 Fetching versions:
 
 __EOT
-    pkg_add -v -m -i postfix--mysql \
-     php-mysql \
-     php-fastcgi 
+    pkg_add -v -m -i postfix--mysql 
+   
     pkg_add -v -m clamav \
      p5-Mail-SpamAssassin \
      ruby-rails \
@@ -36,6 +35,9 @@ __EOT
      nginx-- \
      god \
      gtar--
+  
+   pkg_add -v -m -i php-mysql \
+     php-fastcgi 
      ;;
 
 esac
