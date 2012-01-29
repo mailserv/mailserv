@@ -31,12 +31,12 @@ __EOT
      dovecot-pigeonhole \
      mysql-server \
      sqlgrey \
-     php \
      nginx-- \
      god \
      gtar--
   
-   pkg_add -v -m -i php-mysql \
+   pkg_add -v -m -i php \ 
+     php-mysql \
      php-fastcgi 
      ;;
 
