@@ -35,9 +35,9 @@ __EOT
      god \
      gtar--
   
-   pkg_add -v -m -i php \ 
+   pkg_add -v -m -i php \
      php-mysql \
-     php-fastcgi 
+     php-fastcgi
      ;;
 
 esac
