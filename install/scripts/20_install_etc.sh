@@ -1,6 +1,3 @@
-#!/bin/sh
-
-
 # Only run on install
 [[ "$1" != "install" ]] && exit 1
 
@@ -19,7 +16,6 @@ install -m 644 \
   ${template}/clamd.conf \
   ${template}/daily.local \
   ${template}/monthly.local \
-  ${template}/dovecot.conf \
   ${template}/dovecot-sql.conf \
   ${template}/freshclam.conf \
   ${template}/login.conf \
@@ -32,6 +28,8 @@ install -m 644 \
   ${template}/syslog.conf \
   ${template}/clamav-milter.conf \
   /etc
+
+install -m 644 ${template}/dovecot.conf /etc/dovecot
 
 install -m 600 ${template}/pf.conf /etc
 install -m 644 ${template}/nginx.conf /etc/nginx

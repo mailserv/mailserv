@@ -28,3 +28,8 @@ end
 unless `grep "/usr/libexec" /etc/mailer.conf | wc -l`.to_i.zero?
   %x{/usr/local/sbin/postfix-enable > /dev/null 2>&1}
 end
+
+# Make sure Sendmail is stopped because Postfix is used as MTA
+if `pgrep sendmail > /dev/null; echo $?`.to_i.zero?
+  `pkill -9 sendmail`
+end

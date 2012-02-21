@@ -41,9 +41,9 @@ maildrop  unix  -       n       n       -       -       pipe
   flags=DRhu user=vmail argv=/usr/local/bin/maildrop -d ${recipient}
 bsmtp     unix  -       n       n       -       -       pipe
   flags=Fq. user=foo argv=/usr/local/sbin/bsmtp -f $sender $nexthop $recipient
-# Dovecot LDA
+# Dovecot2 LDA
 dovecot   unix  -       n       n       -       -       pipe
-  flags=ODR user=_dovecot:_dovecot argv=/usr/local/libexec/dovecot/deliver -f ${sender} -d ${user}@${nexthop} -n -m ${extension}
+  flags=DRhu user=_dovecot:_dovecot argv=/usr/local/libexec/dovecot/dovecot-lda  -f ${sender} -d ${user}@${nexthop} -m ${extension} 
 
 spamassassin
           unix    -       n       n       -       -       pipe
