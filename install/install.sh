@@ -5,13 +5,28 @@ if [[ `uname -s` != "OpenBSD" ]]; then
   exit 1
 fi
 
-# git checkout suitable branch for your OpenBSD          
-git --git-dir=/var/mailserv/.git --work-tree=/var/mailserv checkout `uname -r` 2>/dev/null
+# git checkout branch for supported OpenBSD version or development branch
+if [ "`echo $1`" == "--devel" ]; then 
+  checkout_switch="devel"
+elif [ "`echo $1`" == "--help" ]; then
+  echo "Usage: install.sh [OPTION]"
+  echo " "
+  echo "    Without option it installs a stable Mailserv if compatible with your OBSD version."
+  echo "    --devel    use only in case you want to try to intall on unsupported OBSD version" 
+  echo "    --help     show this info"
+  echo " "
+  exit 1
+else
+  checkout_switch=`uname -r`
+fi
+
+git --git-dir=/var/mailserv/.git --work-tree=/var/mailserv checkout $checkout_switch 2>/dev/null               
 if [[ `echo $?` -ne 0 ]]; then                             # and if that fails
- echo "Mailserv is not yet supported on OpenBSD `uname -r`, please use a support version of OpenBSD"
+ echo "Mailserv is not yet supported on OpenBSD `uname -r`, please use a supported version of OpenBSD"
  exit 1
 fi
 
+ 
 if [[ ! -d /usr/X11R6 ]]; then
   echo "You need to install the xbaseXX.tgz package for this to work"
   exit 1
