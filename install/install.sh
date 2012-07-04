@@ -40,6 +40,10 @@ done
 /usr/local/bin/god quit
 /var/mailserv/scripts/mailserv_boot.sh
 
+echo "#############################################"
+echo "Get the last version of Highline"
+/usr/local/bin/gem install highline
+
 echo ""
 echo ""
 echo "#############################################"
