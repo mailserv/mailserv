@@ -14,6 +14,10 @@ rm_f "#{basedir}/webmail"
 #Point the webmail symlink at the latest version of roundcube we've got
 system "ln -s #{basedir}/`ls -1 -r #{basedir}/roundcubemail-*|head -n 1` #{basedir}/webmail"
 
+#Redirect for old configs
+mkdir_p "#{basedir}/webmail/webmail"
+system "echo \"<?php header('Location: /', true, 301); ?>\" > '#{basedir}/webmail/webmail/index.php'"
+
 puts "Downloading plugins"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
 # system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
