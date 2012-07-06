@@ -16,7 +16,7 @@ system "ln -s #{basedir}/`ls -1 -r #{basedir}/roundcubemail-*|head -n 1` #{based
 
 #Redirect for old configs
 mkdir_p "#{basedir}/webmail/webmail"
-system "echo \"<?php header('Location: /', true, 301); ?>\" > '#{basedir}/webmail/webmail/index.php'"
+File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php header('Location: /', true, 301); ?>"}
 
 puts "Downloading plugins"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
