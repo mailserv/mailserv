@@ -7,7 +7,7 @@ namespace :mailserv do
     task :full => [:environment, :init, :mysql] do
       begin
         filename  = "backup-#{`hostname`.strip}.full.tgz"
-        tar_command = "#{@gtar} /var/mailserver"
+        tar_command = "#{@gtar} /var/mailserv"
 
         STDERR.puts header(filename)
 
@@ -24,7 +24,7 @@ namespace :mailserv do
     task :incremental => [:environment, :init, :mysql] do
       begin
         filename  = "backup-#{`hostname`.strip}.incr.#{`date +%d`.strip}.tgz"
-        tar_command = "#{@gtar} --newer-mtime=#{`date +%Y-%m-`.strip}01 /var/mailserver"
+        tar_command = "#{@gtar} --newer-mtime=#{`date +%Y-%m-`.strip}01 /var/mailserv"
 
         STDERR.puts header(filename)
 
@@ -40,9 +40,9 @@ namespace :mailserv do
     desc "Backup the MySQL database"
     task :mysql do
       %x{/usr/local/bin/mysqldump --all-databases --force 2>/dev/null |\
-         gzip -9 > /var/mailserver/backup/db_`date +%Y-%m-%d`.sql.gz}
+         gzip -9 > /var/mailserv/backup/db_`date +%Y-%m-%d`.sql.gz}
       # Remove old MySQL backups
-      %x{find /var/mailserver/backup -ctime +7 | xargs rm -f}
+      %x{find /var/mailserv/backup -ctime +7 | xargs rm -f}
     end
 
     private

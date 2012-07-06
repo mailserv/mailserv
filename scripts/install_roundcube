@@ -20,8 +20,9 @@ File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php h
 
 puts "Downloading plugins"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
-# system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
-system "git clone http://github.com/JohnDoh/Roundcube-Plugin-Message-Size.git #{basedir}/webmail/plugins/messagesize"
+#system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+#system "git clone http://github.com/JohnDoh/Roundcube-Plugin-Message-Size.git #{basedir}/webmail/plugins/messagesize"
+system "wget http://www.tehinterweb.co.uk/roundcube/plugins/old/messagesize.zip -O /tmp/messagesize.zip; unzip /tmp/messagesize.zip -d #{basedir}/webmail/plugins/;rm /tmp/messagesize.zip"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sieverules.tar.gz  | tar zxf - -C #{basedir}/webmail/plugins/"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sauserprefs.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
 
