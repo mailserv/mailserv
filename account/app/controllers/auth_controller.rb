@@ -15,7 +15,7 @@ class AuthController < ApplicationController
 
   def logout
     session[:user] = nil
-    redirect_to "/webmail/"
+    redirect_to "/"
   end
 
 end

@@ -7,20 +7,12 @@ basedir = "/var/www/webmail"
 mkdir_p basedir
 
 puts "Getting latest Roundcube version"
-require 'open-uri'
-roundcube_page = "http://sourceforge.net/projects/roundcubemail/files/roundcubemail"
-roundcube_list = open(roundcube_page).read
-roundcube_latest = roundcube_list.match(/\/[0-9\.]{3,7}\/roundcubemail.*\.tar\.gz/)[0]
-roundcube_file = roundcube_page + roundcube_latest
-
-rc_dir = "/var/www/webmail/" + roundcube_file.match(/(roundcubemail-[\d\.]+)\.tar/)[1]
-
-puts "Downloading Roundcube version " + roundcube_file.match(/([\d\.]+)\.tar/)[1].to_s
-system "ftp -Vmo - #{roundcube_file} | tar zxf - -C /var/www/webmail"
+system "ftp -Vmo - http://sourceforge.net/projects/roundcubemail/files/latest/download | tar zxf - -C #{basedir}"
 
 # Linking 
 rm_f "#{basedir}/webmail"
-ln_s rc_dir, "#{basedir}/webmail"
+#Point the webmail symlink at the latest version of roundcube we've got
+system "ln -s #{basedir}/`ls -1 -r #{basedir}/roundcubemail-*|head -n 1` #{basedir}/webmail"
 
 puts "Downloading plugins"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
