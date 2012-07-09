@@ -23,7 +23,7 @@ else
   checkout_switch=`uname -r`
 fi
 
-if [ "$branch_changes" != "" ]; then
+if [ ! -z "$branch_changes" ]; then
   echo " "
   echo "Code has been changed manually in Devel branch, system will not replace it from git hub." 
   echo "Please add file(s) and commit changes"
