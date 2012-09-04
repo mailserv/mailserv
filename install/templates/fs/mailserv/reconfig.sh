@@ -25,7 +25,7 @@ templates="/usr/local/share/mailserver/template"
 install -C -m 644 /etc/services /etc/resolv.conf /etc/localtime /var/spool/postfix/etc
 
 # Dovecot.conf
-/usr/local/bin/ruby -pi -e '$_.gsub!(/^\s*postmaster_address.*/,  "  postmaster_address = postmaster@#{%x{hostname}.strip}")' /etc/dovecot.conf
+/usr/local/bin/ruby -pi -e '$_.gsub!(/^\s*postmaster_address.*/,  "  postmaster_address = postmaster@#{%x{hostname}.strip}")' /etc/dovecot/dovecot.conf
 
 # AWstats
 install -m 755 $templates/awstats_cron-stats /usr/local/awstats/cron-stats
