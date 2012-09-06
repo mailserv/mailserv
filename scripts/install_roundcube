@@ -34,8 +34,8 @@ install "/var/mailserv/install/templates/roundcube/sieverules/config.inc.php",  
 install "/var/mailserv/install/templates/roundcube/sauserprefs/config.inc.php", "#{basedir}/webmail/plugins/sauserprefs/", :mode => 0644
 install "/var/mailserv/install/templates/roundcube/password/config.inc.php",    "#{basedir}/webmail/plugins/password/",    :mode => 0644
 
-taskbar = File.read("/var/www/webmail/webmail/skins/default/includes/taskbar.html")
-File.open("/var/www/webmail/webmail/skins/default/includes/taskbar.html", "w") do |f|
+taskbar = File.read("/var/www/webmail/webmail/skins/classic/includes/taskbar.html")
+File.open("/var/www/webmail/webmail/skins/classic/includes/taskbar.html", "w") do |f|
   taskbar.each do |line|
     if line =~ /\<div id="taskbar"\>/
       f.puts line
