@@ -366,7 +366,7 @@ $rcmail_config['email_dns_check'] = false;
 /***** these settings can be overwritten by user's preferences *****/
 
 // skin name: folder from skins/
-$rcmail_config['skin'] = 'default';
+$rcmail_config['skin'] = 'classic';
 
 // show up to X items in list view
 $rcmail_config['pagesize'] = 40;
