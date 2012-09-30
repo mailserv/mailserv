@@ -49,11 +49,22 @@ echo "" >> /etc/motd
 # --------------------------------------------------------------
 # /etc/services
 # --------------------------------------------------------------
-if [ `grep sieve /etc/services | wc -l` -eq 0 ]; then
+if [ `grep managesieve /etc/services | wc -l` -eq 0 ]; then
+cat <<EOF >> /etc/services
+managesieve       2000/tcp            # Sieve Remote Management old port
+managesieve       4190/tcp            # Sieve Remote Management new port 
+EOF
+fi
+
+if [ `grep mailadm /etc/services | wc -l` -eq 0 ]; then
+cat <<EOF >> /etc/services
+mailadm           4200/tcp            # Mailserver admin port
+EOF
+fi
+
+if [ `grep smtps /etc/services | wc -l` -eq 0 ]; then
 cat <<EOF >> /etc/services
 smtps             465/tcp             # SMTPs
-managesieve       2000/tcp            # Sieve Remote Management
-mailadm           4200/tcp            # Mailserver admin port
 EOF
 fi
 
