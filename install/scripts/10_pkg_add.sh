@@ -12,7 +12,8 @@ case $1 in
     cat <<__EOT
     
 You will be prompted to install a postfix version. The recommendation is to install
-the first version. For devel version use latest version if required.
+the first version. For devel version use latest version of php, php-mysql if required.
+
 
 Fetching versions:
 
@@ -33,10 +34,10 @@ __EOT
      sqlgrey \
      nginx-- \
      god \
-     pear \ 
      gtar--
+     ;; 
   
-   pkg_add -v -m -i php \
+    pkg_add -v -m -i php \
      php-mysql \
      php-fpm
      ;;
