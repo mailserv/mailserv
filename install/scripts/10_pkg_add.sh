@@ -34,8 +34,7 @@ __EOT
      sqlgrey \
      nginx-- \
      god \
-     gtar--
-     ;; 
+     gtar--      
   
     pkg_add -v -m -i php \
      php-mysql \
