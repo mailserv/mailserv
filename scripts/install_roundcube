@@ -7,16 +7,16 @@ basedir = "/var/www/webmail"
 mkdir_p basedir
 
 puts "Getting latest Roundcube version"
-roundcube_file=`lynx -dump -listonly http://sourceforge.net/projects/roundcubemail/files/roundcubemail/ | egrep "([0-9\.]\/)" | head -1 | awk '{print $2}' | xargs lynx -dump | egrep "(roundcubemail-[0-9\.]+\.tar\.gz\/download)" | head -1 | awk '{ print $2 }'`.strip
-
-rc_dir = "/var/www/webmail/" + roundcube_file.match(/(roundcubemail-[\d\.]+)\.tar/)[1]
-
-puts "Downloading Roundcube version " + roundcube_file.match(/([\d\.]+)\.tar/)[1].to_s
-system "ftp -Vmo - #{roundcube_file} | tar zxf - -C /var/www/webmail"
+system "ftp -Vmo - http://sourceforge.net/projects/roundcubemail/files/latest/download | tar zxf - -C #{basedir}"
 
 # Linking 
 rm_f "#{basedir}/webmail"
-ln_s rc_dir, "#{basedir}/webmail"
+#Point the webmail symlink at the latest version of roundcube we've got
+system "ln -s `ls -1 -r -d #{basedir}/roundcubemail-*|head -n 1` #{basedir}/webmail"
+
+#Redirect for old configs
+mkdir_p "#{basedir}/webmail/webmail"
+File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php header('Location: /', true, 301); ?>"}
 
 puts "Downloading plugins"
 system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
