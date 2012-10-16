@@ -51,5 +51,5 @@ end
 puts "Finished\n\n"
 puts "If you have updated, please have a look at /var/www/webmail/webmail/SQL/mssql.upgrade.sql"
 puts "and apply as needed.\n\n"
-puts "Also, please test the plugins (especially sive/filter, spam and password)."
+puts "Also, please test the plugins (especially sieve/filter, spam and password)."
 puts "This is especially true if you have installed a new major release.\n\n"

@@ -79,7 +79,7 @@ $rcmail_config['default_port'] = 143;
 
 // IMAP AUTH type (DIGEST-MD5, CRAM-MD5, LOGIN, PLAIN or empty to use
 // best server supported one)
-$rcmail_config['imap_auth_type'] = plain;
+$rcmail_config['imap_auth_type'] = 'plain';
 
 // If you know your imap's folder delimiter, you can specify it here.
 // Otherwise it will be determined automatically
@@ -375,7 +375,7 @@ $rcmail_config['email_dns_check'] = false;
 // ----------------------------------
 
 // List of active plugins (in plugins/ directory)
-$rcmail_config['plugins'] = array();
+$rcmail_config['plugins'] = array('sieverules', 'vcard_attachments', 'sauserprefs', 'password', 'contextmenu', 'emoticons');
 
 // ----------------------------------
 // USER INTERFACE
