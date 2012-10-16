@@ -38,7 +38,8 @@ __EOT
   
     pkg_add -v -m -i php \
      php-mysql \
-     php-fpm
+     php-fpm \
+     pecl-APC
      ;;
 
 esac
