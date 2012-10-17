@@ -10,5 +10,8 @@ if [[ "$1" == "install" ]]; then
   /usr/bin/install -m 644 /var/mailserv/install/templates/php-fpm.conf /etc/ 
  
   # symlink for mysql 
-  ln -fs /etc/php-5.3.sample/mysql.ini /etc/php-5.3/mysql.ini 
+  ln -fs /etc/php-5.3.sample/mysql.ini /etc/php-5.3/mysql.ini
+
+  # PHP APC config
+  /usr/bin/install -m 644 /var/mailserv/install/templates/apc.ini /etc/php-5.3/
 fi

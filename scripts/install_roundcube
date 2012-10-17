@@ -48,8 +48,22 @@ File.open("/var/www/webmail/webmail/skins/classic/includes/taskbar.html", "w") d
   end
 end
 
+taskbar = File.read("/var/www/webmail/webmail/skins/larry/includes/header.html")
+File.open("/var/www/webmail/webmail/skins/larry/includes/header.html", "w") do |f|
+  taskbar.each do |line|
+    if line =~ /\<div id="taskbar" class="topright"\>/
+      f.puts line
+      f.puts "<a href=\"../../../account/auth/autologin?id=<roundcube:var name='request:roundcube_sessid' />\">Admin</a>"
+    elsif line =~ /account\/auth\/autologin/
+      next
+    else
+      f.puts line
+    end
+  end
+end
+
 puts "Finished\n\n"
 puts "If you have updated, please have a look at /var/www/webmail/webmail/SQL/mssql.upgrade.sql"
 puts "and apply as needed.\n\n"
-puts "Also, please test the plugins (especially sive/filter, spam and password)."
+puts "Also, please test the plugins (especially sieve/filter, spam and password)."
 puts "This is especially true if you have installed a new major release.\n\n"

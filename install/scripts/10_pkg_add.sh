@@ -2,6 +2,7 @@
 
 if [ X"$PKG_PATH" == X"" ]; then
   export PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/`uname -r`/packages/`uname -m`/
+  grep PKG_PATH /etc/profile || echo "export PKG_PATH=http://ftp.OpenBSD.org/pub/OpenBSD/`uname -r`/packages/`uname -m`/" >> /etc/profile
 fi
 
 case $1 in
@@ -38,7 +39,8 @@ __EOT
   
     pkg_add -v -m -i php \
      php-mysql \
-     php-fpm
+     php-fpm \
+     pecl-APC
      ;;
 
 esac
