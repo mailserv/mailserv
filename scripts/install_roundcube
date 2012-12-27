@@ -29,7 +29,7 @@ system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sauserprefs.ta
 puts "Installing Configuration"
 install "/var/mailserv/install/templates/roundcube/conf/main.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
 install "/var/mailserv/install/templates/roundcube/conf/db.inc.php",            "#{basedir}/webmail/config/", :mode => 0644
-install "/var/mailserv/install/templates/roundcube/messagesize/config.inc.php", "#{basedir}/webmail/plugins/messagesize/", :mode => 0644
+#install "/var/mailserv/install/templates/roundcube/messagesize/config.inc.php", "#{basedir}/webmail/plugins/messagesize/", :mode => 0644
 install "/var/mailserv/install/templates/roundcube/sieverules/config.inc.php",  "#{basedir}/webmail/plugins/sieverules/",  :mode => 0644
 install "/var/mailserv/install/templates/roundcube/sauserprefs/config.inc.php", "#{basedir}/webmail/plugins/sauserprefs/", :mode => 0644
 install "/var/mailserv/install/templates/roundcube/password/config.inc.php",    "#{basedir}/webmail/plugins/password/",    :mode => 0644
