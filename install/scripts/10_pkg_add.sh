@@ -12,8 +12,9 @@ case $1 in
     mkdir /var/db/spamassassin 2>/dev/null
     cat <<__EOT
     
-You will be prompted to install a postfix version. The recommendation is to install
-the first version. For devel version use latest version of php, php-mysql if required.
+You will be prompted to install:
+ - postfix version. The recommendation is to install the first version 
+ - php and php-mysql version. Use php-5.3.x and php-mysql-5.3.x
 
 
 Fetching versions:
