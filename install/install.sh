@@ -6,7 +6,7 @@ if [[ `uname -s` != "OpenBSD" ]]; then
 fi
 
 # git checkout branch for supported OpenBSD version or development branch
-if [ "`echo $1`" == "--devel" ]; then 
+if [ "`echo $1`" == "--devel" ]; then
   checkout_switch="devel"
   # detect changes in devel branch 
   branch_changes=`git --git-dir=/var/mailserv/.git --work-tree=/var/mailserv status -s`
