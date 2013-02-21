@@ -10,6 +10,11 @@ install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
 mkdir -p /usr/local/share/mailserv
 install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
 
+# Create a 64M RAM disk to keep PHP sessions in
+mkdir -p /tmp/phpsessions
+mount_mfs -o rw,async,nodev,noexec,nosuid -s 131072 /dev/wd0b /tmp/phpsessions
+chown -R www:www /tmp/phpsessions
+echo "/dev/wd0b /tmp/phpsessions mfs rw,async,nodev,noexec,nosuid,-s=131072 0 0" >> /etc/fstab
 
 template="/var/mailserv/install/templates"
 install -m 644 \
@@ -97,6 +102,8 @@ if [[ $hi_ver_check == "true"  ]]; then
      echo "Updating rails:"
     /usr/local/bin/gem install -V -v=2.3.4 rails; 
 fi 
+
+gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
 
 # --------------------------------------------------------------
 # /etc/daily
