@@ -3,7 +3,7 @@
 # /var/cron/tabs/root - root's crontab
 #
 SHELL=/bin/sh
-PATH=/bin:/sbin:/usr/bin:/usr/sbin
+PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 HOME=/var/log
 #
 #minute	hour	mday	month	wday	command
