@@ -158,3 +158,19 @@ chgrp 0 /etc/daily.local \
 # --------------------------------------------------------------
 mkdir /etc/god
 install -m 644 /var/mailserv/install/templates/fs/god/* /etc/god
+
+
+#---------------------------------------------------------------
+#  set up onpenfiles max if less than 1024 ( obsd usualy 128 )
+#---------------------------------------------------------------
+maxfilestest=$( ulimit -n)
+
+if [ $maxfilestest -lt 1024 ];
+  then
+    echo " "
+    echo " setting openfiles-max to 1024 "
+    echo " "
+    ulimit -Sn 1024
+fi
+
+
