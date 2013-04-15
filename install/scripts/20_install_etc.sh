@@ -173,4 +173,19 @@ if [ $maxfilestest -lt 1024 ];
     ulimit -Sn 1024
 fi
 
+#----------------------------------------------------------------
+# increase kern.maxfiles (important for dovecot)
+#----------------------------------------------------------------
+
+kernmaxfiles=$( sysctl kern.maxfiles | awk -F= '{print $2}' )
+kernmaxnew=10000
+
+if [ $kernmaxfiles -lt $kernmaxnew ];
+  then
+   echo " "
+   echo " setting kernmaxfiles "
+   sysctl kern.maxfiles=$kernmaxnew
+   cat /etc/sysctl.conf | sed '/kern.maxfiles=.*/d' > /etc/sysctl.conf
+   echo "kern.maxfiles=$kernmaxnew" >> /etc/sysctl.conf
+fi
 
