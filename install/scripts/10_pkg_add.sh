@@ -14,7 +14,7 @@ case $1 in
     
 You will be prompted to install:
  - postfix version. The recommendation is to install the first version 
- - php and php-mysql version. Use php-5.3.x and php-mysql-5.3.x
+ - php and php-mysql version. Use php-5.3.x and php-mysql-5.3.x and php-pdo-5.3.x
 
 
 Fetching versions:
@@ -40,6 +40,7 @@ __EOT
   
     pkg_add -v -m -i php \
      php-mysql \
+     php-pdo_mysql 
      php-fpm \
      pecl-APC
      ;;
