@@ -20,4 +20,8 @@ if [[ "$1" == "install" ]]; then
 
   # Make php easier to run from CLI
   ln -s /usr/local/bin/php-5.3 /usr/local/bin/php
+
+  #PHP Data Objects (PDO) for accessing databases in PHP (required by roundcube >0.9)
+  ln -fs /etc/php-5.3.sample/pdo_mysql.ini  /etc/php-5.3/pdo_mysql.ini
+
 fi

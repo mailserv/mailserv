@@ -41,6 +41,7 @@ __EOT
   
     pkg_add -v -m -i php \
      php-mysql \
+     php-pdo_mysql \
      php-fpm \
      pecl-APC
      ;;
