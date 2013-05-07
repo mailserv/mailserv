@@ -21,7 +21,6 @@ install -m 644 \
   ${template}/clamd.conf \
   ${template}/daily.local \
   ${template}/monthly.local \
-  ${template}/dovecot-sql.conf \
   ${template}/freshclam.conf \
   ${template}/login.conf \
   ${template}/my.cnf \
@@ -35,6 +34,7 @@ install -m 644 \
   /etc
 
 install -m 644 ${template}/dovecot.conf /etc/dovecot
+install -m 644 ${template}/dovecot-sql.conf /etc/dovecot
 
 install -m 600 ${template}/pf.conf /etc
 install -m 644 ${template}/nginx.conf /etc/nginx

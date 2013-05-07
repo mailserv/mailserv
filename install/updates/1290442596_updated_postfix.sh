@@ -18,7 +18,7 @@ Fetching versions:
 
 __EOT
 pkg_add -i postfix--mysql
-install -m 644 /var/mailserv/install/templates/dovecot.conf /etc/
+install -m 644 /var/mailserv/install/templates/dovecot.conf /etc/dovecot
 install -m 644 /var/mailserv/install/templates/postfix/main.cf /etc/postfix
 
 install -m 644 /var/mailserv/install/templates/fs/god/* /etc/god
