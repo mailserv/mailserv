@@ -15,6 +15,9 @@ if [[ "$1" == "install" ]]; then
   # symlink for mysql 
   ln -fs /etc/php-5.3.sample/mysql.ini /etc/php-5.3/mysql.ini
 
+  # Symlink for mcrypt extension
+  ln -sf /etc/php-5.3.sample/mcrypt.ini /etc/php-5.3/mcrypt.ini 
+
   # PHP APC config
   /usr/bin/install -m 644 /var/mailserv/install/templates/apc.ini /etc/php-5.3/
 

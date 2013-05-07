@@ -7,6 +7,7 @@ class System::LogsController < ApplicationController
         {:path => '/var/log/clam-update.log', :logdata => '', :accessible => false},
         {:path => '/var/log/messages_webmin.log', :logdata => '', :accessible => false},
         {:path => '/var/log/imap_webmin', :logdata => '', :accessiable => false},
+        {:path => '/var/log/imap', :logdata => '', :accessiable => false},
         {:path => '/var/log/httpd.err', :logdata => '', :accessible => false},
         {:path => '/var/log/httpd.log', :logdata => '', :accessible => false},
         {:path => '/var/mailserv/admin/log/production.log', :logdata => '', :accessible => false}
