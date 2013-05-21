@@ -6,8 +6,13 @@ if [[ `uname -s` != "OpenBSD" ]]; then
 fi
 
 # git checkout branch for supported OpenBSD version or development branch
-if [ "`echo $1`" == "--devel" ]; then 
-  checkout_switch="devel"
+# can also specify '--devel <branchname>' to use a specific named branch
+if [ "`echo $1`" == "--devel" ]; then
+  if [ "`echo $2`" != "" ]; then
+    checkout_switch=$2
+  else
+    checkout_switch="devel"
+  fi
   # detect changes in devel branch 
   branch_changes=`git --git-dir=/var/mailserv/.git --work-tree=/var/mailserv status -s`
 
@@ -16,6 +21,8 @@ elif [ "`echo $1`" == "--help" ]; then
   echo " "
   echo "    Without option it installs a stable Mailserv if compatible with your OBSD version."
   echo "    --devel    use only in case you want to try to intall on unsupported OBSD version" 
+  echo "  or "
+  echo "    --devel <another_devel_branch_name> "
   echo "    --help     show this info"
   echo " "
   exit 1
@@ -71,6 +78,9 @@ echo "All components added."
 echo ""
 
 rake -s -f /var/mailserv/admin/Rakefile  mailserv:add_admin
+
+echo "Creating locate database"
+/usr/libexec/locate.updatedb
 
 echo ""
 echo "Installation complete."
