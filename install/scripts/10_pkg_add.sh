@@ -14,15 +14,16 @@ case $1 in
     
 You will be prompted to install:
  - postfix version. The recommendation is to install the first version 
- - php and php-mysql version. Use php-5.3.x and php-mysql-5.3.x
- - p5-Mail-SPF and gnupg - accept default
 
 Fetching versions:
 
 __EOT
     pkg_add -v -m -i postfix--mysql 
-   
-    pkg_add -v -m clamav \
+  
+    pkg_add -v -m -I \
+     clamav \
+     gnupg-1.4.11p2 \
+     p5-Mail-SPF \
      p5-Mail-SpamAssassin \
      ruby-rails \
      ruby-rrd \
@@ -32,18 +33,24 @@ __EOT
      ruby-highline \
      dovecot-mysql \
      dovecot-pigeonhole \
+     memcached \
      mysql-server \
+     nginx-1.0.15 \
      sqlgrey \
-     nginx-- \
      god \
      gsed \
-     gtar--      
-  
-    pkg_add -v -m -i php \
-     php-mysql \
-     php-pdo_mysql \
+     gtar-- \
+     php-5.3.14p1 \
+     php-mysqli-5.3.14p0 \
+     php-pdo_mysql-5.3.14p0 \
+     php-gd-5.3.14p0 \
+     php-mcrypt-5.3.14p0 \
+     ghostscript-fonts \
+     ghostscript--no_x11 \
+     ImageMagick \
      php-fpm \
-     pecl-APC
+     pecl-APC \
+     pecl-memcache
      ;;
 
 esac
