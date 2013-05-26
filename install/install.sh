@@ -85,5 +85,11 @@ echo "Creating locate database"
 echo ""
 echo "Installation complete."
 echo ""
-echo "Please browse to port 4200 to continue setting up Mailserv."
+echo "Please browse to port 4200 after server reboot to continue setting up Mailserv."
 echo ""
+#server need to be reboot because of Dovecot low openfiles limit
+#up to now without reboot larger openfiles limit necessary for regular dovecot start
+#is not work properly
+echo ""
+#reboot in a minute
+/sbin/shutdown -r +1
