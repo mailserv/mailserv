@@ -22,7 +22,7 @@ __EOT
   
     pkg_add -v -m -I \
      clamav \
-     gnupg-1.4.11p2 \
+     gnupg-1.4.13 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
      ruby-rails \
@@ -35,16 +35,16 @@ __EOT
      dovecot-pigeonhole \
      memcached \
      mysql-server \
-     nginx-1.0.15 \
+     nginx-1.2.3p1 \
      sqlgrey \
      god \
      gsed \
      gtar-- \
-     php-5.3.14p1 \
-     php-mysqli-5.3.14p0 \
-     php-pdo_mysql-5.3.14p0 \
-     php-gd-5.3.14p0 \
-     php-mcrypt-5.3.14p0 \
+     php-5.3.21 \
+     php-mysqli-5.3.21 \
+     php-pdo_mysql-5.3.21 \
+     php-gd-5.3.21 \
+     php-mcrypt-5.3.21 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
