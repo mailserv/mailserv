@@ -25,6 +25,8 @@ __EOT
      gnupg-1.4.13 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
+     ruby-iconv \
+     ruby-rdoc \
      ruby-rails \
      ruby-rrd \
      ruby-mysql \
