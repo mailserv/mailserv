@@ -25,21 +25,11 @@ __EOT
      gnupg-1.4.13 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
-     ruby-iconv \
-     ruby-rdoc \
-     ruby-rails \
-     ruby-rrd \
-     ruby-mysql \
-     ruby-mongrel \
-     ruby-fastercsv \
-     ruby-highline \
-     dovecot-mysql \
      dovecot-pigeonhole \
      memcached \
      mysql-server \
      nginx-1.2.3p1 \
      sqlgrey \
-     god \
      gsed \
      gtar-- \
      php-5.3.21 \
