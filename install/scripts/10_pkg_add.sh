@@ -25,6 +25,7 @@ __EOT
      gnupg-1.4.13 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
+     ruby-highline \
      dovecot-pigeonhole \
      memcached \
      mysql-server \
