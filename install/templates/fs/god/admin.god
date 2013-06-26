@@ -2,7 +2,7 @@
 #
 
 RAILS_ROOT = "/var/mailserv/admin"
-RAILS_GEM_VERSION = %x{pkg_info | egrep "^ruby-rails" | awk '{print $1}'}.match(/-([\d\.]+)/)[1]
+RAILS_GEM_VERSION = %x{gem list | grep "rails" | awk '{print $2}'}.sub( /\(/, "").sub( /\)/, "")[1]
 
 %x{
   touch #{RAILS_ROOT}/log/production.log
