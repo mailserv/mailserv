@@ -91,7 +91,7 @@ echo ""
 #server need to be reboot because of Dovecot low openfiles limit 
 #up to now without reboot larger openfiles limit necessary for regular dovecot start 
 #is not work properly
-echo ""
+##echo ""
 #reboot in a minute
-/sbin/shutdown -r +1
+##/sbin/shutdown -r +1
 
