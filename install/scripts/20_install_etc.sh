@@ -100,11 +100,9 @@ if [[ $hi_ver_check == "true"  ]]; then
      # Update your RAILS_GEM_VERSION
      # -----------------------------------------------------
      echo " Installing rails:"
-   # /usr/local/bin/gem install -V -v=2.3.4 rails;
-     /usr/local/bin/gem install -V rails; 
+     /usr/local/bin/gem install -V -v=2.3.4 rails;    
      echo " Installing rubby apps:"
-     /usr/local/bin/gem install -V god iconv rdoc rrd mysql mongrel fastercsv highline; 
-
+     /usr/local/bin/gem install -V highline;
 fi 
 
 gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
