@@ -25,8 +25,17 @@ __EOT
      gnupg-1.4.13 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
-     ruby-highline \
+     ruby-gems-1.8.23p0 \
+     ruby-rake-0.9.2.2p0 \
+     ruby-rrd \
+     ruby-mysql-2.8.1p11 \
+     ruby-mongrel \
+     ruby-fastercsv-1.5.4p1 \
+     ruby-rdoc-3.11p1.tgz \
+     ruby-iconv \
+     god \
      dovecot-pigeonhole \
+     dovecot-mysql \
      memcached \
      mysql-server \
      nginx-1.2.3p1 \
