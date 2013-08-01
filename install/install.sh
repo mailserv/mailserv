@@ -63,7 +63,42 @@ for file in `ls /var/mailserv/install/scripts/*`; do
   $file install 2>&1 | tee -a /var/log/install.log
 done
 
+#stop god 
 /usr/local/bin/god quit
+
+#---------------------------------------------------------------
+#  increase openfiles limit to 1024 ( obsd usualy runs 128 )
+#  necessary to dovecot start up
+#  (when server reboot limits are read from login.conf, sysctl.conf) 
+#---------------------------------------------------------------
+maxfilestest=$( ulimit -n )
+
+if [ $maxfilestest -lt 1024 ];
+  then
+    echo " "
+    echo " setting openfiles-max to 1024 "
+    echo " "
+    ulimit -n 1024
+fi
+
+#----------------------------------------------------------------
+# increase kern.maxfiles (important for dovecot)
+#----------------------------------------------------------------
+
+kernmaxfiles=$( sysctl kern.maxfiles | awk -F= '{print $2}' )
+kernmaxnew=10000
+
+if [ $kernmaxfiles -lt $kernmaxnew ];
+  then
+   echo " "
+   echo " setting kernmaxfiles "
+   sysctl kern.maxfiles=$kernmaxnew
+   cat /etc/sysctl.conf | sed '/kern.maxfiles=.*/d' > /etc/sysctl.conf
+   echo "kern.maxfiles=$kernmaxnew" >> /etc/sysctl.conf
+fi
+
+sleep 1
+
 /var/mailserv/scripts/mailserv_boot.sh
 
 echo "#############################################"
@@ -82,14 +117,11 @@ rake -s -f /var/mailserv/admin/Rakefile  mailserv:add_admin
 echo "Creating locate database"
 /usr/libexec/locate.updatedb
 
+
 echo ""
 echo "Installation complete."
 echo ""
-echo "Please browse to port 4200 after server reboot to continue setting up Mailserv."
+echo "Please browse to port 4200 to continue setting up Mailserv."
 echo ""
-#server need to be reboot because of Dovecot low openfiles limit
-#up to now without reboot larger openfiles limit necessary for regular dovecot start
-#is not work properly
-echo ""
-#reboot in a minute
-/sbin/shutdown -r +1
+
+
