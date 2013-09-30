@@ -117,6 +117,8 @@ rake -s -f /var/mailserv/admin/Rakefile  mailserv:add_admin
 echo "Creating locate database"
 /usr/libexec/locate.updatedb
 
+#load PF
+/sbin/pfctl –f /etc/pf.conf
 
 echo ""
 echo "Installation complete."
