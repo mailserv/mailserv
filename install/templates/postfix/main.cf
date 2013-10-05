@@ -50,7 +50,6 @@ virtual_gid_maps =          proxy:mysql:/etc/postfix/sql/group.cf
 virtual_minimum_uid = 1000
 virtual_transport = dovecot
 dovecot_destination_recipient_limit = 1
-transport_destination_recipient_limit = 1
 spamassassin_destination_recipient_limit = 1
 transport_maps = proxy:mysql:/etc/postfix/sql/routing.cf
 relay_domains = proxy:mysql:/etc/postfix/sql/routing.cf
@@ -85,6 +84,14 @@ smtpd_sasl_local_domain =
 smtpd_delay_reject = yes
 smtpd_helo_required = yes
 smtpd_recipient_restrictions =
+  permit_mynetworks
+  permit_sasl_authenticated
+  permit_auth_destination
+  reject_unauth_destination
+  reject_unknown_recipient_domain
+  reject_non_fqdn_recipient
+
+smtpd_relay_restrictions =
   permit_mynetworks
   permit_sasl_authenticated
   permit_auth_destination
