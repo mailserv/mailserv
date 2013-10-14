@@ -118,7 +118,7 @@ echo "Creating locate database"
 /usr/libexec/locate.updatedb
 
 #load pf
-/sbin/pfctl –f /etc/pf.conf
+/sbin/pfctl -f /etc/pf.conf
 
 echo ""
 echo "Installation complete."
