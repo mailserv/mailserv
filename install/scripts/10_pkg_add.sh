@@ -31,7 +31,7 @@ __EOT
      ruby-mysql-2.8.1p13 \
      ruby-mongrel \
      ruby-fastercsv-1.5.4p1 \
-     ruby19-rdoc-3.11p1.tgz \
+     ruby19-rdoc-3.11p1 \
      ruby-iconv \
      god \
      dovecot-pigeonhole \
@@ -42,7 +42,7 @@ __EOT
      sqlgrey \
      gsed \
      gtar-- \
-     php-5.3.27 \
+     php-5.3.27-ap2 \
      php-mysqli-5.3.27 \
      php-pdo_mysql-5.3.27 \
      php-gd-5.3.27 \
