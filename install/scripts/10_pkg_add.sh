@@ -28,7 +28,7 @@ __EOT
      ruby-gems-1.8.23p0 \
      ruby-rake-0.9.2.2p0 \
      ruby-rrd \
-     ruby-mysql-2.8.1p11 \
+     ruby-mysql-2.8.1p13 \
      ruby-mongrel \
      ruby-fastercsv-1.5.4p1 \
      ruby19-rdoc-3.11p1.tgz \
