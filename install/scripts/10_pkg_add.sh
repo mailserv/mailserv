@@ -31,7 +31,6 @@ __EOT
      ruby-mysql-2.8.1p13 \
      ruby-mongrel \
      ruby-fastercsv-1.5.4p1 \
-     ruby19-rdoc-3.11p1 \
      ruby-iconv \
      god \
      dovecot-pigeonhole \
