@@ -35,8 +35,8 @@ class Certificate
     subj += "/OU=#{ou}" unless ou.blank?
     subj += "/CN=#{cn}" 
     subj += "/emailAddress=#{email}" unless email.empty?
-    %x{openssl req -new -key #{@keyfile} -subj "#{subj}" 2>/dev/null}.strip
-  end
+    Sudo.exec("/usr/sbin/openssl req -new -key #{@keyfile} -subj \"#{subj}\"  2>/dev/null").strip
+ end
 
   def view
     %x{openssl x509 -text -in #{@certfile}}.strip
