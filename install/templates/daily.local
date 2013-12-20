@@ -15,3 +15,6 @@
 
 # Restart ruby-god (avoiding potential memory leaks)
 /usr/local/bin/god quit >/dev/null; sleep 2; /usr/local/bin/god -c /etc/god/god.conf >/dev/null 2>&1
+
+# Clear out expired brute-force firewall blocks after 1 day
+/sbin/pfctl -t bruteforce -T expire 86400
