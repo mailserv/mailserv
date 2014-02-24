@@ -6,8 +6,12 @@ include FileUtils
 basedir = "/var/www/webmail"
 mkdir_p basedir
 
-puts "Getting latest Roundcube version"
-roundcube_file=`lynx -dump -listonly http://sourceforge.net/projects/roundcubemail/files/roundcubemail/ | egrep "([0-9\.]\/)" | head -1 | awk '{print $2}' | xargs lynx -dump | egrep "(roundcubemail-[0-9\.]+\.tar\.gz\/download)" | head -1 | awk '{ print $2 }'`.strip
+#puts "Getting latest Roundcube version"
+#roundcube_file=`lynx -dump -listonly http://sourceforge.net/projects/roundcubemail/files/roundcubemail/ | egrep "([0-9\.]\/)" | head -1 | awk '{print $2}' | xargs lynx -dump | egrep "(roundcubemail-[0-9\.]+\.tar\.gz\/download)" | head -1 | awk '{ print $2 }'`.strip
+
+puts "Getting RoundCube suitable for this version (0.8.7)"
+#newer versions require higher version of PHP
+roundcube_file="http://downloads.sourceforge.net/project/roundcubemail/roundcubemail/0.8.7/roundcubemail-0.8.7.tar.gz"
 
 rc_dir = "/var/www/webmail/" + roundcube_file.match(/(roundcubemail-[\d\.]+)\.tar/)[1]
 
