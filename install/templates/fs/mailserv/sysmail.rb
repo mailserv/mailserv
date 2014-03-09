@@ -10,7 +10,8 @@
 # to the setting in the webadmin database.
 # ----------------------------------------------------------------------
 
-recipients = %x{/var/www/admin/script/runner -e production "puts Admin.emails"}.strip
+
+recipients = %x{/var/mailserv/admin/script/runner -e production "puts Admin.emails"}.strip
 exit if recipients.empty?
 
 IO.popen("/usr/sbin/sendmail #{recipients}","w+") do |sm|
