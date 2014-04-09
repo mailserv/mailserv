@@ -33,6 +33,7 @@ __EOT
      ruby-fastercsv-1.5.4p1 \
      ruby-iconv \
      god \
+     dnsmasq \
      dovecot-pigeonhole \
      dovecot-mysql \
      memcached \

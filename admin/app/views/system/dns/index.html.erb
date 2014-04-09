@@ -10,9 +10,9 @@
   </tr>
   <tr>
     <td>Nameserver</td>
-    <td><input type="text" name="nameservers[0]" value="<%= @dns.nameservers[0] -%>" id="nameserver[0]" /></td>
+    <td><input type="text" name="nameservers[0]" value="<%= @dns.nameservers[0] -%>" id="nameserver[0]" placeholder="127.0.0.1" /></td>
     <td rowspan="3">A total a 3 name (DNS) servers can be specified. 
-      If there are multiple servers, the resolver library queries them in the order listed.</td>
+      If there are multiple servers, the resolver library queries them in the order listed. The first name server should be 127.0.0.1 to make use of the caching DNS server.</td>
   </tr>
   <tr>
     <td>Nameserver</td>

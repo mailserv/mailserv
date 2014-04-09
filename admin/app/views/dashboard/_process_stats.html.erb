@@ -29,6 +29,26 @@
           <td><%= display_enabled(@proc[:mysqld]) %></td>
           <td>-</td>
         </tr>
+        <tr>
+          <td>PHP</td>
+          <td><%= display_enabled(@proc[:php]) %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Nginx</td>
+          <td><%= display_enabled(@proc[:nginx]) %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Memcached</td>
+          <td><%= display_enabled(@proc[:memcached]) %></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Dnsmasq</td>
+          <td><%= display_enabled(@proc[:dnsmasq]) %></td>
+          <td>-</td>
+        </tr>
       </table>
 
       <table class="noborder small">
