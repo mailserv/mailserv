@@ -8,10 +8,10 @@
 /usr/local/bin/god restart spamd >/dev/null 2>&1
 
 # Delete old Spams and Trash messages after 30 days
-/usr/local/share/mailserver/clean_spam.rb 30 >/dev/null 2>&1
+/usr/local/share/mailserv/clean_spam.rb 30 >/dev/null 2>&1
 
-# Backup the mailserver if configuration is correctly defined in the web interface
-/usr/local/bin/mailserver backup:incremental >/dev/null 2>&1
+# Backup the mailserv if configuration is correctly defined in the web interface
+/usr/local/bin/mailserv backup:incremental >/dev/null 2>&1
 
 # Restart ruby-god (avoiding potential memory leaks)
 /usr/local/bin/god quit >/dev/null; sleep 2; /usr/local/bin/god -c /etc/god/god.conf >/dev/null 2>&1

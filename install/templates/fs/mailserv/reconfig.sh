@@ -15,7 +15,7 @@
 # == Copyright 
 # Copyright (c) 2008 Allard Consulting.
 
-templates="/usr/local/share/mailserver/template"
+templates="/usr/local/share/mailserv/template"
 
 # --------------------------------------------------------------
 # Copy and edit files

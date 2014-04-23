@@ -22,7 +22,7 @@ class Certificate
   end
 
   def gen_selfsigned(options = {})
-    Sudo.exec("/usr/local/bin/mailserver system:reload_hostname")
+    Sudo.exec("/usr/local/bin/mailserv system:reload_hostname")
   end
 
   def gen_csr(c = "", st = "", l = "", o = "", ou = "", cn = "", email = "")

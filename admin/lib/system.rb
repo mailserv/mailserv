@@ -50,13 +50,13 @@ class System
   def reconfig(function = "all")
     case function
     when "hostname"
-      Sudo.exec("/usr/local/bin/mailserver system:reload_hostname &")
+      Sudo.exec("/usr/local/bin/mailserv system:reload_hostname &")
     when "all"
       Sudo.exec("
-        /usr/local/bin/mailserver system:update_hostname &&
-        /usr/local/bin/god restart mailserver &")
+        /usr/local/bin/mailserv system:update_hostname &&
+        /usr/local/bin/god restart mailserv &")
     when "certificates"
-      Sudo.exec("/usr/local/bin/mailserver system:reload &")
+      Sudo.exec("/usr/local/bin/mailserv system:reload &")
     else
       Sudo.exec("/usr/local/bin/god restart #{function}")
     end

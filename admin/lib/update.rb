@@ -37,7 +37,7 @@ class Update
 
   def extract
     @state = "extracting"
-    %x{/usr/bin/install -m 755 /usr/local/share/mailserver/update.sh /tmp}
+    %x{/usr/bin/install -m 755 /usr/local/share/mailserv/update.sh /tmp}
     @extract_state = spawn do
       %x{/tmp/update.sh /var/tmp/#{@filename}}
     end
