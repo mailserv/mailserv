@@ -19,12 +19,18 @@ mkdir_p "#{basedir}/webmail/webmail"
 File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php header('Location: /', true, 301); ?>"}
 
 puts "Downloading plugins"
-system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/contextmenu.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
-#system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/messagesize.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
-#system "git clone http://github.com/JohnDoh/Roundcube-Plugin-Message-Size.git #{basedir}/webmail/plugins/messagesize"
-#system "wget http://www.tehinterweb.co.uk/roundcube/plugins/old/messagesize.zip -O /tmp/messagesize.zip; unzip /tmp/messagesize.zip -d #{basedir}/webmail/plugins/;rm /tmp/messagesize.zip"
-system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sieverules.tar.gz  | tar zxf - -C #{basedir}/webmail/plugins/"
-system "ftp -Vmo - http://www.tehinterweb.co.uk/roundcube/plugins/sauserprefs.tar.gz | tar zxf - -C #{basedir}/webmail/plugins/"
+#download and prepare  composer first 
+system "curl -s https://getcomposer.org/download/1.0.0-alpha8/composer.phar -o #{basedir}/webmail/composer.phar"
+
+#copy composer profile composer.json from template 
+install "/var/mailserv/install/templates/roundcube/conf/composer.json",  "#{basedir}/webmail/", :mode => 0644
+
+#install plugins
+#sauserprefs, contextmenu
+system "cd #{basedir}/webmail; php -d allow_url_fopen=On -d detect_unicode=Off -d suhosin.executor.include.whitelist=phar  #{basedir}/webmail/composer.phar install"
+
+#old way - sieverules not work stable with composer
+system "ftp -Vmo - https://github.com/JohnDoh/Roundcube-Plugin-SieveRules-Managesieve/archive/2.1.2.tar.gz | tar zxf - -C #{basedir}/webmail/plugins; mv #{basedir}/webmail/plugins/Roundcube-Plugin-SieveRules-Managesieve-2.1.2 #{basedir}/webmail/plugins/sieverules"
 
 puts "Installing Configuration"
 install "/var/mailserv/install/templates/roundcube/conf/main.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
