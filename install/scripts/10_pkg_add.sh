@@ -38,11 +38,11 @@ __EOT
      dovecot-mysql \
      memcached \
      mysql-server \
-     nginx-1.4.1 \
+     nginx-1.4.4 \
      sqlgrey \
      gsed \
      gtar-- \
-     php-5.3.28-ap2 \
+     php-5.3.28p2-ap2 \
      php-mysqli-5.3.28p0 \
      php-pdo_mysql-5.3.28p0 \
      php-gd-5.3.28p0 \
