@@ -22,15 +22,15 @@ __EOT
   
     pkg_add -v -m -I \
      clamav \
-     gnupg-2.0.19p3 \
+     gnupg-2.0.22p0 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
-     ruby-gems-1.8.23p0 \
+     ruby-gems-1.8.23p1 \
      ruby-rake-0.9.2.2p0 \
      ruby-rrd \
-     ruby-mysql-2.8.1p13 \
+     ruby-mysql-2.8.1p16 \
      ruby-mongrel \
-     ruby-fastercsv-1.5.4p1 \
+     ruby-fastercsv-1.5.4p2 \
      ruby-iconv \
      god \
      dnsmasq \
@@ -42,11 +42,11 @@ __EOT
      sqlgrey \
      gsed \
      gtar-- \
-     php-5.3.27-ap2 \
-     php-mysqli-5.3.27 \
-     php-pdo_mysql-5.3.27 \
-     php-gd-5.3.27 \
-     php-mcrypt-5.3.27 \
+     php-5.3.28-ap2 \
+     php-mysqli-5.3.28p0 \
+     php-pdo_mysql-5.3.28p0 \
+     php-gd-5.3.28p0 \
+     php-mcrypt-5.3.28p0 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
