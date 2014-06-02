@@ -43,6 +43,7 @@ __EOT
      gsed \
      gtar-- \
      php-5.3.28p2-ap2 \
+     php-fpm-5.3.28p3.tgz \
      php-mysqli-5.3.28p0 \
      php-pdo_mysql-5.3.28p0 \
      php-gd-5.3.28p0 \
