@@ -3,7 +3,8 @@ class DashboardController < ApplicationController
   def index
     @proc = Mailserver.new.processes
     @updates = Mailserver.new.updates
-    Rrdmon.new.daily
+    # problem to load rrdtools - can not load specified object RRD.so
+    # Rrdmon.new.daily
   end
 
   def dns_test
