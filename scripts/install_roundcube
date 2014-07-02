@@ -20,7 +20,7 @@ File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php h
 
 puts "Downloading plugins"
 #download and prepare  composer first 
-system "curl -s https://getcomposer.org/download/1.0.0-alpha8/composer.phar -o #{basedir}/webmail/composer.phar"
+system "curl -s http://getcomposer.org/download/1.0.0-alpha8/composer.phar -o #{basedir}/webmail/composer.phar"
 
 #copy composer profile composer.json from template 
 install "/var/mailserv/install/templates/roundcube/conf/composer.json",  "#{basedir}/webmail/", :mode => 0644
