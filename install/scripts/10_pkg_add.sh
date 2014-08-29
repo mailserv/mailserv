@@ -51,7 +51,7 @@ __EOT
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
-     php-fpm \
+     php-fpm-5.3.28p3 \
      pecl-APC \
      pecl-memcache
      ;;
