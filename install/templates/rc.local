@@ -1,2 +1,1 @@
-
-/bin/sh /var/mailserv/scripts/mailserv_boot.sh
+env LD_PRELOAD=/usr/lib/libpthread.so.18.0 /var/mailserv/scripts/mailserv_boot.sh

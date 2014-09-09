@@ -28,7 +28,7 @@ case $1 in
     cd /var/mailserv/admin && /usr/local/bin/rake -s db:migrate RAILS_ENV=production
     /usr/local/bin/mysql mail < /var/mailserv/install/templates/sql/mail.sql
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/spamcontrol.sql
-    /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
+    env LD_PRELOAD=/usr/lib/libpthread.so.18.0 /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
     echo "."
     ;;
 
