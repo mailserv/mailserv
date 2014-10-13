@@ -8,7 +8,9 @@ class Mailserver
       :mysqld     => %x{ps -ax | egrep "mysqld " | grep -v grep | wc -l}.to_i > 0,
       :spamd      => %x{ps -ax | egrep spamd | grep -v grep | wc -l}.to_i > 0,
       :freshclam  => %x{ps -ax | egrep freshclam | grep -v grep | wc -l}.to_i > 0,
-      :dnsmasq    => %x{ps -ax | egrep dnsmasq | grep -v grep | wc -l}.to_i > 0
+      :dnsmasq    => %x{ps -ax | egrep dnsmasq | grep -v grep | wc -l}.to_i > 0,
+      :nginx      => %x{ps -ax | egrep nginx | grep -v grep | wc -l}.to_i > 0,
+      :php        => %x{ps -ax | egrep php-fpm | grep -v grep | wc -l}.to_i > 0
     }
   end
 
