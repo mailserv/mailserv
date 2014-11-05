@@ -12,8 +12,6 @@ case $1 in
     mkdir /var/db/spamassassin 2>/dev/null
     cat <<__EOT
     
-You will be prompted to install:
- - postfix version. The recommendation is to install the first version 
 
 Fetching versions:
 
@@ -41,12 +39,12 @@ __EOT
      sqlgrey \
      gsed \
      gtar \
-     php-5.5.14p0 \
-     php-fpm-5.5.14 \
-     php-mysqli-5.5.14 \
-     php-pdo_mysql-5.5.14 \
-     php-gd-5.5.14 \
-     php-mcrypt-5.5.14 \
+     php-5.4.30p0 \
+     php-fpm-5.4.30 \
+     php-mysqli-5.4.30 \
+     php-pdo_mysql-5.4.30 \
+     php-gd-5.4.30 \
+     php-mcrypt-5.4.30 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
