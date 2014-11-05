@@ -21,7 +21,7 @@ __EOT
     pkg_add -v -m -I \
      postfix-2.11.1p0-mysql \
      clamav \
-     gnupg-2.0.22p0 \
+     gnupg-2.0.25 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
      ruby-gems-1.8.23p2 \
