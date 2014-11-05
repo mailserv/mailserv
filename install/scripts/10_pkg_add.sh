@@ -18,14 +18,13 @@ You will be prompted to install:
 Fetching versions:
 
 __EOT
-    pkg_add -v -m -i postfix--mysql 
-  
     pkg_add -v -m -I \
+     postfix-2.11.1p0-mysql \
      clamav \
      gnupg-2.0.22p0 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
-     ruby-gems-1.8.23p1 \
+     ruby-gems-1.8.23p2 \
      ruby-rake-0.9.2.2p0 \
      ruby-rrd \
      ruby-mysql-2.8.1p16 \
@@ -38,21 +37,22 @@ __EOT
      dovecot-mysql \
      memcached \
      mysql-server \
-     nginx-1.4.4 \
+     nginx-1.5.7p3 \
      sqlgrey \
      gsed \
-     gtar-- \
-     php-5.3.28p2-ap2 \
-     php-fpm-5.3.28p3.tgz \
-     php-mysqli-5.3.28p0 \
-     php-pdo_mysql-5.3.28p0 \
-     php-gd-5.3.28p0 \
-     php-mcrypt-5.3.28p0 \
+     gtar \
+     php-5.5.14p0 \
+     php-fpm-5.5.14 \
+     php-mysqli-5.5.14 \
+     php-pdo_mysql-5.5.14 \
+     php-gd-5.5.14 \
+     php-mcrypt-5.5.14 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
      pecl-APC \
-     pecl-memcache
+     pecl-memcache \
+     lynx
      ;;
 
 esac
