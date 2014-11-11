@@ -5,6 +5,10 @@ if [[ "$1" == "install" ]]; then
 
   # Install php.ini file (this is a stock php.ini-production)
   /usr/bin/install -m 644 /var/mailserv/install/templates/php-5.4.ini /etc/
+  
+  #To enable the php module please create a symbolic link
+  mkdir /var/www/conf/modules
+  ln -fs /var/www/conf/modules.sample/php-5.4.conf /var/www/conf/modules/php.conf
 
   # Install our local changes to php.ini
   /usr/bin/install -m 644 /var/mailserv/install/templates/php-mailserv.ini /etc/php-5.4/mailserv.ini
