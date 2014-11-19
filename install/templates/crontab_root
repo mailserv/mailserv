@@ -25,4 +25,4 @@ HOME=/var/log
 #
 # Collect System stats
 #
-*/5	*	*	*	* 	/usr/bin/env LD_PRELOAD=/usr/lib/libpthread.so.18.0	/var/mailserv/scripts/rrdmon-poll >/dev/null 2>&1
+*/5	*	*	*	* 	/var/mailserv/scripts/rrdmon-poll >/dev/null 2>&1

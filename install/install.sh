@@ -99,7 +99,7 @@ fi
 
 sleep 1
 
-env LD_PRELOAD=/usr/lib/libpthread.so.18.0 /var/mailserv/scripts/mailserv_boot.sh
+/var/mailserv/scripts/mailserv_boot.sh
 
 echo "#############################################"
 echo "Get the last version of Highline"

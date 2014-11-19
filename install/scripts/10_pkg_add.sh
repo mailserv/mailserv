@@ -22,9 +22,9 @@ __EOT
      gnupg-2.0.25 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
+     rrdtool \
      ruby-gems-1.8.23p2 \
      ruby-rake-0.9.2.2p0 \
-     ruby-rrd \
      ruby-mysql-2.8.1p16 \
      ruby-mongrel \
      ruby-fastercsv-1.5.4p2 \
