@@ -1,7 +1,9 @@
 #!/usr/local/bin/ruby
 require 'rubygems'
 require 'date'
-require 'RRD'
+#require 'RRDTool'
+#require 'rrd'
+
 
 config_file = "/etc/rrdmon.conf"
 
@@ -35,15 +37,17 @@ File.read(config_file).each do |line|
     # Store 1 datapoint every 2 hours and keep 1 month
     # Store 1 datapoint every 1 day and keep 1 year
     unless File.exists?(cpu_rrd)
-      RRD.create(cpu_rrd, "--step", "300",
-        "DS:user:GAUGE:400:0:100",
-        "DS:system:GAUGE:400:0:100",
-        "DS:idle:GAUGE:400:0:100",
-        "RRA:AVERAGE:0.5:1:288",
-        "RRA:AVERAGE:0.5:6:336",
-        "RRA:AVERAGE:0.5:24:372",
-        "RRA:AVERAGE:0.5:288:365"
-      )
+    system <<-eos
+     rrdtool create #{cpu_rrd} \
+     --step 300 \
+     DS:user:GAUGE:400:0:100 \
+     DS:system:GAUGE:400:0:100 \
+     DS:idle:GAUGE:400:0:100 \
+     RRA:AVERAGE:0.5:1:288 \
+     RRA:AVERAGE:0.5:6:336 \
+     RRA:AVERAGE:0.5:24:372 \
+     RRA:AVERAGE:0.5:288:365
+    eos
     end
   
   when /mem/  # ========================= MEM =========================
@@ -56,17 +60,20 @@ File.read(config_file).each do |line|
     # Store 1 datapoint every 2 hours and keep 1 month
     # Store 1 datapoint every 1 day and keep 1 year
     unless File.exists?(mem_rrd)
-      RRD.create(mem_rrd,
-        "--step", "300",
-        "DS:usage:GAUGE:400:0:U",
-        "DS:free:GAUGE:400:0:U",
-        "RRA:AVERAGE:0.5:1:288",
-        "RRA:AVERAGE:0.5:6:336",
-        "RRA:AVERAGE:0.5:24:372",
-        "RRA:AVERAGE:0.5:288:365"
-      )
+    system <<-eos
+     rrdtool create #{mem_rrd} \
+     --step 300 \
+     DS:usage:GAUGE:400:0:U \
+     DS:free:GAUGE:400:0:U \
+     RRA:AVERAGE:0.5:1:288 \
+     RRA:AVERAGE:0.5:6:336 \
+     RRA:AVERAGE:0.5:24:372 \
+     RRA:AVERAGE:0.5:288:365
+    eos
     end
-  
+
+
+
   when /swap/  # ========================= SWAP =========================
 
     swap_rrd = rrd_dir + "/" + "swap.rrd"
@@ -76,16 +83,19 @@ File.read(config_file).each do |line|
     # Store 1 datapoint every 2 hours and keep 1 month
     # Store 1 datapoint every 1 day and keep 1 year
     unless File.exists?(swap_rrd)
-      RRD.create(swap_rrd,
-        "--step", "300",
-        "DS:usage:GAUGE:400:0:U",
-        "DS:free:GAUGE:400:0:U",
-        "RRA:AVERAGE:0.5:1:288",
-        "RRA:AVERAGE:0.5:6:336",
-        "RRA:AVERAGE:0.5:24:372",
-        "RRA:AVERAGE:0.5:288:365"
-      )
-    end
+    system <<-eos
+     rrdtool create #{swap_rrd} \
+     --step 300 \
+     DS:usage:GAUGE:400:0:U \
+     DS:free:GAUGE:400:0:U \
+     RRA:AVERAGE:0.5:1:288 \
+     RRA:AVERAGE:0.5:6:336 \
+     RRA:AVERAGE:0.5:24:372 \
+     RRA:AVERAGE:0.5:288:365
+    eos
+   end
+   
+
   
   when /pf/  # ========================= PF =========================
 
@@ -96,17 +106,19 @@ File.read(config_file).each do |line|
     # Store 1 datapoint every 2 hours and keep 1 month
     # Store 1 datapoint every 1 day and keep 1 year
     unless File.exists?(pf_rrd)
-      RRD.create(pf_rrd,
-        "--step", "300",
-        "DS:in_pass:COUNTER:400:0:U",
-        "DS:in_block:COUNTER:400:0:U",
-        "DS:out_pass:COUNTER:400:0:U",
-        "DS:out_block:COUNTER:400:0:U",
-        "RRA:AVERAGE:0.5:1:288",
-        "RRA:AVERAGE:0.5:6:336",
-        "RRA:AVERAGE:0.5:24:372",
-        "RRA:AVERAGE:0.5:288:365"
-      )
+    puts pf creating
+    system <<-eos
+      rrdtool create #{pf_rrd} \
+        --step 300 \
+        DS:in_pass:COUNTER:400:0:U \ 
+        DS:in_block:COUNTER:400:0:U \
+        DS:out_pass:COUNTER:400:0:U \ 
+        DS:out_block:COUNTER:400:0:U \
+        RRA:AVERAGE:0.5:1:288 \
+        RRA:AVERAGE:0.5:6:336 \
+        RRA:AVERAGE:0.5:24:372 \
+        RRA:AVERAGE:0.5:288:365
+     eos   
     end
   
   when /mail/  # ========================= MAIL =========================
@@ -118,20 +130,21 @@ File.read(config_file).each do |line|
     # Store 1 datapoint every 2 hours and keep 1 month
     # Store 1 datapoint every 1 day and keep 1 year
     unless File.exists?(mail_rrd)
-      RRD.create(mail_rrd,
-        "--step", "300",
-        "DS:sent:GAUGE:400:0:U",
-        "DS:received:GAUGE:400:0:U",
-        "DS:bounced:GAUGE:400:0:U",
-        "DS:rejected:GAUGE:400:0:U",
-        "DS:virus:GAUGE:400:0:U",
-        "DS:spam:GAUGE:400:0:U",
-        "RRA:AVERAGE:0.5:1:288",
-        "RRA:AVERAGE:0.5:6:336",
-        "RRA:AVERAGE:0.5:24:372",
-        "RRA:AVERAGE:0.5:288:365"
-      )
-    end
+      system <<-eos
+       rrdtool create #{mail_rrd} \
+        --step 300 \
+        DS:sent:GAUGE:400:0:U \
+        DS:received:GAUGE:400:0:U \
+        DS:bounced:GAUGE:400:0:U \
+        DS:rejected:GAUGE:400:0:U \
+        DS:virus:GAUGE:400:0:U \
+        DS:spam:GAUGE:400:0:U \
+        RRA:AVERAGE:0.5:1:288 \
+        RRA:AVERAGE:0.5:6:336 \
+        RRA:AVERAGE:0.5:24:372 \
+        RRA:AVERAGE:0.5:288:365
+      eos
+     end
   end # when
 end # File.read
 
@@ -150,13 +163,17 @@ File.open(config_file).each {|line|
 
     cpu_rrd = rrd_dir + "/" + "cpu.rrd"
 
-    vmstat = `vmstat 300 2 | tail -1`
+    #vmstat = `vmstat 300 2 | tail -1`
+    vmstat = `vmstat 3 2 | tail -1`
     vmstat =~ /(\d+)\s+(\d+)\s+(\d+)$/
     user = $1
     system = $2
     idle = $3
 
-    RRD.update(cpu_rrd, "#{time}:#{user}:#{system}:#{idle}")
+   system "rrdtool update #{cpu_rrd} #{time}:#{user}:#{system}:#{idle}"
+   #RRD.update(cpu_rrd, "#{time}:#{user}:#{system}:#{idle}")
+
+
 
   when /mem/  # ========================= MEM =========================
 
@@ -166,8 +183,11 @@ File.open(config_file).each {|line|
     memstat =~ /\/(\d+)M.*Free:\s+(\d+)M/
     usage = $1
     free = $2
-
-    RRD.update(mem_rrd, "#{time}:#{usage}:#{free}")
+   
+puts usage
+puts free  
+    system "rrdtool update #{mem_rrd} #{time}:#{usage}:#{free}" 
+    #RRD.update(mem_rrd, "#{time}:#{usage}:#{free}")
 
   when /swap/  # ========================= SWAP =========================
 
@@ -177,8 +197,9 @@ File.open(config_file).each {|line|
     swapctl =~ /(\d+)\s+(\d+)/
     usage = $1.to_f/1024
     free = $2.to_f/1024
-
-    RRD.update(swap_rrd, "#{time}:#{usage}:#{free}")
+    
+    system "rrdtool update #{swap_rrd} #{time}:#{usage}:#{free}"
+    #RRD.update(swap_rrd, "#{time}:#{usage}:#{free}")
 
   when /pf/  # ========================= PF =========================
 
@@ -191,8 +212,9 @@ File.open(config_file).each {|line|
     pfctl =~ /Packets Out\s+Passed\s+(\d+)\s+\d+\s+Blocked\s+(\d+)/
     out_passed  = $1
     out_blocked = $2
-
-    RRD.update(pf_rrd, "#{time}:#{in_passed}:#{in_blocked}:#{out_passed}:#{out_blocked}")
+    
+    system "rrdtool update #{pf_rrd} #{time}:#{in_passed}:#{in_blocked}:#{out_passed}:#{out_blocked}"
+    #RRD.update(pf_rrd, "#{time}:#{in_passed}:#{in_blocked}:#{out_passed}:#{out_blocked}")
 
   when /mail/  # ========================= MAIL =========================
 
@@ -228,7 +250,8 @@ File.open(config_file).each {|line|
         rejected += 1
       end
     }
-    RRD.update(mail_rrd, "#{time}:#{sent}:#{received}:#{bounced}:#{rejected}:#{virus}:#{spam}")
+   system "rrdtool update #{mail_rrd} #{time}:#{sent}:#{received}:#{bounced}:#{rejected}:#{virus}:#{spam}"
+   #RRD.update(mail_rrd, "#{time}:#{sent}:#{received}:#{bounced}:#{rejected}:#{virus}:#{spam}")
 
   end
 }
