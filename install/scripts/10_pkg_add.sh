@@ -42,12 +42,12 @@ __EOT
      sqlgrey \
      gsed \
      gtar-- \
-     php-5.3.28p2-ap2 \
-     php-fpm-5.3.28p3.tgz \
-     php-mysqli-5.3.28p0 \
-     php-pdo_mysql-5.3.28p0 \
-     php-gd-5.3.28p0 \
-     php-mcrypt-5.3.28p0 \
+     php-5.4.24-ap2 \
+     php-fpm-5.4.24 \
+     php-mysqli-5.4.24 \
+     php-pdo_mysql-5.4.24 \
+     php-gd-5.4.24 \
+     php-mcrypt-5.4.24 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
