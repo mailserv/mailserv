@@ -103,7 +103,7 @@ sleep 1
 
 echo "#############################################"
 echo "Get the last version of Highline"
-/usr/local/bin/gem install highline
+/usr/local/bin/gem install highline -v 1.6.21
 
 echo ""
 echo ""
