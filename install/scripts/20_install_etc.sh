@@ -102,7 +102,7 @@ if [[ $hi_ver_check == "true"  ]]; then
      echo " Installing rails:"
      /usr/local/bin/gem install -V -v=2.3.4 rails;    
      echo " Installing rubby apps:"
-     /usr/local/bin/gem install -V highline rdoc;
+     /usr/local/bin/gem install -V highline;
 fi 
 
 gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
