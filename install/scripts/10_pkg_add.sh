@@ -28,6 +28,7 @@ __EOT
      ruby-mysql-2.8.1p16 \
      ruby-mongrel \
      ruby-fastercsv-1.5.4p2 \
+     ruby-rdoc-3.11p2 \
      ruby-iconv \
      god \
      dnsmasq \
