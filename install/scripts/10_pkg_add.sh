@@ -45,7 +45,6 @@ __EOT
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
-     pecl-APC \
      pecl-memcache \
      lynx
      ;;
