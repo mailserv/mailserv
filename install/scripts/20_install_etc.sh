@@ -97,13 +97,15 @@ if [[ $hi_ver_check == "true"  ]]; then
      ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
      ln -sf /usr/local/bin/mongrel_rails18 /usr/local/bin/mongrel_rails
      ln -sf /usr/local/bin/rails18 /usr/local/bin/rails 
+     ln -sf /usr/local/bin/god18 /usr/local/bin/god
      # -----------------------------------------------------
      # Update your RAILS_GEM_VERSION
      # -----------------------------------------------------
      echo " Installing rails:"
      /usr/local/bin/gem install -V -v=2.3.4 rails;    
      echo " Installing rubby apps:"
-     /usr/local/bin/gem install -V god highline rdoc mongrel fastercsv;
+     /usr/local/bin/gem install -V -v=1.6.21 highline;    
+     /usr/local/bin/gem install -V god rdoc mongrel fastercsv ruby-mysql;
 fi 
 
 gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
