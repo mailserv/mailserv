@@ -95,14 +95,15 @@ if [[ $hi_ver_check == "true"  ]]; then
 
      ln -sf /usr/local/bin/gem18 /usr/local/bin/gem
      ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
-
+     ln -sf /usr/local/bin/mongrel_rails18 /usr/local/bin/mongrel_rails
+     ln -sf /usr/local/bin/rails18 /usr/local/bin/rails 
      # -----------------------------------------------------
      # Update your RAILS_GEM_VERSION
      # -----------------------------------------------------
      echo " Installing rails:"
      /usr/local/bin/gem install -V -v=2.3.4 rails;    
      echo " Installing rubby apps:"
-     /usr/local/bin/gem install -V highline;
+     /usr/local/bin/gem install -V god highline rdoc mongrel fastercsv;
 fi 
 
 gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
