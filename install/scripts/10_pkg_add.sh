@@ -25,7 +25,6 @@ __EOT
      rrdtool \
      ruby-gems-1.8.24 \
      ruby-rake-0.9.2.2p0 \
-     ruby-mysql-2.9.1 \
      ruby-iconv \
      dnsmasq \
      dovecot-pigeonhole \
