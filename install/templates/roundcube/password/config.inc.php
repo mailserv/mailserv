@@ -23,7 +23,7 @@ $rcmail_config['password_require_nonalpha'] = false;
 // ------------------
 // PEAR database DSN for performing the query. By default
 // Roundcube DB settings are used.
-$rcmail_config['password_db_dsn'] = 'mysql://mailadmin:mailadmin@localhost/mail';
+$rcmail_config['password_db_dsn'] = 'mysql://mailadmin:mailadmin@127.0.0.1/mail';
 
 // The SQL query used to change the password.
 // The query can contain the following macros that will be expanded as follows:

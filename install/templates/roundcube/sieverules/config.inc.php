@@ -10,7 +10,7 @@
 // %n - http hostname ($_SERVER['SERVER_NAME'])
 // %d - domain (http hostname without the first part)
 // For example %n = mail.domain.tld, %d = domain.tld
-$rcmail_config['sieverules_host'] = 'localhost';
+$rcmail_config['sieverules_host'] = '127.0.0.1';
 
 // managesieve server port
 $rcmail_config['sieverules_port'] = 2000;

@@ -47,6 +47,7 @@ __EOT
      ImageMagick \
      pecl-memcache \
      lynx \
+     vim \
      sudo 
      ;;
 

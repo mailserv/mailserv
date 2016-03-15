@@ -101,11 +101,11 @@ sleep 1
 
 /var/mailserv/scripts/mailserv_boot.sh
 
-echo "#############################################"
-echo "Get the last version of Highline"
-/usr/local/bin/gem install highline -v 1.6.21
+#echo "#############################################"
+#echo "Get the last version of Highline"
+#/usr/local/bin/gem install highline -v 1.6.21
 
-echo ""
+#echo ""
 echo ""
 echo "#############################################"
 echo ""
