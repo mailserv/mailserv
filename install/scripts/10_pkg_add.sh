@@ -46,7 +46,8 @@ __EOT
      ghostscript--no_x11 \
      ImageMagick \
      pecl-memcache \
-     lynx
+     lynx \
+     sudo 
      ;;
 
 esac

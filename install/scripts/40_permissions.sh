@@ -2,6 +2,7 @@
 
 if [[ "$1" == "install" ]]; then
   useradd -g =uid -u 901 -s /bin/ksh -d /var/mailserv _mailserv
+  echo "root    ALL=(ALL) SETENV: ALL" >> /etc/sudoers
   echo "_mailserv   ALL=(ALL) NOPASSWD: SETENV: ALL" >> /etc/sudoers
 fi
 
