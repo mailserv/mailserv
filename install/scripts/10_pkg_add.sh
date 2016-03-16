@@ -35,7 +35,7 @@ __EOT
      openssl-1.0.1pp1 \
      sqlgrey \
      gsed \
-     gtar \
+     gtar-1.28p1-static \
      php-5.4.43 \
      php-fpm-5.4.43p0 \
      php-mysqli-5.4.43 \
@@ -47,8 +47,8 @@ __EOT
      ImageMagick \
      pecl-memcache \
      lynx \
-     vim \
-     sudo 
+     vim-7.4.769-no_x11 \
+     sudo-1.8.14.3
      ;;
 
 esac
