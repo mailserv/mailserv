@@ -16,7 +16,7 @@ system "ftp -Vmo - https://github.com/roundcube/roundcubemail/releases/download/
 rm_f "#{basedir}/webmail"
 #Point the webmail symlink at the latest version of roundcube we've got
 #symlink must be relative path important for nginx 
-system "ln -s `ls -1 -r -d roundcubemail-*|head -n 1` #{basedir}/webmail"
+system "ln -s `cd #{basedir}; ls -1 -r -d roundcubemail-*|head -n 1` #{basedir}/webmail"
 
 #Redirect for old configs
 mkdir_p "#{basedir}/webmail/webmail"
