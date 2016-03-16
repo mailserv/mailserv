@@ -8,13 +8,13 @@ CREATE TABLE bayes_expire (
   id int(11) NOT NULL default '0',
   runtime int(11) NOT NULL default '0',
   KEY bayes_expire_idx1 (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE bayes_global_vars (
   variable varchar(30) NOT NULL default '',
   value varchar(200) NOT NULL default '',
   PRIMARY KEY  (variable)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 INSERT INTO bayes_global_vars VALUES ('VERSION','3');
 
@@ -23,7 +23,7 @@ CREATE TABLE bayes_seen (
   msgid varchar(200) binary NOT NULL default '',
   flag char(1) NOT NULL default '',
   PRIMARY KEY  (id,msgid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE bayes_token (
   id int(11) NOT NULL default '0',
@@ -34,7 +34,7 @@ CREATE TABLE bayes_token (
   PRIMARY KEY  (id, token),
   INDEX bayes_token_idx1 (token),
   INDEX bayes_token_idx2 (id, atime)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE bayes_vars (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -49,7 +49,7 @@ CREATE TABLE bayes_vars (
   newest_token_age int(11) NOT NULL default '0',
   PRIMARY KEY (id),
   UNIQUE bayes_vars_idx1 (username)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Auto White List
@@ -61,7 +61,7 @@ CREATE TABLE awl (
   count int(11) default '0',
   totscore float default '0',
   PRIMARY KEY  (username,email,ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 grant SELECT on spamcontrol.* to 'spamassassin'@'localhost' identified by 'spamassassin';
 GRANT SELECT, UPDATE, DELETE, INSERT ON spamcontrol.bayes_token TO 'spamassassin'@'localhost' ;
