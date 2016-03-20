@@ -13,7 +13,7 @@
 */
 
 // spamassassin database settings
-$rcmail_config['sauserprefs_db_dsnw'] = 'mysql://mailadmin:127.0.0.1@localhost/mail';
+$rcmail_config['sauserprefs_db_dsnw'] = 'mysql://mailadmin:mailadmin@127.0.0.1/mail';
 
 // PEAR database DSN for read only operations (if empty write database will be used)
 // useful for database replication
