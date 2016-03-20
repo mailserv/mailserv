@@ -36,12 +36,12 @@ __EOT
      sqlgrey \
      gsed \
      gtar-1.28p1-static \
-     php-5.4.43 \
-     php-fpm-5.4.43p0 \
+     php-5.6.11 \
+     php-fpm-5.6.11p0 \
      php-mysqli-5.4.43 \
-     php-pdo_mysql-5.4.43 \
-     php-gd-5.4.43 \
-     php-mcrypt-5.4.43 \
+     php-pdo_mysql-5.6.11 \
+     php-gd-5.6.11 \
+     php-mcrypt-5.6.11 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
