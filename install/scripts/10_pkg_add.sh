@@ -29,7 +29,7 @@ __EOT
      dnsmasq \
      dovecot-pigeonhole \
      dovecot-mysql \
-     memcached \
+     memcached-1.4.24 \
      mariadb-server \
      nginx-1.9.3p3 \
      openssl-1.0.1pp1 \

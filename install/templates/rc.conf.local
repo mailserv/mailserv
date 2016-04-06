@@ -1,3 +1,4 @@
 ntpd_flags=-s
 sendmail_flags=NO
+smtpd_flags=NO
 pf=YES

@@ -83,9 +83,11 @@ hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false" 
 
 #version check
 if [[ $hi_ver_check == "true"  ]]; then
-     ln -sf /usr/local/bin/python2.6 /usr/local/bin/python
-     ln -sf /usr/local/bin/python2.6-config /usr/local/bin/python-config
-     ln -sf /usr/local/bin/pydoc2.6  /usr/local/bin/pydoc
+     ln -sf /usr/local/bin/python2.7 /usr/local/bin/python
+	 ln -sf /usr/local/bin/python2.7-2to3 /usr/local/bin/2to3
+     ln -sf /usr/local/bin/python2.7-config /usr/local/bin/python-config
+     ln -sf /usr/local/bin/pydoc2.7  /usr/local/bin/pydoc
+	 
      ln -sf /usr/local/bin/ruby18 /usr/local/bin/ruby
      ln -sf /usr/local/bin/erb18 /usr/local/bin/erb
      ln -sf /usr/local/bin/irb18 /usr/local/bin/irb
