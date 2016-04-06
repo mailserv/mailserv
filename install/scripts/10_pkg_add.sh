@@ -29,7 +29,7 @@ __EOT
      dnsmasq \
      dovecot-pigeonhole \
      dovecot-mysql \
-     memcached \
+     memcached-1.4.24 \
      mariadb-server \
      nginx-1.9.3p3 \
      openssl-1.0.1pp1 \
@@ -38,7 +38,7 @@ __EOT
      gtar-1.28p1-static \
      php-5.6.11 \
      php-fpm-5.6.11p0 \
-     php-mysqli-5.4.43 \
+     php-mysqli-5.6.11 \
      php-pdo_mysql-5.6.11 \
      php-gd-5.6.11 \
      php-mcrypt-5.6.11 \
