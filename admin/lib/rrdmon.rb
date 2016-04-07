@@ -65,7 +65,7 @@ require 'tmpdir'
     cpu_rrd = "#{@rrd_dir}/cpu.rrd"
 
 system <<-eos 
-rrdtool graph "#{@output_dir}/cpu.png" \
+/usr/local/bin/rrdtool graph "#{@output_dir}/cpu.png" \
 --start #{@start_time} --end -900 \
 --lazy --width=80 --height=80 \
 --imgformat PNG --upper-limit 100 \
@@ -90,7 +90,7 @@ end
 
     mem_rrd = "#{@rrd_dir}/mem.rrd"
      system <<-eos
-	rrdtool graph "#{@output_dir}/mem.png" \
+	/usr/local/bin/rrdtool graph "#{@output_dir}/mem.png" \
         --start #{@start_time} --end -300 \
 	--width=80 --height=80 \
         --imgformat PNG --lazy \
@@ -106,7 +106,7 @@ end
 
     swap_rrd = "#{@rrd_dir}/swap.rrd"
      system <<-eos
-	rrdtool graph "#{@output_dir}/swap.png" \
+	/usr/local/bin/rrdtool graph "#{@output_dir}/swap.png" \
 	--start #{@start_time} \
 	--end -300 --lazy \
 	--width=80 --height=80 \
@@ -123,7 +123,7 @@ end
 
     mail_rrd = "#{@rrd_dir}/mail.rrd"
      system <<-eos
-	rrdtool graph "#{@output_dir}/mail.png" \
+	/usr/local/bin/rrdtool graph "#{@output_dir}/mail.png" \
 	--start #{@start_time} --end -300 \
 	--imgformat PNG \
 	--lower-limit 0 --lazy \
@@ -151,7 +151,7 @@ end
 
      mail_rrd = "#{@rrd_dir}/mail.rrd"
       system <<-eos
-	rrdtool graph #{@output_dir}/mail_block.png \
+	/usr/local/bin/rrdtool graph #{@output_dir}/mail_block.png \
 	--start #{@start_time} --end -300 \
 	--imgformat PNG \
 	--lower-limit 0 \

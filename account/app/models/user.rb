@@ -51,10 +51,10 @@ class User < ActiveRecord::Base
     vmi["reply-to"] = self.email
     vmi.save
     %x{
-      sudo cp -r /var/mailserv/config/default_maildir /var/mailserv/mail/#{domain.name}/#{name}
-      sudo chown -R #{id}:#{id} /var/mailserv/mail/#{domain.name}/#{name}
-      find /var/mailserv/mail/#{domain.name}/#{name} -type f -name .gitignore | xargs sudo rm
-      find /var/mailserv/mail/#{domain.name}/#{name} -type d | xargs sudo chmod 750
+      /usr/local/bin/sudo cp -r /var/mailserv/config/default_maildir /var/mailserv/mail/#{domain.name}/#{name}
+      /usr/local/bin/sudo chown -R #{id}:#{id} /var/mailserv/mail/#{domain.name}/#{name}
+      find /var/mailserv/mail/#{domain.name}/#{name} -type f -name .gitignore | xargs /usr/local/bin/sudo rm
+      find /var/mailserv/mail/#{domain.name}/#{name} -type d | xargs /usr/local/bin/sudo chmod 750
     }
   end
 
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def after_update
-    %x{sudo mv /var/mailserv/mail/#{domain.name}/#{@oldname} /var/mailserv/mail/#{domain.name}/#{name}}
+    %x{/usr/local/bin/sudo mv /var/mailserv/mail/#{domain.name}/#{@oldname} /var/mailserv/mail/#{domain.name}/#{name}}
   end
 
   def before_destroy
@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def after_destroy
-    %x{sudo rm -rf /var/mailserv/mail/#{domain.name}/#{@oldname}}
+    %x{/usr/local/bin/sudo rm -rf /var/mailserv/mail/#{domain.name}/#{@oldname}}
   end
 
   def validate
