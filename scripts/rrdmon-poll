@@ -192,7 +192,7 @@ puts free
 
     swap_rrd = rrd_dir + "/" + "swap.rrd"
 
-    swapctl = `swapctl -sk | awk '{print $6 " " $8}' | sed 's/k//g'`
+    swapctl = `swapctl -sk | awk '{print $5 " " $7}' | sed 's/k//g'`
     swapctl =~ /(\d+)\s+(\d+)/
     usage = $1.to_f/1024
     free = $2.to_f/1024
