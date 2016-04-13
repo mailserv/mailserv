@@ -58,6 +58,9 @@ fi
 rcctl enable memcached
 rcctl start  memcached
 
+rcctl enable dnsmasq
+rcctl start  dnsmasq
+
 # --------------------------------------------------------------
 # /etc/services
 # --------------------------------------------------------------
