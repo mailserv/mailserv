@@ -10,12 +10,6 @@ install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
 mkdir -p /usr/local/share/mailserv
 install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
 
-# Create a 64M RAM disk to keep PHP sessions in
-mkdir -p /tmp/phpsessions
-mount_mfs -s 131072 -o rw,async,nodev,noexec,nosuid swap /tmp/phpsessions
-chown -R www:www /tmp/phpsessions
-echo "swap /tmp/phpsessions mfs rw,async,nodev,noexec,nosuid,-s=131072 0 0" >> /etc/fstab
-
 template="/var/mailserv/install/templates"
 install -m 644 \
   ${template}/clamd.conf \
@@ -50,6 +44,19 @@ echo "" >> /etc/motd
 echo "Welcome to Mailserv" >> /etc/motd
 date >> /etc/motd
 echo "" >> /etc/motd
+
+# --------------------------------------------------------------
+# Setup package daemons
+# --------------------------------------------------------------
+
+if [ `grep /var/run/memcached/memcached.pid /etc/rd.d/memcached | wc -l` -eq 0 ]; then
+	#fix /etc/rc.d/memcached to use pidfile /var/run/memcached/memcached.pid
+	sed -i 's/\/var\/run\/memcached.pid/\/var\/run\/memcached\/memcached.pid/' /etc/rc.d/memcached
+	#fix /etc/rc.d/memcached to create /var/run/memcached before starting
+	sed -i '/rc_reload=NO/r /var/mailserv/install/templates/memcached_rc.d' /etc/rc.d/memcached
+fi
+rcctl enable memcached
+rcctl start  memcached
 
 # --------------------------------------------------------------
 # /etc/services
