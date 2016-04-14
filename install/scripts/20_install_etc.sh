@@ -20,7 +20,6 @@ install -m 644 \
   ${template}/my.cnf \
   ${template}/newsyslog.conf \
   ${template}/profile \
-  ${template}/rc.conf.local \
   ${template}/rc.shutdown \
   ${template}/rrdmon.conf \
   ${template}/syslog.conf \
@@ -48,6 +47,12 @@ echo "" >> /etc/motd
 # --------------------------------------------------------------
 # Setup package daemons
 # --------------------------------------------------------------
+rcctl set ntpd flags -s
+rcctl stop smtpd
+rcctl disable smtpd
+rcctl stop sndiod
+rcctl disable sndiod
+
 if [ `grep /var/run/memcached/memcached.pid /etc/rc.d/memcached | wc -l` -eq 0 ]; then
 	#fix /etc/rc.d/memcached to use pidfile /var/run/memcached/memcached.pid
 	sed -i 's/\/var\/run\/memcached.pid/\/var\/run\/memcached\/memcached.pid/' /etc/rc.d/memcached
@@ -166,7 +171,6 @@ chgrp 0 /etc/daily.local \
         /etc/login.conf \
         /etc/monthly.local \
         /etc/pf.conf \
-        /etc/rc.conf.local \
         /etc/rc.local \
         /etc/rc.shutdown \
         /etc/shells /etc/syslog.conf \
