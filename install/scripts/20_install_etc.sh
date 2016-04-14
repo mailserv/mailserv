@@ -60,6 +60,13 @@ rcctl start  memcached
 rcctl enable dnsmasq
 rcctl start  dnsmasq
 
+if [ `grep rc_pre /etc/rc.d/mysqld | wc -l` -eq 0 ]; then
+	#fix /etc/rc.d/mysqld to create /var/run/mysql before starting
+	sed -i '/rc_reload=NO/r /var/mailserv/install/templates/mysqld_rc.d' /etc/rc.d/mysqld
+fi
+rcctl enable mysqld
+rcctl start  mysqld
+
 rcctl enable nginx
 rcctl start  nginx
 

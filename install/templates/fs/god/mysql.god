@@ -1,17 +1,12 @@
 # run with:  god -c /etc/god/mysql.god
 #
 
-%x{
-  mkdir /var/run/mysql 2>/dev/null
-  chown -R _mysql:_mysql /var/run/mysql
-}
-
 God.watch do |w|
   w.name = "mysql"
   w.interval = 30.seconds # default
-  w.start = "/usr/local/bin/mysqld_safe &"
-  w.stop = "/usr/local/bin/mysqladmin shutdown"
-  w.restart = "/usr/local/bin/mysqladmin reload"
+  w.start = "rcctl start mysqld"
+  w.stop = "rcctl stop mysqld"
+  w.restart = "rcctl restart mysqld"
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
   w.pid_file = "/var/run/mysql/mysql.pid"

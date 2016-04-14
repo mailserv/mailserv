@@ -14,7 +14,7 @@ install_dir = "#{File.dirname(__FILE__)}/../"
   system("#{file} upgrade 2>&1 | tee -a /var/log/upgrade.log")
 end
 
-system("/usr/local/bin/mysqld_start")
+system("rcctl start mysqld")
 
 `ls #{install_dir}/install/updates/*`.split.each do |file_with_path|
   if version = File.basename(file_with_path).match(/^(\d+)/)[1] rescue false
