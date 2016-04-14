@@ -8,8 +8,6 @@ chgrp _dovecot /usr/local/libexec/dovecot/deliver
 chmod 4750 /usr/local/libexec/dovecot/deliver
 /usr/bin/newaliases
 
-/usr/local/bin/mysqld_start
-
 # Update ClamAV databases
 if [ -x /usr/local/bin/freshclam ]; then
   echo -n ' freshclam'

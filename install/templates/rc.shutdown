@@ -20,7 +20,4 @@ echo -n " mongrel"
 echo -n " postfix"
 /usr/local/sbin/postfix stop >/dev/null 2>&1
 
-echo -n " MySQL"
-/usr/local/bin/mysqladmin shutdown 2>/dev/null
-
 echo "."
