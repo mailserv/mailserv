@@ -63,10 +63,7 @@ rcctl start  memcached
 rcctl enable dnsmasq
 rcctl start  dnsmasq
 
-if [ `grep rc_pre /etc/rc.d/mysqld | wc -l` -eq 0 ]; then
-	#fix /etc/rc.d/mysqld to create /var/run/mysql before starting
-	sed -i '/rc_reload=NO/r /var/mailserv/install/templates/mysqld_rc.d' /etc/rc.d/mysqld
-fi
+rcctl set mysqld flags --pid-file=mysql.pid
 rcctl enable mysqld
 rcctl start  mysqld
 
