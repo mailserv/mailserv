@@ -1,6 +1,6 @@
 #/bin/sh
 
-echo -n "Starting mailserv daemons:"
+echo -n "starting mailserv daemons:"
 
 # ensure correct file permissions are set
 /usr/local/sbin/postfix set-permissions >/dev/null 2>&1
@@ -41,13 +41,10 @@ if [ -f /usr/local/awstats/awstats.pl ]; then
   perl /usr/local/awstats/awstats.pl -config=`hostname` -update > /dev/null &
 fi
 
-if [ -x /usr/local/sbin/nginx ]; then
-  echo -n ' nginx'
-  /usr/local/sbin/nginx
-fi
-
 # Start God system monitoring
 if [ -x /usr/local/bin/god ]; then
   echo -n ' god'
   /usr/local/bin/god -c /etc/god/god.conf
 fi
+
+echo "."
