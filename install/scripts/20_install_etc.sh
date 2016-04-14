@@ -48,7 +48,7 @@ echo "" >> /etc/motd
 # --------------------------------------------------------------
 # Setup package daemons
 # --------------------------------------------------------------
-if [ `grep /var/run/memcached/memcached.pid /etc/rd.d/memcached | wc -l` -eq 0 ]; then
+if [ `grep /var/run/memcached/memcached.pid /etc/rc.d/memcached | wc -l` -eq 0 ]; then
 	#fix /etc/rc.d/memcached to use pidfile /var/run/memcached/memcached.pid
 	sed -i 's/\/var\/run\/memcached.pid/\/var\/run\/memcached\/memcached.pid/' /etc/rc.d/memcached
 	#fix /etc/rc.d/memcached to create /var/run/memcached before starting
