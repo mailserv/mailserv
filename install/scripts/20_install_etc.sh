@@ -48,8 +48,6 @@ echo "" >> /etc/motd
 # Setup package daemons
 # --------------------------------------------------------------
 rcctl set ntpd flags -s
-rcctl stop smtpd
-rcctl disable smtpd
 rcctl stop sndiod
 rcctl disable sndiod
 

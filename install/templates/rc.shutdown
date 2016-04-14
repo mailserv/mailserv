@@ -17,7 +17,4 @@ echo -n " mongrel"
 /usr/local/bin/mongrel_rails stop -c /var/www/admin >/dev/null 2>&1
 /usr/local/bin/mongrel_rails stop -c /var/www/user/account >/dev/null 2>&1
 
-echo -n " postfix"
-/usr/local/sbin/postfix stop >/dev/null 2>&1
-
 echo "."

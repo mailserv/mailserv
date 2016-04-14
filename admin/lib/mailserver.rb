@@ -3,7 +3,7 @@ class Mailserver
   def processes
     {
       :clamd      => %x{ps -ax | egrep clamd | grep -v grep | wc -l}.to_i > 0,
-      :postfix    => %x{ps -ax | egrep postfix\/master | grep -v grep | wc -l}.to_i > 0,
+      :postfix    => system('rcctl check postfix'),
       :dovecot    => system('rcctl check dovecot'),
       :mysqld     => system('rcctl start mysqld'),
       :spamd      => %x{ps -ax | egrep spamd | grep -v grep | wc -l}.to_i > 0,
