@@ -10,7 +10,7 @@ class Mailserver
       :freshclam  => %x{ps -ax | egrep freshclam | grep -v grep | wc -l}.to_i > 0,
       :dnsmasq    => system('rcctl check dnsmasq'),
       :memcached  => system('rcctl check memcached'),
-      :nginx      => %x{ps -ax | egrep nginx | grep -v grep | wc -l}.to_i > 0,
+      :nginx      => system('rcctl check nginx'),
       :php        => %x{ps -ax | egrep php-fpm | grep -v grep | wc -l}.to_i > 0
     }
   end

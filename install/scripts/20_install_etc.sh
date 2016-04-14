@@ -48,7 +48,6 @@ echo "" >> /etc/motd
 # --------------------------------------------------------------
 # Setup package daemons
 # --------------------------------------------------------------
-
 if [ `grep /var/run/memcached/memcached.pid /etc/rd.d/memcached | wc -l` -eq 0 ]; then
 	#fix /etc/rc.d/memcached to use pidfile /var/run/memcached/memcached.pid
 	sed -i 's/\/var\/run\/memcached.pid/\/var\/run\/memcached\/memcached.pid/' /etc/rc.d/memcached
@@ -60,6 +59,9 @@ rcctl start  memcached
 
 rcctl enable dnsmasq
 rcctl start  dnsmasq
+
+rcctl enable nginx
+rcctl start  nginx
 
 # --------------------------------------------------------------
 # /etc/services
@@ -119,8 +121,6 @@ if [[ $hi_ver_check == "true"  ]]; then
      /usr/local/bin/gem install -V -v=1.6.21 highline;    
      /usr/local/bin/gem install -V god rdoc mongrel fastercsv ruby-mysql;
 fi 
-
-gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
 
 # --------------------------------------------------------------
 # /etc/awstats

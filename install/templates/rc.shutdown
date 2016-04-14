@@ -20,9 +20,6 @@ echo -n " mongrel"
 echo -n " postfix"
 /usr/local/sbin/postfix stop >/dev/null 2>&1
 
-echo -n " nginx"
-/usr/local/sbin/nginx -s stop >/dev/null 2>&1
-
 echo -n " dovecot"
 pkill dovecot
 
