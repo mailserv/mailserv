@@ -10,10 +10,6 @@ chmod 4750 /usr/local/libexec/dovecot/deliver
 
 /usr/local/bin/mysqld_start
 
-if [ -x /usr/local/sbin/dovecot ]; then
-  echo -n ' dovecot'; /usr/local/sbin/dovecot >/dev/null 2>&1
-fi
-
 # Update ClamAV databases
 if [ -x /usr/local/bin/freshclam ]; then
   echo -n ' freshclam'
