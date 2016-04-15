@@ -11,6 +11,7 @@ class Mailserver
       :dnsmasq    => system('rcctl check dnsmasq'),
       :memcached  => system('rcctl check memcached'),
       :nginx      => system('rcctl check nginx'),
+	  :ntpd       => system('rcctl check ntpd'),
       :php        => %x{ps -ax | egrep php-fpm | grep -v grep | wc -l}.to_i > 0
     }
   end
