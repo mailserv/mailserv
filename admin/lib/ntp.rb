@@ -15,13 +15,7 @@ class Ntp < ActiveRecord::BaseWithoutTable
         add_server $1, i += 1
       end
     end
-    self.enabled = false
-    Sudo.read("/etc/rc.conf.local").each do |line|
-      case
-      when line =~ /ntpd_flags=\"(\"|\s*\-)/
-        self.enabled = true
-      end
-    end
+    self.enabled = system('rcctl get ntpd')
   end
 
   def add_server(name, number)
@@ -42,26 +36,14 @@ class Ntp < ActiveRecord::BaseWithoutTable
     out += (is_pool?(name_3) ? "servers" : "server") + " #{name_3}\n" unless name_3.blank?
     Sudo.write("/etc/ntpd.conf", out, :mode => 644)
 
-    out = ""
-    ntp_is_set = false
-    rc_conf_local = Sudo.read("/etc/rc.conf.local").each do |line|
-      if line =~ /^ntpd_flags/
-        out += "ntpd_flags=\"-s\"\n" if enabled
-        ntp_is_set = true
-      elsif line =~ /^\s*$/
-        next
-      else
-        out += line.strip + "\n"
-      end
-    end
-    unless ntp_is_set
-      out += "ntpd_flags=\"-s\"" if enabled
-    end
-    Sudo.write("/etc/rc.conf.local", out)
-    if %x{uname -s}.strip == "OpenBSD"
-        Sudo.exec "pkill ntpd"
-        Sudo.exec "/usr/sbin/ntpd" if enabled
-    end
+	if enabled
+	  system('doas rcctl enable ntpd')
+	  system('doas rcctl set ntpd flags -s')
+	  system('doas rcctl start ntpd')
+	else
+	  system('doas rcctl stop ntpd')
+	  system('doas rcctl disable ntpd')
+	end
     true
   end
 
