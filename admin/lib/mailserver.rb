@@ -6,7 +6,7 @@ class Mailserver
       :postfix    => system('rcctl check postfix'),
       :dovecot    => system('rcctl check dovecot'),
       :mysqld     => system('rcctl check mysqld'),
-      :spamd      => %x{ps -ax | egrep spamd | grep -v grep | wc -l}.to_i > 0,
+      :spamd      => system('rcctl check spamassassin'),
       :freshclam  => system('rcctl check freshclam'),
       :dnsmasq    => system('rcctl check dnsmasq'),
       :memcached  => system('rcctl check memcached'),
