@@ -4,12 +4,12 @@
 God.watch do |w|
   w.name = "clamd"
   w.interval = 30.seconds # default
-  w.start = "/usr/local/sbin/clamd"
-  w.stop = "kill `cat /var/run/clamd.pid`"
-  w.restart = "kill `cat /var/run/clamd.pid`; sleep 10; /usr/local/sbin/clamd"
+  w.start = "rcctl start clamd"
+  w.stop = "rcctl stop clamd"
+  w.restart = "rcctl restart clamd"
   w.start_grace = 10.seconds
   w.restart_grace = 20.seconds
-  w.pid_file = "/var/run/clamd.pid"
+  w.pid_file = "/tmp/clamd.pid"
 
   w.start_if do |start|
     start.condition(:process_running) do |c|
