@@ -4,7 +4,7 @@ class System::LogsController < ApplicationController
     begin
       @logs = [
         {:path => '/var/log/maillog_webmin', :logdata => '', :accessible => false},
-        {:path => '/var/log/clam-update.log', :logdata => '', :accessible => false},
+        {:path => '/var/log/freshclam.log', :logdata => '', :accessible => false},
         {:path => '/var/log/messages_webmin.log', :logdata => '', :accessible => false},
         {:path => '/var/log/imap_webmin', :logdata => '', :accessiable => false},
         {:path => '/var/log/imap', :logdata => '', :accessiable => false},

@@ -11,8 +11,13 @@
         </tr>
         <tr>
           <td>SpamAssassin</td>
-          <td><%= display_enabled(@proc[:freshclam]) %></td>
+          <td><%= display_enabled(@proc[:spamd]) %></td>
           <td><%= @updates[:spamassassin].strftime("%x %H:%M") %></td>
+        </tr>
+        <tr>
+          <td>Freshclam</td>
+          <td><%= display_enabled(@proc[:freshclam]) %></td>
+          <td>-</td>
         </tr>
         <tr>
           <td>Postfix</td>
