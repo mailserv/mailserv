@@ -71,7 +71,7 @@ rcctl enable nginx
 rcctl start  nginx
 
 rcctl enable spamassassin
-rcctl set spamassassin flags -u _spamdaemon -P -s mail -xq -r /var/run/spamd.pid -i 127.0.0.1
+rcctl set spamassassin flags -u _spamdaemon -P -s mail -xq -r /var/run/spamassassin.pid -i 127.0.0.1
 rcctl start  spamassassin
 
 # --------------------------------------------------------------
