@@ -8,10 +8,6 @@ chgrp _dovecot /usr/local/libexec/dovecot/deliver
 chmod 4750 /usr/local/libexec/dovecot/deliver
 /usr/bin/newaliases
 
-if [ -x /usr/local/bin/spamd ]; then
-  /usr/local/bin/spamd -s mail -u _spamd -dxq -r /var/run/spamd.pid -i 127.0.0.1
-fi
-
 # Collect mail statistics
 if [ -f /usr/local/awstats/awstats.pl ]; then
   echo -n ' awstats'
