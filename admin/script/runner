@@ -1,3 +1,3 @@
-#!/usr/local/bin/ruby
+#!/usr/local/bin/ruby -W0
 require File.dirname(__FILE__) + '/../config/boot'
 require 'commands/runner'
