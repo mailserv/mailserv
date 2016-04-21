@@ -63,9 +63,6 @@ for file in `ls /var/mailserv/install/scripts/*`; do
   $file install 2>&1 | tee -a /var/log/install.log
 done
 
-#stop god 
-/usr/local/bin/god quit
-
 #---------------------------------------------------------------
 #  increase openfiles limit to 1024 ( obsd usualy runs 128 )
 #  necessary to dovecot start up
