@@ -2,6 +2,9 @@
 
 if [[ "$1" == "install" ]]; then
   /usr/local/bin/mysql_install_db > /dev/null 2>&1
+  rcctl enable mysqld
+  rcctl set mysqld flags --pid-file=mysql.pid
+  rcctl start  mysqld
 fi
 
 pgrep -f god > /dev/null
