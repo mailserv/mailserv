@@ -63,13 +63,6 @@ rcctl start  memcached
 rcctl enable dnsmasq
 rcctl start  dnsmasq
 
-rcctl enable mysqld
-rcctl set mysqld flags --pid-file=mysql.pid
-rcctl start  mysqld
-
-rcctl enable nginx
-rcctl start  nginx
-
 rcctl enable spamassassin
 rcctl set spamassassin flags -u _spamdaemon -P -s mail -xq -r /var/run/spamassassin.pid -i 127.0.0.1
 rcctl start  spamassassin
