@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     WebmailUser.new(
       :username => self.email,
       :last_login => Time.new.strftime("%F %T"),
-      :alias => self.fullname,
+#      :alias => self.fullname,
       :created => Time.new.strftime("%F %T"),
       :language => "en_US",
       :mail_host => "localhost",
