@@ -16,4 +16,6 @@ if [ ! -f /etc/ssl/private/server.key ]; then
 fi
 
 rcctl enable nginx
+#No chroot
+rcctl set nginx flags -u
 rcctl start  nginx
