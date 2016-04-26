@@ -29,7 +29,10 @@ mkdir /var/mailserv/mail >/dev/null 2>&1
 touch /var/log/imap_webmin
 touch /var/log/maillog_webmin
 touch /var/log/messages_webmin.log
+touch /var/log/php-fpm.log
 
+chmod 644 /var/log/php-fpm.log
+chmod 644 /var/log/imap
 chmod 644 /var/log/imap_webmin
 chmod 644 /var/log/maillog_webmin
 chmod 644 /var/log/messages_webmin.log
