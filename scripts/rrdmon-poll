@@ -162,8 +162,7 @@ File.open(config_file).each {|line|
 
     cpu_rrd = rrd_dir + "/" + "cpu.rrd"
 
-    #vmstat = `vmstat 300 2 | tail -1`
-    vmstat = `vmstat 3 2 | tail -1`
+    vmstat = `vmstat 300 2 | tail -1`
     vmstat =~ /(\d+)\s+(\d+)\s+(\d+)$/
     user = $1
     system = $2
