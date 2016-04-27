@@ -39,7 +39,7 @@ class Ntp < ActiveRecord::BaseWithoutTable
 	if enabled
 	  system('doas rcctl enable ntpd')
 	  system('doas rcctl set ntpd flags -s')
-	  system('doas rcctl start ntpd')
+	  system('doas rcctl restart ntpd')
 	else
 	  system('doas rcctl stop ntpd')
 	  system('doas rcctl disable ntpd')
