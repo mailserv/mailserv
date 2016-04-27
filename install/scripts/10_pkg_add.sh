@@ -38,6 +38,7 @@ __EOT
      gtar-1.28p1-static \
      php-5.6.11 \
      php-fpm-5.6.11p0 \
+	 php-intl-5.6.11 \
      php-mysqli-5.6.11 \
      php-pdo_mysql-5.6.11 \
      php-gd-5.6.11 \
