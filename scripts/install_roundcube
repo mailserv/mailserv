@@ -6,10 +6,10 @@ include FileUtils
 basedir = "/var/www/webmail"
 mkdir_p basedir
 
-puts "Getting Roundcube version 1.0.8"
+puts "Getting Roundcube version 1.0.9"
 #system "ftp -Vmo - http://sourceforge.net/projects/roundcubemail/files/latest/download | tar zxf - -C #{basedir}"
-#force to install 1.0.8 
-system "ftp -Vmo - https://github.com/roundcube/roundcubemail/releases/download/1.0.8/roundcubemail-1.0.8.tar.gz | tar zxf - -C #{basedir}"
+#force to install 1.0.9
+system "ftp -Vmo - https://github.com/roundcube/roundcubemail/releases/download/1.0.9/roundcubemail-1.0.9.tar.gz | tar zxf - -C #{basedir}"
 
 
 # Linking 
@@ -24,23 +24,17 @@ File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php h
 
 puts "Downloading plugins"
 #download and prepare  composer first 
-#system "curl -s https://getcomposer.org/download/1.0.0-alpha8/composer.phar -o #{basedir}/webmail/composer.phar"
-system "curl -s https://getcomposer.org/download/1.0.0-beta1/composer.phar  -o #{basedir}/webmail/composer.phar"
+system "cd #{basedir}; curl -s https://getcomposer.org/installer | php"
 
 #copy composer profile composer.json from template 
 install "/var/mailserv/install/templates/roundcube/conf/composer.json",  "#{basedir}/webmail/", :mode => 0644
 
 #install plugins
-#sauserprefs, contextmenu
-system "cd #{basedir}/webmail; php -d allow_url_fopen=On -d detect_unicode=Off -d suhosin.executor.include.whitelist=phar  #{basedir}/webmail/composer.phar install"
-
-#old way - sieverules not work stable with composer
-#system "ftp -Vmo - https://github.com/JohnDoh/Roundcube-Plugin-SieveRules-Managesieve/archive/2.1.2.tar.gz | tar zxf - -C #{basedir}/webmail/plugins; mv #{basedir}/webmail/plugins/Roundcube-Plugin-SieveRules-Managesieve-2.1.2 #{basedir}/webmail/plugins/sieverules"
+system "cd #{basedir}/webmail; php composer.phar install"
 
 
 puts "Installing Configuration"
-install "/var/mailserv/install/templates/roundcube/conf/main.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
-install "/var/mailserv/install/templates/roundcube/conf/db.inc.php",            "#{basedir}/webmail/config/", :mode => 0644
+install "/var/mailserv/install/templates/roundcube/conf/config.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
 #install "/var/mailserv/install/templates/roundcube/messagesize/config.inc.php", "#{basedir}/webmail/plugins/messagesize/", :mode => 0644
 install "/var/mailserv/install/templates/roundcube/sieverules/config.inc.php",  "#{basedir}/webmail/plugins/sieverules/",  :mode => 0644
 install "/var/mailserv/install/templates/roundcube/sauserprefs/config.inc.php", "#{basedir}/webmail/plugins/sauserprefs/", :mode => 0644
@@ -77,7 +71,7 @@ File.open("/var/www/webmail/webmail/skins/larry/includes/header.html", "w") do |
 end
 
 puts "Finished\n\n"
-puts "If you have updated, please have a look at /var/www/webmail/webmail/SQL/mssql.upgrade.sql"
+puts "If you have updated, please have a look at /var/www/webmail/webmail/SQL/mysql"
 puts "and apply as needed.\n\n"
 puts "Also, please test the plugins (especially sieve/filter, spam and password)."
 puts "This is especially true if you have installed a new major release.\n\n"

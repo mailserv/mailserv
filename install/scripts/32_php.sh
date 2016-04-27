@@ -30,6 +30,9 @@ if [[ "$1" == "install" ]]; then
   # Symlink for memcache
   ln -sf /etc/php-5.6.sample/memcache.ini /etc/php-5.6/memcache.ini
   
+  # Symlink for intl
+  ln -sf /etc/php-5.6.sample/intl.ini /etc/php-5.6/intl.ini  
+  
   rcctl enable php_fpm
   rcctl start  php_fpm
 fi
