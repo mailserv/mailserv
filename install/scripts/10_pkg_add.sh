@@ -17,39 +17,37 @@ Fetching versions:
 
 __EOT
     pkg_add -v -m -I \
-     postfix-3.0.2-mysql \
+     postfix-3.0.3p0-mysql \
      clamav \
-     gnupg-2.1.4 \
+     gnupg-2.1.9 \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
      rrdtool \
-     ruby-gems-1.8.24 \
-     ruby-rake-0.9.2.2p0 \
+     ruby-gems \
+     ruby-rake \
      ruby-iconv \
      dnsmasq \
      dovecot-pigeonhole \
      dovecot-mysql \
-     memcached-1.4.24 \
+     memcached-- \
      mariadb-server \
-     nginx-1.9.3p3 \
-     openssl-1.0.1pp1 \
+     nginx-- \
+     openssl \
      sqlgrey \
      gsed \
-     gtar-1.28p1-static \
-     php-5.6.11 \
-     php-fpm-5.6.11p0 \
-	 php-intl-5.6.11 \
-     php-mysqli-5.6.11 \
-     php-pdo_mysql-5.6.11 \
-     php-gd-5.6.11 \
-     php-mcrypt-5.6.11 \
+     gtar--static \
+     php-5.6.18 \
+     php-mysqli-5.6.18 \
+     php-pdo_mysql-5.6.18 \
+     php-gd-5.6.18 \
+     php-mcrypt-5.6.18 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
      pecl-memcache \
      lynx \
-     vim-7.4.769-no_x11 \
-     sudo-1.8.14.3
+     vim--no_x11 \
+     sudo--
      ;;
 
 esac
