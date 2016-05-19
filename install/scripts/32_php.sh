@@ -33,6 +33,6 @@ if [[ "$1" == "install" ]]; then
   # Symlink for intl
   ln -sf /etc/php-5.6.sample/intl.ini /etc/php-5.6/intl.ini  
   
-  rcctl enable php_fpm
-  rcctl start  php_fpm
+  rcctl enable php56_fpm
+  rcctl start  php56_fpm
 fi
