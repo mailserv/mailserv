@@ -3,36 +3,19 @@
 # Only run on install
 if [[ "$1" == "install" ]]; then
 
+  # Create symlinks for all installed php extensions
+  cd /etc/php-5.6.sample
+  for i in *; do ln -sf ../php-5.6.sample/$i ../php-5.6/; done
+
   # Install our local changes to php.ini
   /usr/bin/install -m 644 /var/mailserv/install/templates/php-mailserv.ini /etc/php-5.6/mailserv.ini
 
-  # Install php-fpm.conf (replace fast-cgi)
+  # Install php-fpm.conf
   /usr/bin/install -m 644 /var/mailserv/install/templates/php-fpm.conf /etc/ 
- 
+
   # Make php easier to run from CLI
   ln -s /usr/local/bin/php-5.6 /usr/local/bin/php
 
-  # symlink for mysqli
-  ln -sf /etc/php-5.6.sample/mysqli.ini /etc/php-5.6/mysqli.ini
-
-  # Symlink for mcrypt extension
-  ln -sf /etc/php-5.6.sample/mcrypt.ini /etc/php-5.6/mcrypt.ini 
-
-  # Symlink for opcache
-  ln -sf /etc/php-5.6.sample/opcache.ini /etc/php-5.6/opcache.ini
-
-  #PHP Data Objects (PDO) for accessing databases in PHP (required by roundcube >0.9)
-  ln -sf /etc/php-5.6.sample/pdo_mysql.ini /etc/php-5.6/pdo_mysql.ini
-
-  # Symlink for gd
-  ln -sf /etc/php-5.6.sample/gd.ini /etc/php-5.6/gd.ini
-  
-  # Symlink for memcache
-  ln -sf /etc/php-5.6.sample/memcache.ini /etc/php-5.6/memcache.ini
-  
-  # Symlink for intl
-  ln -sf /etc/php-5.6.sample/intl.ini /etc/php-5.6/intl.ini  
-  
   rcctl enable php56_fpm
   rcctl start  php56_fpm
 fi

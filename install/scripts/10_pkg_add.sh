@@ -37,6 +37,7 @@ __EOT
      gsed \
      gtar--static \
      php-5.6.18 \
+	 php-intl-5.6.18 \
      php-mysqli-5.6.18 \
      php-pdo_mysql-5.6.18 \
      php-gd-5.6.18 \
