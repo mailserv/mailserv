@@ -52,6 +52,10 @@ $config['imap_cache'] = 'memcache';
 // Setting this value to 'php' will use the default session save handler configured in PHP
 $config['session_storage'] = 'php';
 
+// Use these hosts for accessing memcached
+// Define any number of hosts in the form of hostname:port or unix:///path/to/socket.file
+$config['memcache_hosts'] = array( '127.0.0.1:11211' );
+
 // ----------------------------------
 // SMTP
 // ----------------------------------
