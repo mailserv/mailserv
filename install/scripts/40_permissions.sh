@@ -5,6 +5,7 @@ if [[ "$1" == "install" ]]; then
   echo "root    ALL=(ALL) SETENV: ALL" >> /etc/sudoers
   echo "_mailserv   ALL=(ALL) NOPASSWD: SETENV: ALL" >> /etc/sudoers
   echo "permit nopass _mailserv as root cmd rcctl" >> /etc/doas.conf
+  echo "permit nopass _mailserv as root cmd ntpctl" >> /etc/doas.conf
   chmod 640 /etc/doas.conf
 fi
 
