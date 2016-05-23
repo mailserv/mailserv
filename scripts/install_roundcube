@@ -24,8 +24,7 @@ File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php h
 
 puts "Downloading plugins"
 #download and prepare  composer first 
-#system "cd #{basedir}; curl -s https://getcomposer.org/installer | php"
-system "cd #{basedir}/webmail; curl -s https://getcomposer.org/installer | php -- --version=1.2.0"
+system "cd #{basedir}/webmail; curl -s https://getcomposer.org/installer | php"
 
 #copy composer profile composer.json from template 
 install "/var/mailserv/install/templates/roundcube/conf/composer.json",  "#{basedir}/webmail/", :mode => 0644
@@ -38,7 +37,6 @@ system "chown www /var/www/webmail/webmail/temp"
 
 #remove roundcube installer
 system "rm -r /var/www/webmail/webmail/installer"
-
 
 puts "Installing Configuration"
 install "/var/mailserv/install/templates/roundcube/conf/config.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
