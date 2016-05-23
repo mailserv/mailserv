@@ -33,10 +33,10 @@ install "/var/mailserv/install/templates/roundcube/conf/composer.json",  "#{base
 system "cd #{basedir}/webmail; php composer.phar install"
 
 #make temp writable by the web server user
-system "chown www /var/www/webmail/webmail/temp"
+system "chown www #{basedir}/webmail/temp"
 
 #remove roundcube installer
-system "rm -r /var/www/webmail/webmail/installer"
+system "rm -r #{basedir}/webmail/installer"
 
 puts "Installing Configuration"
 install "/var/mailserv/install/templates/roundcube/conf/config.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
@@ -47,8 +47,8 @@ install "/var/mailserv/install/templates/roundcube/password/config.inc.php",    
 
 
 
-taskbar = File.read("/var/www/webmail/webmail/skins/classic/includes/taskbar.html")
-File.open("/var/www/webmail/webmail/skins/classic/includes/taskbar.html", "w") do |f|
+taskbar = File.read("#{basedir}/webmail/skins/classic/includes/taskbar.html")
+File.open("#{basedir}/webmail/skins/classic/includes/taskbar.html", "w") do |f|
   taskbar.each do |line|
     if line =~ /\<div id="taskbar"\>/
       f.puts line
@@ -61,8 +61,8 @@ File.open("/var/www/webmail/webmail/skins/classic/includes/taskbar.html", "w") d
   end
 end
 
-taskbar = File.read("/var/www/webmail/webmail/skins/larry/includes/header.html")
-File.open("/var/www/webmail/webmail/skins/larry/includes/header.html", "w") do |f|
+taskbar = File.read("#{basedir}/webmail/skins/larry/includes/header.html")
+File.open("#{basedir}/webmail/skins/larry/includes/header.html", "w") do |f|
   taskbar.each do |line|
     if line =~ /\<div id="taskbar" class="topright"\>/
       f.puts line
@@ -76,7 +76,7 @@ File.open("/var/www/webmail/webmail/skins/larry/includes/header.html", "w") do |
 end
 
 puts "Finished\n\n"
-puts "If you have updated, please have a look at /var/www/webmail/webmail/SQL/mysql"
+puts "If you have updated, please have a look at #{basedir}/webmail/SQL/mysql"
 puts "and apply as needed.\n\n"
 puts "Also, please test the plugins (especially sieve/filter, spam and password)."
 puts "This is especially true if you have installed a new major release.\n\n"
