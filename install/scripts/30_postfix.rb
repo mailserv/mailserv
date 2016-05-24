@@ -25,7 +25,7 @@ chmod(755, "/etc/postfix/sql") unless File.executable?("/etc/postfix/sql")
 end
 
 # Make sure that the mailer is being set
-unless `grep "/usr/libexec" /etc/mailer.conf | wc -l`.to_i.zero?
+unless `grep "/usr/sbin/smtpctl" /etc/mailer.conf | wc -l`.to_i.zero?
   %x{/usr/local/sbin/postfix-enable > /dev/null 2>&1}
   #stop smtpd from base
   %x{rcctl stop smtpd; rcctl disable smtpd}
