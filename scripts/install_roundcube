@@ -36,7 +36,8 @@ system "cd #{basedir}/webmail; php composer.phar install"
 system "chown www #{basedir}/webmail/temp"
 
 #remove roundcube installer
-system "rm -r #{basedir}/webmail/installer"
+#Needed for bin/upgrade.sh
+#system "rm -r #{basedir}/webmail/installer"
 
 puts "Installing Configuration"
 install "/var/mailserv/install/templates/roundcube/conf/config.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
