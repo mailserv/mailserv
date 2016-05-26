@@ -120,7 +120,7 @@ if [[ $hi_ver_check == "true"  ]]; then
      # Update your RAILS_GEM_VERSION
      # -----------------------------------------------------
      echo " Installing rails:"
-     /usr/local/bin/gem install -V -v=2.3.4 rails;    
+	 /usr/local/bin/gem install -V -v=2.3.4 rails --no-ri --no-rdoc;
      echo " Installing rubby apps:"
      /usr/local/bin/gem install -V -v=1.6.21 highline;    
      /usr/local/bin/gem install -V god rdoc mongrel fastercsv ruby-mysql;
