@@ -1,11 +1,12 @@
 <h2>System Overview</h2>
 <table>
   <tr valign="top">
-    <td colspan="2"><%= render :partial => 'system_overview' %></td>
+    <td><%= render :partial => 'system_overview' %></td>
+    <td valign="top"><%= render :partial => 'disk_stats' %></td>
     <td rowspan="3"><%= render :partial => 'process_stats' %></td>
   </tr>
   <tr>
-    <td valign="top">
+    <td colspan="2" valign="top">
       <table class="mini">
         <tr>
           <th>CPU</th>
@@ -19,7 +20,6 @@
         </tr>
       </table>
     </td>
-    <td valign="top"><%= render :partial => 'disk_stats' %></td>
   </tr>
   <tr>
     <td colspan="2">

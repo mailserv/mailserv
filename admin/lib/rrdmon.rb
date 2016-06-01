@@ -66,7 +66,7 @@ require 'tmpdir'
 system <<-eos 
 	/usr/local/bin/rrdtool graph "#{@output_dir}/cpu.png" \
 	--start #{@start_time} --end -900 \
-	--lazy --width=80 --height=80 \
+	--lazy --width=160 --height=100 \
 	--imgformat PNG --upper-limit 100 \
 	--lower-limit 0 --rigid --lazy \
 	DEF:user=#{cpu_rrd}:user:AVERAGE \
@@ -92,7 +92,7 @@ end
      system <<-eos
 	/usr/local/bin/rrdtool graph "#{@output_dir}/mem.png" \
 	--start #{@start_time} --end -300 \
-	--width=80 --height=80 \
+	--width=160 --height=100 \
 	--imgformat PNG --lazy \
 	--lower-limit 0 --upper-limit 100 \
 	DEF:usage=#{mem_rrd}:usage:AVERAGE \
@@ -109,7 +109,7 @@ end
 	/usr/local/bin/rrdtool graph "#{@output_dir}/swap.png" \
 	--start #{@start_time} \
 	--end -300 --lazy \
-	--width=80 --height=80 \
+	--width=160 --height=100 \
 	--imgformat PNG \
 	--lower-limit 0 \
 	DEF:usage=#{swap_rrd}:usage:AVERAGE \
@@ -127,7 +127,7 @@ end
 	--start #{@start_time} --end -300 \
 	--imgformat PNG \
 	--lower-limit 0 --lazy \
-	--width=260 --height=122 \
+	--width=270 --height=122 \
 	DEF:sent=#{mail_rrd}:sent:AVERAGE \
 	DEF:received=#{mail_rrd}:received:AVERAGE \
 	"CDEF:sent_sum=sent,#{@poll_time},*" \
@@ -155,7 +155,7 @@ end
 	--start #{@start_time} --end -300 \
 	--imgformat PNG \
 	--lower-limit 0 \
-	--width=280 --height=100 --lazy \
+	--width=290 --height=100 --lazy \
 	DEF:bounced=#{mail_rrd}:bounced:AVERAGE \
 	DEF:rejected=#{mail_rrd}:rejected:AVERAGE \
 	DEF:virus=#{mail_rrd}:virus:AVERAGE \
