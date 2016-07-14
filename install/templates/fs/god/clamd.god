@@ -20,7 +20,7 @@ God.watch do |w|
 
   w.restart_if do |restart|
     restart.condition(:memory_usage) do |c|
-      c.above = 250.megabytes
+      c.above = 400.megabytes
       c.times = [3, 5] # 3 out of 5 intervals
     end
     
