@@ -63,24 +63,24 @@ require 'tmpdir'
   def cpu  # ========================= CPU =========================
 
     cpu_rrd = "#{@rrd_dir}/cpu.rrd"
-
 system <<-eos 
-rrdtool graph "#{@output_dir}/cpu.png" \
---start #{@start_time} --end -900 \
---lazy --width=80 --height=80 \
---imgformat PNG --upper-limit 100 \
---lower-limit 0 --rigid --lazy \
-DEF:user=/var/spool/rrd/cpu.rrd:user:AVERAGE \
-DEF:sys=/var/spool/rrd/cpu.rrd:system:AVERAGE \
-DEF:idle=/var/spool/rrd/cpu.rrd:idle:AVERAGE \
-CDEF:Ln1=user,user,UNKN,IF \
-CDEF:Ln2=sys,sys,UNKN,IF \
-CDEF:Ln3=sys,user,+ \
-AREA:user#ECD748: \
-STACK:sys#ECD748: \
-STACK:idle#54EC48: \
-LINE1:Ln1#C9B215 \
-LINE1:Ln3#CC7016
+	/usr/local/bin/rrdtool graph "#{@output_dir}/cpu.png" \
+	--start #{@start_time} --end -900 \
+	--lazy --width=160 --height=100 \
+	--imgformat PNG --upper-limit 100 \
+	--lower-limit 0 --rigid --lazy \
+	DEF:user=#{cpu_rrd}:user:AVERAGE \
+	DEF:sys=#{cpu_rrd}:system:AVERAGE \
+	DEF:idle=#{cpu_rrd}:idle:AVERAGE \
+	CDEF:Ln1=user,user,UNKN,IF \
+	CDEF:Ln2=sys,sys,UNKN,IF \
+	CDEF:Ln3=sys,user,+ \
+	AREA:user#{@yellow}: \
+	STACK:sys#{@orange}: \
+	STACK:idle#{@green}: \
+	LINE1:Ln1#{@yellow_bold} \
+	LINE1:Ln3#{@orange_bold}
+
 eos
   
 end
@@ -90,15 +90,15 @@ end
 
     mem_rrd = "#{@rrd_dir}/mem.rrd"
      system <<-eos
-	rrdtool graph "#{@output_dir}/mem.png" \
-        --start #{@start_time} --end -300 \
-	--width=80 --height=80 \
-        --imgformat PNG --lazy \
-        --lower-limit 0 --upper-limit 100 \
-	DEF:usage="#{mem_rrd}":usage:AVERAGE \
-        DEF:free="#{mem_rrd}":free:AVERAGE \
+	/usr/local/bin/rrdtool graph "#{@output_dir}/mem.png" \
+	--start #{@start_time} --end -300 \
+	--width=160 --height=100 \
+	--imgformat PNG --lazy \
+	--lower-limit 0 --upper-limit 100 \
+	DEF:usage=#{mem_rrd}:usage:AVERAGE \
+	DEF:free=#{mem_rrd}:free:AVERAGE \
 	AREA:usage#{@orange}: \
-        STACK:free#{@green}:
+	STACK:free#{@green}:
      eos
   end
 
@@ -106,10 +106,10 @@ end
 
     swap_rrd = "#{@rrd_dir}/swap.rrd"
      system <<-eos
-	rrdtool graph "#{@output_dir}/swap.png" \
+	/usr/local/bin/rrdtool graph "#{@output_dir}/swap.png" \
 	--start #{@start_time} \
 	--end -300 --lazy \
-	--width=80 --height=80 \
+	--width=160 --height=100 \
 	--imgformat PNG \
 	--lower-limit 0 \
 	DEF:usage=#{swap_rrd}:usage:AVERAGE \
@@ -123,39 +123,39 @@ end
 
     mail_rrd = "#{@rrd_dir}/mail.rrd"
      system <<-eos
-	rrdtool graph "#{@output_dir}/mail.png" \
+	/usr/local/bin/rrdtool graph "#{@output_dir}/mail.png" \
 	--start #{@start_time} --end -300 \
 	--imgformat PNG \
 	--lower-limit 0 --lazy \
-	--width=260 --height=122 \
+	--width=270 --height=122 \
 	DEF:sent=#{mail_rrd}:sent:AVERAGE \
 	DEF:received=#{mail_rrd}:received:AVERAGE \
 	"CDEF:sent_sum=sent,#{@poll_time},*" \
 	"CDEF:received_sum=received,#{@poll_time},*" \
 	"CDEF:sent_fixed=sent,300,*" \
 	COMMENT:"#{@lb}" \
-	COMMENT:" Total Avg Max Min mails/s#{@nl}" \
+	COMMENT:"               Total    Avg      Max     Min    mails/s#{@nl}" \
 	COMMENT:"#{@lb}" \
-	AREA:sent#{@green}:Sent \
+	AREA:sent#{@green}:"Sent     " \
 	GPRINT:sent_sum:AVERAGE:%6.0lf \
 	GPRINT:sent:AVERAGE:%6.2lf \
 	GPRINT:sent:MAX:%6.2lf \
-	GPRINT:sent:MIN:%6.2lf#{@nl} \
-	LINE1:received#{@orange}:Received \
+	GPRINT:sent:MIN:%6.2lf"#{@nl}" \
+	LINE1:received#{@orange}:"Received " \
 	GPRINT:received_sum:AVERAGE:%6.0lf \
 	GPRINT:received:AVERAGE:%6.2lf \
 	GPRINT:received:MAX:%6.2lf \
-	GPRINT:received:MIN:%6.2lf#{@nl}
+	GPRINT:received:MIN:%6.2lf"#{@nl}"
       eos
 
 
      mail_rrd = "#{@rrd_dir}/mail.rrd"
       system <<-eos
-	rrdtool graph #{@output_dir}/mail_block.png \
+	/usr/local/bin/rrdtool graph #{@output_dir}/mail_block.png \
 	--start #{@start_time} --end -300 \
 	--imgformat PNG \
 	--lower-limit 0 \
-	--width=280 --height=100 --lazy \
+	--width=290 --height=100 --lazy \
 	DEF:bounced=#{mail_rrd}:bounced:AVERAGE \
 	DEF:rejected=#{mail_rrd}:rejected:AVERAGE \
 	DEF:virus=#{mail_rrd}:virus:AVERAGE \
@@ -165,27 +165,27 @@ end
 	"CDEF:virus_sum=virus,#{@poll_time},*" \
 	"CDEF:spam_sum=spam,#{@poll_time},*" \
 	COMMENT:"#{@lb}" \
-	COMMENT:"          Total    Avg    Max    Min#{@nl}" \
-	AREA:rejected#{@purple}:Rejected \
+	COMMENT:"              Total      Avg       Max      Min#{@nl}" \
+	AREA:rejected#{@purple}:"Rejected " \
 	GPRINT:rejected_sum:AVERAGE:%6.0lf \
 	GPRINT:rejected:AVERAGE:%7.2lf \
 	GPRINT:rejected:MAX:%7.2lf \
-	GPRINT:rejected:MIN:%7.2lf#{@nl} \
-	AREA:bounced#{@red}:Bounced \
+	GPRINT:rejected:MIN:%7.2lf"#{@nl}" \
+	AREA:bounced#{@red}:"Bounced  " \
 	GPRINT:bounced_sum:AVERAGE:%6.0lf \
 	GPRINT:bounced:AVERAGE:%7.2lf \
 	GPRINT:bounced:MAX:%7.2lf \
-	GPRINT:bounced:MIN:%7.2lf#{@nl} \
-	LINE1:virus#{@blue}:Virus \
+	GPRINT:bounced:MIN:%7.2lf"#{@nl}" \
+	LINE1:virus#{@blue}:"Virus    " \
 	GPRINT:virus_sum:AVERAGE:%6.0lf \
 	GPRINT:virus:AVERAGE:%7.2lf \
 	GPRINT:virus:MAX:%7.2lf \
-	GPRINT:virus:MIN:%7.2lf#{@nl} \
-	LINE1:spam#{@orange}:Spam \
+	GPRINT:virus:MIN:%7.2lf"#{@nl}" \
+	LINE1:spam#{@orange}:"Spam     " \
 	GPRINT:spam_sum:AVERAGE:%6.0lf \
 	GPRINT:spam:AVERAGE:%7.2lf \
 	GPRINT:spam:MAX:%7.2lf \
-	GPRINT:spam:MIN:%7.2lf
+	GPRINT:spam:MIN:%7.2lf"#{@nl}"
       eos
     end 
 

@@ -5,9 +5,9 @@ God.watch do |w|
   w.name = "postfix"
   w.group = "mailserv"
   w.interval = 30.seconds # default
-  w.start = "/usr/local/sbin/postfix start"
-  w.stop = "/usr/local/sbin/postfix stop"
-  w.restart = "/usr/local/sbin/postfix reload"
+  w.start = "rcctl start postfix"
+  w.stop = "rcctl stop postfix"
+  w.restart = "rcctl restart postfix"
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
   w.pid_file = "/var/spool/postfix/pid/master.pid"

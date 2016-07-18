@@ -11,8 +11,13 @@
         </tr>
         <tr>
           <td>SpamAssassin</td>
-          <td><%= display_enabled(@proc[:freshclam]) %></td>
+          <td><%= display_enabled(@proc[:spamd]) %></td>
           <td><%= @updates[:spamassassin].strftime("%x %H:%M") %></td>
+        </tr>
+        <tr>
+          <td>Freshclam</td>
+          <td><%= display_enabled(@proc[:freshclam]) %></td>
+          <td>-</td>
         </tr>
         <tr>
           <td>Postfix</td>
@@ -40,9 +45,19 @@
           <td>-</td>
         </tr>
         <tr>
+          <td>Memcached</td>
+          <td><%= display_enabled(@proc[:memcached]) %></td>
+          <td>-</td>
+        </tr>
+        <tr>
           <td>Dnsmasq</td>
           <td><%= display_enabled(@proc[:dnsmasq]) %></td>
           <td>-</td>
+        </tr>
+        <tr>
+          <td>NTP</td>
+          <td><%= display_enabled(@proc[:ntpd]) %></td>
+          <td><%= @updates[:ntpstatus] %></td>
         </tr>
       </table>
 

@@ -7,6 +7,7 @@ class System
     @os_version_short = @os_version.gsub(/\./, "")
     @cpu_type         = %x{uname -p}.strip
     @memory           = %x{sysctl hw.usermem | sed 's/=/ /' | awk '{print $2}'}.to_i / 1048576 + 1
+    @version          = %x{uname -srv}.strip
     @timezone         = Timezone.new
   end
 

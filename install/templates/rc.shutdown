@@ -17,16 +17,4 @@ echo -n " mongrel"
 /usr/local/bin/mongrel_rails stop -c /var/www/admin >/dev/null 2>&1
 /usr/local/bin/mongrel_rails stop -c /var/www/user/account >/dev/null 2>&1
 
-echo -n " postfix"
-/usr/local/sbin/postfix stop >/dev/null 2>&1
-
-echo -n " nginx"
-/usr/local/sbin/nginx -s stop >/dev/null 2>&1
-
-echo -n " dovecot"
-pkill dovecot
-
-echo -n " MySQL"
-/usr/local/bin/mysqladmin shutdown 2>/dev/null
-
 echo "."

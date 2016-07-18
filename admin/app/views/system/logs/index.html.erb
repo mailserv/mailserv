@@ -1,10 +1,18 @@
 <h2>Recent Log Output</h2>
-<p class="lognote">Last logs from Mailserv</p>
+<ul>
+<% for log in @logs do %>
+<li><a href="#<%= h(log[:path]) -%>"><%= h(log[:path]) -%></a></li>
+<% end %>
+</ul>
+<br>
 <% for log in @logs do %>
 <% if log[:accessible] %>
-<h3><%= h(log[:path]) -%></h3>
+<h3 id="<%= h(log[:path]) -%>"><%= h(log[:path]) -%></h3>
 <textarea rows="25" width="100%" class="logdata"><%= h(log[:logdata]) -%></textarea>
 <% else %>
 <h3><%= h(log[:path]) -%> is not readable</h3>
 <% end %>
 <% end %>
+<script>
+$$('textarea').each(function(t){t.scrollTop = t.scrollHeight;});
+</script>

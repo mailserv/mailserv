@@ -10,12 +10,6 @@ install /var/mailserv/install/templates/fs/sbin/* /usr/local/sbin/
 mkdir -p /usr/local/share/mailserv
 install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
 
-# Create a 64M RAM disk to keep PHP sessions in
-mkdir -p /tmp/phpsessions
-mount_mfs -s 131072 -o rw,async,nodev,noexec,nosuid swap /tmp/phpsessions
-chown -R www:www /tmp/phpsessions
-echo "swap /tmp/phpsessions mfs rw,async,nodev,noexec,nosuid,-s=131072 0 0" >> /etc/fstab
-
 template="/var/mailserv/install/templates"
 install -m 644 \
   ${template}/clamd.conf \
@@ -26,7 +20,6 @@ install -m 644 \
   ${template}/my.cnf \
   ${template}/newsyslog.conf \
   ${template}/profile \
-  ${template}/rc.conf.local \
   ${template}/rc.shutdown \
   ${template}/rrdmon.conf \
   ${template}/syslog.conf \
@@ -50,6 +43,29 @@ echo "" >> /etc/motd
 echo "Welcome to Mailserv" >> /etc/motd
 date >> /etc/motd
 echo "" >> /etc/motd
+
+# --------------------------------------------------------------
+# Setup package daemons
+# --------------------------------------------------------------
+rcctl set ntpd flags -s
+rcctl stop sndiod
+rcctl disable sndiod
+
+if [ `grep /var/run/memcached/memcached.pid /etc/rc.d/memcached | wc -l` -eq 0 ]; then
+	#fix /etc/rc.d/memcached to use pidfile /var/run/memcached/memcached.pid
+	sed -i 's/\/var\/run\/memcached.pid/\/var\/run\/memcached\/memcached.pid/' /etc/rc.d/memcached
+	#fix /etc/rc.d/memcached to create /var/run/memcached before starting
+	sed -i '/rc_reload=NO/r /var/mailserv/install/templates/memcached_rc.d' /etc/rc.d/memcached
+fi
+rcctl enable memcached
+rcctl start  memcached
+
+rcctl enable dnsmasq
+rcctl start  dnsmasq
+
+rcctl enable spamassassin
+rcctl set spamassassin flags -u _spamdaemon -P -s mail -xq -r /var/run/spamassassin.pid -i 127.0.0.1
+rcctl start  spamassassin
 
 # --------------------------------------------------------------
 # /etc/services
@@ -83,9 +99,11 @@ hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false" 
 
 #version check
 if [[ $hi_ver_check == "true"  ]]; then
-     ln -sf /usr/local/bin/python2.6 /usr/local/bin/python
-     ln -sf /usr/local/bin/python2.6-config /usr/local/bin/python-config
-     ln -sf /usr/local/bin/pydoc2.6  /usr/local/bin/pydoc
+     ln -sf /usr/local/bin/python2.7 /usr/local/bin/python
+	 ln -sf /usr/local/bin/python2.7-2to3 /usr/local/bin/2to3
+     ln -sf /usr/local/bin/python2.7-config /usr/local/bin/python-config
+     ln -sf /usr/local/bin/pydoc2.7  /usr/local/bin/pydoc
+	 
      ln -sf /usr/local/bin/ruby18 /usr/local/bin/ruby
      ln -sf /usr/local/bin/erb18 /usr/local/bin/erb
      ln -sf /usr/local/bin/irb18 /usr/local/bin/irb
@@ -102,18 +120,11 @@ if [[ $hi_ver_check == "true"  ]]; then
      # Update your RAILS_GEM_VERSION
      # -----------------------------------------------------
      echo " Installing rails:"
-     /usr/local/bin/gem install -V -v=2.3.4 rails;    
+	 /usr/local/bin/gem install -V -v=2.3.4 rails --no-ri --no-rdoc;
      echo " Installing rubby apps:"
      /usr/local/bin/gem install -V -v=1.6.21 highline;    
      /usr/local/bin/gem install -V god rdoc mongrel fastercsv ruby-mysql;
 fi 
-
-gsed -i -E 's/(fastcgi_param +HTTPS)/#\1/' /etc/nginx/fastcgi_params
-
-# --------------------------------------------------------------
-# /etc/daily
-# --------------------------------------------------------------
-/usr/local/bin/ruby -pi -e '$_.gsub!(/\/var\/spool\/mqueue/, "Mail queue")' /etc/daily
 
 # --------------------------------------------------------------
 # /etc/awstats
@@ -152,7 +163,6 @@ chgrp 0 /etc/daily.local \
         /etc/login.conf \
         /etc/monthly.local \
         /etc/pf.conf \
-        /etc/rc.conf.local \
         /etc/rc.local \
         /etc/rc.shutdown \
         /etc/shells /etc/syslog.conf \

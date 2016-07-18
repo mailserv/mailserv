@@ -1,11 +1,8 @@
 #!/bin/sh
 
-# Update spamassassin with official updates and
-# level 0 rules from www.rulesemporium.com
-/usr/local/bin/sa-update --nogpg \
-  --channel saupdates.openprotect.com \
-  --channel updates.spamassassin.org &&
-/usr/local/bin/god restart spamd >/dev/null 2>&1
+# Update spamassassin with official updates
+/usr/local/bin/sa-update && 
+/usr/local/bin/god restart spamassassin >/dev/null 2>&1
 
 # Delete old Spams and Trash messages after 30 days
 /usr/local/share/mailserv/clean_spam.rb 30 >/dev/null 2>&1

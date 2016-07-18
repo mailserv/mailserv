@@ -201,7 +201,7 @@ class IfconfigPhysical
       Sudo.exec("/bin/sh /etc/netstart #{@name}")
       if @dhcp
         Sudo.rm("/etc/mygate")
-        RAILS_DEFAULT_LOGGER.info %x{sudo rm /etc/mygate}
+        RAILS_DEFAULT_LOGGER.info %x{/usr/local/bin/sudo rm /etc/mygate}
       else
         Sudo.exec("route delete default")
         Sudo.exec("route add default #{@default_route}")

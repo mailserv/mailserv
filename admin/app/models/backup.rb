@@ -2,8 +2,8 @@ class Backup < ActiveRecord::Base
   validates_confirmation_of :encryption_key
 
   def validate
-    if !location.match(/^(sftp|ftp)/)
-      errors.add("location", "protocol needs to be either sftp or ftp")
+    if !location.match(/^(ftp)/)
+      errors.add("location", "protocol needs to be ftp")
     else
       unless Rails.env.test?
         result = %x{echo `date` | /usr/local/bin/curl -m 10 -ksST - #{location}/backup-test-`hostname`-`date +%Y%m%d%H%M%S`.txt 2>&1; echo $?}.split("\n")
@@ -36,19 +36,19 @@ class Backup < ActiveRecord::Base
   end
 
   def self.is_running?
-    %x{pgrep -f mailserver:backup}.to_i > 0
+    %x{pgrep -f mailserv:backup}.to_i > 0
   end
 
   def self.restore_is_running?
-    %x{pgrep -f mailserver:restore}.to_i > 0
+    %x{pgrep -f mailserv:restore}.to_i > 0
   end
 
   def self.start_full
-    Sudo.rake "mailserver:backup:full"
+    Sudo.rake "mailserv:backup:full"
   end
 
   def self.abort_backup
-    Sudo.killall "mailserver:backup"
+    Sudo.killall "mailserv:backup"
   end
 
 end

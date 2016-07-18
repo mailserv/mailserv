@@ -7,7 +7,7 @@ class Sudo
       user  = options[:user]  || "root"
       group = options[:group] || "wheel"
       mode  = options[:mode]  || 644
-      %x{sudo install -o #{user} -g #{group} -m #{mode} #{sourcefile} #{destinationfile}}
+      %x{/usr/local/bin/sudo install -o #{user} -g #{group} -m #{mode} #{sourcefile} #{destinationfile}}
     else
       mode  = options[:mode]  || 644
       %x{install -m #{mode} #{Rails.root}/tmp/root/#{Rails.env}/#{sourcefile} #{Rails.root}/tmp/root/#{Rails.env}/#{destinationfile}}
@@ -31,7 +31,7 @@ class Sudo
       user  = options[:user]  || "root"
       group = options[:group] || "wheel"
       mode  = options[:mode]  || 644
-      %x{sudo install -o #{user} -g #{group} -m #{mode} #{f.path} #{destination}}
+      %x{/usr/local/bin/sudo install -o #{user} -g #{group} -m #{mode} #{f.path} #{destination}}
     when Rails.env.development?, Rails.env.test?
       mode  = options[:mode]  || 644
       %x{install -m #{mode} #{f.path} #{Rails.root}/tmp/root/#{Rails.env}/#{destination}}
@@ -42,11 +42,11 @@ class Sudo
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
       user = options[:user] || "root"
-      %x{sudo -u #{user} #{command}}
+      %x{/usr/local/bin/sudo -u #{user} #{command}}
     when Rails.env.development?
       %x{#{command}}
     when Rails.env.test?
-      "sudo #{command}"
+      "/usr/local/bin/sudo #{command}"
     end
   end
 
@@ -56,7 +56,7 @@ class Sudo
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
       user = options[:user] || "root"
-      system("sudo -u #{user} /usr/local/bin/rake #{command} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/production.log &")
+      system("/usr/local/bin/sudo -u #{user} /usr/local/bin/rake #{command} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/production.log &")
     when Rails.env.development?
       system("/usr/local/bin/rake #{command} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/development.log &")
     when Rails.env.test?
@@ -67,14 +67,14 @@ class Sudo
   def self.killall(application)
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
-      %x{sudo pkill -1 -f #{application}}
+      %x{/usr/local/bin/sudo pkill -1 -f #{application}}
     end
   end
 
   def self.read(filename)
     case
     when Rails.env.production? || %x{uname -s}.match(/OpenBSD/)
-      %x{sudo cat #{filename} 2>/dev/null}.strip
+      %x{/usr/local/bin/sudo cat #{filename} 2>/dev/null}.strip
     else
       %x{cat #{Rails.root}/tmp/root/#{Rails.env}/#{filename}}.strip
     end
@@ -92,7 +92,7 @@ class Sudo
   def self.rm(filename)
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
-      %x{sudo rm #{filename} 2>/dev/null}.strip
+      %x{/usr/local/bin/sudo rm #{filename} 2>/dev/null}.strip
     else
       %x{rm #{Rails.root}/tmp/root/#{Rails.env}/#{filename}}
     end
@@ -101,7 +101,7 @@ class Sudo
   def self.rm_rf(filename)
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
-      %x{sudo rm -rf #{filename} 2>/dev/null}.strip
+      %x{/usr/local/bin/sudo rm -rf #{filename} 2>/dev/null}.strip
     else
       %x{rm -rf #{Rails.root}/tmp/root/#{Rails.env}/#{filename}}
     end
@@ -113,7 +113,7 @@ class Sudo
     flags += "f" if options[:force]
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
-      %x{sudo ln #{flags} #{source} #{destination} 2>/dev/null}
+      %x{/usr/local/bin/sudo ln #{flags} #{source} #{destination} 2>/dev/null}
     else
       %x{ln #{flags} #{Rails.root}/tmp/root/#{Rails.env}/#{source} #{Rails.root}/tmp/root/#{Rails.env}/#{destination}}
     end
@@ -140,7 +140,7 @@ class Sudo
   def self.ls(filename)
     case
     when Rails.env.production? || `uname -s`.strip == "OpenBSD"
-      %x{sudo ls #{filename}}
+      %x{/usr/local/bin/sudo ls #{filename}}
     else
       %x{ls #{Rails.root}/tmp/root/#{Rails.env}/#{filename}}
     end

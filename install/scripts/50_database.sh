@@ -2,14 +2,11 @@
 
 if [[ "$1" == "install" ]]; then
   /usr/local/bin/mysql_install_db > /dev/null 2>&1
+  rcctl enable mysqld
+  rcctl set mysqld flags --pid-file=mysql.pid
+  rcctl start  mysqld
 fi
 
-pgrep -f god > /dev/null
-if [[ $? -eq 1 ]]; then
-  /usr/local/bin/god -c /etc/god/mysql.god
-else
-  /usr/local/bin/god load /etc/god/mysql.god
-fi
 /usr/local/bin/mysqladmin ping >/dev/null 2>&1
 while [ $? -ne 0 ]; do
   sleep 1; /usr/local/bin/mysqladmin ping >/dev/null 2>&1

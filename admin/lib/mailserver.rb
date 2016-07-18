@@ -2,15 +2,17 @@ class Mailserver
 
   def processes
     {
-      :clamd      => %x{ps -ax | egrep clamd | grep -v grep | wc -l}.to_i > 0,
-      :postfix    => %x{ps -ax | egrep postfix\/master | grep -v grep | wc -l}.to_i > 0,
-      :dovecot    => %x{ps -ax | egrep dovecot$ | grep -v grep | wc -l}.to_i > 0,
-      :mysqld     => %x{ps -ax | egrep "mysqld " | grep -v grep | wc -l}.to_i > 0,
-      :spamd      => %x{ps -ax | egrep spamd | grep -v grep | wc -l}.to_i > 0,
-      :freshclam  => %x{ps -ax | egrep freshclam | grep -v grep | wc -l}.to_i > 0,
-      :dnsmasq    => %x{ps -ax | egrep dnsmasq | grep -v grep | wc -l}.to_i > 0,
-      :nginx      => %x{ps -ax | egrep nginx | grep -v grep | wc -l}.to_i > 0,
-      :php        => %x{ps -ax | egrep php-fpm | grep -v grep | wc -l}.to_i > 0
+      :clamd      => system('rcctl check clamd'),
+      :postfix    => system('rcctl check postfix'),
+      :dovecot    => system('rcctl check dovecot'),
+      :mysqld     => system('rcctl check mysqld'),
+      :spamd      => system('rcctl check spamassassin'),
+      :freshclam  => system('rcctl check freshclam'),
+      :dnsmasq    => system('rcctl check dnsmasq'),
+      :memcached  => system('rcctl check memcached'),
+      :nginx      => system('rcctl check nginx'),
+      :ntpd       => system('rcctl check ntpd'),
+      :php        => system('rcctl check php56_fpm')
     }
   end
 
@@ -18,10 +20,11 @@ class Mailserver
     begin
     {
       :spamassassin => File.ctime("/var/db/spamassassin/" + `ls -t /var/db/spamassassin/ | head -1`.strip),
-      :clam => File.ctime("/var/db/clamav/" + `ls -t /var/db/clamav/ | head -1`.strip)
+      :clam => File.ctime("/var/db/clamav/" + `ls -t /var/db/clamav/ | head -1`.strip),
+      :ntpstatus => `doas ntpctl -s status | awk -F"clock " '{print $2}' | awk -F"," '{print $1}'`
     }
     rescue
-      {:spamassassin => Date.today, :clam => Date.today}
+      {:spamassassin => Date.today, :clam => Date.today, ntpstatus => '-'}
     end
   end
 

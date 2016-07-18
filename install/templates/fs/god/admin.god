@@ -6,7 +6,7 @@ RAILS_GEM_VERSION = %x{gem list | grep "rails" | awk '{print $2}'}.sub( /\(/, ""
 
 %x{
   touch #{RAILS_ROOT}/log/production.log
-  touch #{RAILS_ROOT}/log/production.log
+  chmod 666 #{RAILS_ROOT}/log/production.log
   chown -R _mailserv:_mailserv #{RAILS_ROOT}/log
 }
 

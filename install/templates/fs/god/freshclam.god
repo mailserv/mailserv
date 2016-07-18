@@ -1,15 +1,12 @@
-# run with:  god -c /etc/god/sqlgrey.god
-#
-
 God.watch do |w|
-  w.name = "sqlgrey"
+  w.name = "freshclam"
   w.interval = 30.seconds # default
-  w.start = "rcctl start sqlgrey"
-  w.stop = "rcctl stop sqlgrey"
-  w.restart = "rcctl restart sqlgrey"
+  w.start = "rcctl start freshclam"
+  w.stop = "rcctl stop freshclam"
+  w.restart = "rcctl restart freshclam"
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
-  w.pid_file = "/var/run/sqlgrey.pid"
+  w.pid_file = "/tmp/freshclam.pid"
 
   w.start_if do |start|
     start.condition(:process_running) do |c|

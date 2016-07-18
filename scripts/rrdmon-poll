@@ -162,8 +162,7 @@ File.open(config_file).each {|line|
 
     cpu_rrd = rrd_dir + "/" + "cpu.rrd"
 
-    #vmstat = `vmstat 300 2 | tail -1`
-    vmstat = `vmstat 3 2 | tail -1`
+    vmstat = `vmstat 300 2 | tail -1`
     vmstat =~ /(\d+)\s+(\d+)\s+(\d+)$/
     user = $1
     system = $2
@@ -192,7 +191,7 @@ puts free
 
     swap_rrd = rrd_dir + "/" + "swap.rrd"
 
-    swapctl = `swapctl -sk | awk '{print $6 " " $8}' | sed 's/k//g'`
+    swapctl = `swapctl -sk | awk '{print $5 " " $7}' | sed 's/k//g'`
     swapctl =~ /(\d+)\s+(\d+)/
     usage = $1.to_f/1024
     free = $2.to_f/1024

@@ -4,6 +4,9 @@ if [[ "$1" == "install" ]]; then
   useradd -g =uid -u 901 -s /bin/ksh -d /var/mailserv _mailserv
   echo "root    ALL=(ALL) SETENV: ALL" >> /etc/sudoers
   echo "_mailserv   ALL=(ALL) NOPASSWD: SETENV: ALL" >> /etc/sudoers
+  echo "permit nopass _mailserv as root cmd rcctl" >> /etc/doas.conf
+  echo "permit nopass _mailserv as root cmd ntpctl" >> /etc/doas.conf
+  chmod 640 /etc/doas.conf
 fi
 
 cd /var/mailserv/admin && chown -R _mailserv:_mailserv log db public tmp
@@ -27,7 +30,10 @@ mkdir /var/mailserv/mail >/dev/null 2>&1
 touch /var/log/imap_webmin
 touch /var/log/maillog_webmin
 touch /var/log/messages_webmin.log
+touch /var/log/php-fpm.log
 
+chmod 644 /var/log/php-fpm.log
+chmod 644 /var/log/imap
 chmod 644 /var/log/imap_webmin
 chmod 644 /var/log/maillog_webmin
 chmod 644 /var/log/messages_webmin.log

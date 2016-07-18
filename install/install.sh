@@ -63,9 +63,6 @@ for file in `ls /var/mailserv/install/scripts/*`; do
   $file install 2>&1 | tee -a /var/log/install.log
 done
 
-#stop god 
-/usr/local/bin/god quit
-
 #---------------------------------------------------------------
 #  increase openfiles limit to 1024 ( obsd usualy runs 128 )
 #  necessary to dovecot start up
@@ -85,15 +82,13 @@ fi
 # increase kern.maxfiles (important for dovecot)
 #----------------------------------------------------------------
 
-kernmaxfiles=$( sysctl kern.maxfiles | awk -F= '{print $2}' )
+kernmaxfiles=$( sysctl -n kern.maxfiles )
 kernmaxnew=10000
 
 if [ $kernmaxfiles -lt $kernmaxnew ];
   then
    echo " "
    echo " setting kernmaxfiles "
-   sysctl kern.maxfiles=$kernmaxnew
-   cat /etc/sysctl.conf | sed '/kern.maxfiles=.*/d' > /etc/sysctl.conf
    echo "kern.maxfiles=$kernmaxnew" >> /etc/sysctl.conf
 fi
 
@@ -101,11 +96,6 @@ sleep 1
 
 /var/mailserv/scripts/mailserv_boot.sh
 
-#echo "#############################################"
-#echo "Get the last version of Highline"
-#/usr/local/bin/gem install highline -v 1.6.21
-
-#echo ""
 echo ""
 echo "#############################################"
 echo ""
