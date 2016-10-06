@@ -54,7 +54,6 @@ rm /etc/postfix/sql/*
 
 /usr/local/bin/mysqld_start
 /var/mailserv/scripts/install_roundcube
-echo "<?php header( 'Location: webmail/' ); ?>" > /var/www/webmail/index.php
 /var/mailserv/scripts/install_awstats
 
 /var/mailserv/install/scripts/70_sqlgrey.sh install 2>&1 | tee -a /var/log/upgrade.log
