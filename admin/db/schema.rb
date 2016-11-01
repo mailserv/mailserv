@@ -65,20 +65,6 @@ ActiveRecord::Schema.define(:version => 20101216072412) do
     t.datetime "updated_at"
   end
 
-  create_table "hostconfigs", :force => true do |t|
-    t.text     "interfaces"
-    t.text     "routes"
-    t.text     "nameservers"
-    t.text     "ntpservers"
-    t.text     "certificate"
-    t.text     "certificate_key"
-    t.text     "certificate_ca"
-    t.string   "hostname"
-    t.string   "timezone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "licenses", :force => true do |t|
     t.string "hostname", :limit => 256
     t.string "code",     :limit => 40
