@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
     @proc = Mailserver.new.processes
     @updates = Mailserver.new.updates
     Rrdmon.new.daily
+	Rrdmon.new.monthly
   end
 
   def dns_test
