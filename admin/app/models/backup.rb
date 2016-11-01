@@ -2,8 +2,8 @@ class Backup < ActiveRecord::Base
   validates_confirmation_of :encryption_key
 
   def validate
-    if !location.match(/^(ftp)/)
-      errors.add("location", "protocol needs to be ftp")
+    if !location.match(/^(ftp|https)/)
+      errors.add("location", "protocol needs to be ftp or https")
     else
       unless Rails.env.test?
         result = %x{echo `date` | /usr/local/bin/curl -m 10 -ksST - #{location}/backup-test-`hostname`-`date +%Y%m%d%H%M%S`.txt 2>&1; echo $?}.split("\n")
