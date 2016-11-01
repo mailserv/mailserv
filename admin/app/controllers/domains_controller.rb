@@ -3,7 +3,7 @@ class DomainsController < ApplicationController
   active_scaffold :domains do |config|
     config.columns = [:name, :quota, :quotamax]
     config.actions.swap :search, :live_search
-    config.list.per_page = 20
+    config.list.per_page = 200
     config.show.link.label = "Manage"
     config.show.link.page = true
     config.columns[:name].label = "Domain"
