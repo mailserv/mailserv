@@ -64,7 +64,7 @@ class System
   end
 
   def reboot
-    Sudoe.exec("shutdown -r now")
+    Sudo.exec("shutdown -r now")
   end
 
   def shutdown
