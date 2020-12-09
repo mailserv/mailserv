@@ -23,7 +23,7 @@ __EOT
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
      rrdtool \
-     ruby-2.7.1p1
+     ruby-2.7.1p1 \
      dnsmasq \
      dovecot-pigeonhole \
      dovecot-mysql \
@@ -39,7 +39,6 @@ __EOT
      php-mysqli-7.4.13 \
      php-pdo_mysql-7.4.13 \
      php-gd-7.4.13 \
-     php-mcrypt-7.4.13 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \

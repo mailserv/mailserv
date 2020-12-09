@@ -99,31 +99,37 @@ hi_ver_check=`uname -r | awk '{ if ($1 >= 4.9) print "true"; else print "false" 
 
 #version check
 if [[ $hi_ver_check == "true"  ]]; then
-     ln -sf /usr/local/bin/python2.7 /usr/local/bin/python
-	 ln -sf /usr/local/bin/python2.7-2to3 /usr/local/bin/2to3
-     ln -sf /usr/local/bin/python2.7-config /usr/local/bin/python-config
-     ln -sf /usr/local/bin/pydoc2.7  /usr/local/bin/pydoc
-	 
-     ln -sf /usr/local/bin/ruby18 /usr/local/bin/ruby
-     ln -sf /usr/local/bin/erb18 /usr/local/bin/erb
-     ln -sf /usr/local/bin/irb18 /usr/local/bin/irb
-     ln -sf /usr/local/bin/rdoc18 /usr/local/bin/rdoc
-     ln -sf /usr/local/bin/ri18 /usr/local/bin/ri
-     ln -sf /usr/local/bin/testrb18 /usr/local/bin/testrb
+  #ln -sf /usr/local/bin/python2.7 /usr/local/bin/python
+  #ln -sf /usr/local/bin/python2.7-2to3 /usr/local/bin/2to3
+  #ln -sf /usr/local/bin/python2.7-config /usr/local/bin/python-config
+  #ln -sf /usr/local/bin/pydoc2.7  /usr/local/bin/pydoc
 
-     ln -sf /usr/local/bin/gem18 /usr/local/bin/gem
-     ln -sf /usr/local/bin/rake18 /usr/local/bin/rake
-     ln -sf /usr/local/bin/mongrel_rails18 /usr/local/bin/mongrel_rails
-     ln -sf /usr/local/bin/rails18 /usr/local/bin/rails 
-     ln -sf /usr/local/bin/god18 /usr/local/bin/god
-     # -----------------------------------------------------
-     # Update your RAILS_GEM_VERSION
-     # -----------------------------------------------------
-     echo " Installing rails:"
-	 /usr/local/bin/gem install -V -v=2.3.4 rails --no-ri --no-rdoc;
-     echo " Installing rubby apps:"
-     /usr/local/bin/gem install -V -v=1.6.21 highline;    
-     /usr/local/bin/gem install -V god rdoc mongrel fastercsv ruby-mysql;
+  # set default system ruby	 
+  ln -sf /usr/local/bin/ruby27 /usr/local/bin/ruby
+  ln -sf /usr/local/bin/erb27 /usr/local/bin/erb
+  ln -sf /usr/local/bin/irb27 /usr/local/bin/irb
+  ln -sf /usr/local/bin/rdoc27 /usr/local/bin/rdoc
+  ln -sf /usr/local/bin/ri27 /usr/local/bin/ri
+  ln -sf /usr/local/bin/rake27 /usr/local/bin/rake
+  ln -sf /usr/local/bin/gem27 /usr/local/bin/gem
+  ln -sf /usr/local/bin/bundle27 /usr/local/bin/bundle
+  ln -sf /usr/local/bin/bundler27 /usr/local/bin/bundler
+  ln -sf /usr/local/bin/racc27 /usr/local/bin/racc
+  ln -sf /usr/local/bin/racc2y27 /usr/local/bin/racc2y
+  ln -sf /usr/local/bin/y2racc27 /usr/local/bin/y2racc
+
+  # -----------------------------------------------------
+  # Update your RAILS_GEM_VERSION
+  # -----------------------------------------------------
+  echo " Installing rails:"
+  /usr/local/bin/gem install -V -v=2.3.4 rails
+  echo " Installing rubby apps:"
+  /usr/local/bin/gem install -V -v=1.6.21 highline
+  /usr/local/bin/gem install -V god rdoc fastercsv ruby-mysql #mongrel
+
+  #ln -sf /usr/local/bin/mongrel_rails18 /usr/local/bin/mongrel_rails
+  ln -sf /usr/local/bin/rails27 /usr/local/bin/rails 
+  ln -sf /usr/local/bin/god27 /usr/local/bin/god
 fi 
 
 # --------------------------------------------------------------
@@ -157,7 +163,7 @@ fi
 # --------------------------------------------------------------
 # /etc/sysctl.conf
 # --------------------------------------------------------------
-/usr/local/bin/rake -s -f /var/mailserv/admin/Rakefile system:update_hostname RAILS_ENV=production
+#/usr/local/bin/rake -s -f /var/mailserv/admin/Rakefile system:update_hostname RAILS_ENV=production
 
 chgrp 0 /etc/daily.local \
         /etc/login.conf \
