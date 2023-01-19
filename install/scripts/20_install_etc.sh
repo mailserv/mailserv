@@ -27,9 +27,6 @@ install -m 644 \
   ${template}/clamav-milter.conf \
   /etc
 
-install -m 644 ${template}/dovecot.conf /etc/dovecot
-install -m 644 ${template}/dovecot-sql.conf /etc/dovecot
-
 install -m 600 ${template}/pf.conf /etc
 install -m 644 ${template}/nginx.conf /etc/nginx
 

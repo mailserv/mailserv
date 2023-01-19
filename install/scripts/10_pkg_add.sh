@@ -24,8 +24,6 @@ __EOT
      p5-Mail-SpamAssassin \
      ruby-2.7.7 \
 #     dnsmasq \
-     dovecot-pigeonhole \
-     dovecot-mysql \
      memcached-- \
      mariadb-server \
      nginx \
