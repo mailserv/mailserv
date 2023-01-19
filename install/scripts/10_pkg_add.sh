@@ -17,7 +17,6 @@ Fetching versions:
 
 __EOT
     pkg_add -v -m -I \
-     postfix-3.8.20220816p0-mysql \
      clamav \
      gnupg \
      p5-Mail-SPF \
