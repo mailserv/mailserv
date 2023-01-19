@@ -23,7 +23,6 @@ install -m 644 \
   ${template}/newsyslog.conf \
   ${template}/profile \
   ${template}/rc.shutdown \
-  ${template}/rrdmon.conf \
   ${template}/syslog.conf \
   ${template}/clamav-milter.conf \
   /etc

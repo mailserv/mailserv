@@ -22,7 +22,6 @@ __EOT
      gnupg \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
-     rrdtool \
      ruby-2.7.7 \
 #     dnsmasq \
      dovecot-pigeonhole \
