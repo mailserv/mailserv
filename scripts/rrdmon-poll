@@ -21,7 +21,7 @@ end
 # ------------------------------------------------------------------------------------
 
 %x{mkdir #{rrd_dir}} unless File.directory?(rrd_dir)
-File.read(config_file).each do |line|
+File.readlines(config_file).each do |line|
   case line
   when /^#/,/^\s/
     next
