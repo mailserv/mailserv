@@ -14,17 +14,14 @@ install /var/mailserv/install/templates/fs/mailserv/* /usr/local/share/mailserv
 
 template="/var/mailserv/install/templates"
 install -m 644 \
-  ${template}/clamd.conf \
   ${template}/daily.local \
   ${template}/monthly.local \
-  ${template}/freshclam.conf \
   ${template}/login.conf \
   ${template}/my.cnf \
   ${template}/newsyslog.conf \
   ${template}/profile \
   ${template}/rc.shutdown \
   ${template}/syslog.conf \
-  ${template}/clamav-milter.conf \
   /etc
 
 install -m 600 ${template}/pf.conf /etc

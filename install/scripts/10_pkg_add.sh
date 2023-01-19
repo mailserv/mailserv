@@ -17,7 +17,6 @@ Fetching versions:
 
 __EOT
     pkg_add -v -m -I \
-     clamav \
      gnupg \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
