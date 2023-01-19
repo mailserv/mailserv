@@ -14,8 +14,3 @@ if [ ! -f /etc/ssl/private/server.key ]; then
   rm -f /tmp/server.csr
   echo '. done.'
 fi
-
-rcctl enable nginx
-#No chroot
-rcctl set nginx flags -u
-rcctl start  nginx

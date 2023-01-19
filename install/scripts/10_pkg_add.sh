@@ -17,14 +17,14 @@ Fetching versions:
 
 __EOT
     pkg_add -v -m -I \
-     postfix-3.6.20200627-mysql \
+     postfix-3.8.20220816p0-mysql \
      clamav \
-     gnupg-2.2.23p0 \
+     gnupg \
      p5-Mail-SPF \
      p5-Mail-SpamAssassin \
      rrdtool \
-     ruby-2.7.1p1 \
-     dnsmasq \
+     ruby-2.7.7 \
+#     dnsmasq \
      dovecot-pigeonhole \
      dovecot-mysql \
      memcached-- \
@@ -34,15 +34,15 @@ __EOT
      sqlgrey \
      gsed \
      gtar--static \
-     php-7.4.13 \
-	   php-intl-7.4.13 \
-     php-mysqli-7.4.13 \
-     php-pdo_mysql-7.4.13 \
-     php-gd-7.4.13 \
+     php-8.1.12 \
+     php-intl-8.1.12 \
+     php-mysqli-8.1.12 \
+     php-pdo_mysql-8.1.12 \
+     php-gd-8.1.12 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
-     pecl-memcache \
+#     pecl-memcache \
      lynx \
      vim--no_x11 \
      sudo--
