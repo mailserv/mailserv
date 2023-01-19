@@ -26,7 +26,6 @@ __EOT
 #     dnsmasq \
      memcached-- \
      mariadb-server \
-     nginx \
      openssl \
      sqlgrey \
      gsed \

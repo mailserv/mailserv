@@ -28,7 +28,6 @@ install -m 644 \
   /etc
 
 install -m 600 ${template}/pf.conf /etc
-install -m 644 ${template}/nginx.conf /etc/nginx
 
 install -m 644 /var/mailserv/install/templates/spamassassin_local.cf /etc/mail/spamassassin/local.cf
 install -m 644 /var/mailserv/install/templates/rc.local /etc
