@@ -3,6 +3,13 @@
 # Only run on install
 [[ "$1" != "install" ]] && exit 1
 
+pkg_add -v -m -I \
+    php-8.1.12 \
+    php-intl-8.1.12 \
+    php-mysqli-8.1.12 \
+    php-pdo_mysql-8.1.12 \
+    php-gd-8.1.12 \
+
 # Create symlinks for all installed php extensions
 cd /etc/php-8.1.sample
 for i in *; do ln -sf ../php-8.1.sample/$i ../php-8.1/; done

@@ -34,11 +34,6 @@ __EOT
      sqlgrey \
      gsed \
      gtar--static \
-     php-8.1.12 \
-     php-intl-8.1.12 \
-     php-mysqli-8.1.12 \
-     php-pdo_mysql-8.1.12 \
-     php-gd-8.1.12 \
      ghostscript-fonts \
      ghostscript--no_x11 \
      ImageMagick \
