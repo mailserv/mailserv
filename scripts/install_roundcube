@@ -3,48 +3,12 @@ require 'rubygems'
 require 'fileutils'
 include FileUtils
 
-basedir = "/var/www/webmail"
-mkdir_p basedir
-
-puts "Getting Roundcube version 1.0.9"
-#system "ftp -Vmo - http://sourceforge.net/projects/roundcubemail/files/latest/download | tar zxf - -C #{basedir}"
-#force to install 1.0.9
-system "ftp -Vmo - https://github.com/roundcube/roundcubemail/releases/download/1.0.9/roundcubemail-1.0.9.tar.gz | tar zxf - -C #{basedir}"
 
 
-# Linking 
-rm_f "#{basedir}/webmail"
-#Point the webmail symlink at the latest version of roundcube we've got
-#symlink must be relative path important for nginx 
-system "ln -s `cd #{basedir}; ls -1 -r -d roundcubemail-*|head -n 1` #{basedir}/webmail"
 
-#Redirect for old configs
-mkdir_p "#{basedir}/webmail/webmail"
-File.open("#{basedir}/webmail/webmail/index.php",'w') {|file| file.puts "<?php header('Location: /', true, 301); ?>"}
 
-puts "Downloading plugins"
-#download and prepare  composer first 
-system "cd #{basedir}/webmail; curl -s https://getcomposer.org/installer | php"
 
-#copy composer profile composer.json from template 
-install "/var/mailserv/install/templates/roundcube/conf/composer.json",  "#{basedir}/webmail/", :mode => 0644
 
-#install plugins
-system "cd #{basedir}/webmail; php composer.phar install"
-
-#make temp writable by the web server user
-system "chown www #{basedir}/webmail/temp"
-
-#remove roundcube installer
-#Needed for bin/upgrade.sh
-#system "rm -r #{basedir}/webmail/installer"
-
-puts "Installing Configuration"
-install "/var/mailserv/install/templates/roundcube/conf/config.inc.php",          "#{basedir}/webmail/config/", :mode => 0644
-#install "/var/mailserv/install/templates/roundcube/messagesize/config.inc.php", "#{basedir}/webmail/plugins/messagesize/", :mode => 0644
-install "/var/mailserv/install/templates/roundcube/sieverules/config.inc.php",  "#{basedir}/webmail/plugins/sieverules/",  :mode => 0644
-install "/var/mailserv/install/templates/roundcube/sauserprefs/config.inc.php", "#{basedir}/webmail/plugins/sauserprefs/", :mode => 0644
-install "/var/mailserv/install/templates/roundcube/password/config.inc.php",    "#{basedir}/webmail/plugins/password/",    :mode => 0644
 
 
 
@@ -76,8 +40,3 @@ File.open("#{basedir}/webmail/skins/larry/includes/header.html", "w") do |f|
   end
 end
 
-puts "Finished\n\n"
-puts "If you have updated, please have a look at #{basedir}/webmail/SQL/mysql"
-puts "and apply as needed.\n\n"
-puts "Also, please test the plugins (especially sieve/filter, spam and password)."
-puts "This is especially true if you have installed a new major release.\n\n"
