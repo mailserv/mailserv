@@ -51,8 +51,8 @@ rcctl set memcached flags `rcctl get memcached flags` --pidfile=/var/run/memcach
 rcctl enable memcached
 rcctl start  memcached
 
-rcctl enable dnsmasq
-rcctl start  dnsmasq
+#rcctl enable dnsmasq
+#rcctl start  dnsmasq
 
 rcctl enable spamassassin
 rcctl set spamassassin flags -u _spamdaemon -P -s mail -xq -r /var/run/spamassassin.pid -i 127.0.0.1
@@ -118,11 +118,6 @@ fi
   ln -sf /usr/local/bin/rails27 /usr/local/bin/rails 
   ln -sf /usr/local/bin/god27 /usr/local/bin/god
 
-
-# --------------------------------------------------------------
-# /etc/awstats
-# --------------------------------------------------------------
-mkdir /etc/awstats
 
 # --------------------------------------------------------------
 # /var/cron/tabs/root

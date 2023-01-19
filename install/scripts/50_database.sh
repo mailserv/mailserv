@@ -26,10 +26,6 @@ case $1 in
     /usr/local/bin/mysql mail < /var/mailserv/install/templates/sql/mail.sql
     /usr/local/bin/mysql < /var/mailserv/install/templates/sql/spamcontrol.sql
 
-    pkg_add -v -m -I rrdtool
-    template="/var/mailserv/install/templates"
-    install -m 644 ${template}/rrdmon.conf /etc
-    /usr/local/bin/ruby /var/mailserv/scripts/rrdmon_create.rb
     echo "."
     ;;
 
