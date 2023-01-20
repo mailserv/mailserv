@@ -51,7 +51,35 @@ install -m 0644 /var/mailserv/install/templates/roundcube/sauserprefs/config.inc
 install -m 0644 /var/mailserv/install/templates/roundcube/password/config.inc.php    #{basedir}/webmail/plugins/password/
 
 
-/var/mailserv/scripts/install_roundcube
+# taskbar = File.read("#{basedir}/webmail/skins/classic/includes/taskbar.html")
+# File.open("#{basedir}/webmail/skins/classic/includes/taskbar.html", "w") do |f|
+#   taskbar.each do |line|
+#     if line =~ /\<div id="taskbar"\>/
+#       f.puts line
+#       f.puts "<a href=\"../../../account/auth/autologin?id=<roundcube:var name='request:roundcube_sessid' />\">Admin</a>"
+#     elsif line =~ /account\/auth\/autologin/
+#       next
+#     else
+#       f.puts line
+#     end
+#   end
+# end
+
+# taskbar = File.read("#{basedir}/webmail/skins/larry/includes/header.html")
+# File.open("#{basedir}/webmail/skins/larry/includes/header.html", "w") do |f|
+#   taskbar.each do |line|
+#     if line =~ /\<div id="taskbar" class="topright"\>/
+#       f.puts line
+#       f.puts "<a href=\"../../../account/auth/autologin?id=<roundcube:var name='request:roundcube_sessid' />\">Admin</a>"
+#     elsif line =~ /account\/auth\/autologin/
+#       next
+#     else
+#       f.puts line
+#     end
+#   end
+# end
+
+
 
 echo "Finished\n\n"
 echo "If you have updated, please have a look at #{basedir}/webmail/SQL/mysql"
