@@ -58,39 +58,12 @@ if [[ ! -d /usr/X11R6 ]]; then
   exit 1
 fi
 
+# run all install scripts
 for file in `ls /var/mailserv/install/scripts/*`; do
   echo $file
   $file install 2>&1 | tee -a /var/log/install.log
 done
 
-#---------------------------------------------------------------
-#  increase openfiles limit to 1024 ( obsd usualy runs 128 )
-#  necessary to dovecot start up
-#  (when server reboot limits are read from login.conf, sysctl.conf) 
-#---------------------------------------------------------------
-maxfilestest=$( ulimit -n )
-
-if [ $maxfilestest -lt 1024 ];
-  then
-    echo " "
-    echo " setting openfiles-max to 1024 "
-    echo " "
-    ulimit -n 1024
-fi
-
-#----------------------------------------------------------------
-# increase kern.maxfiles (important for dovecot)
-#----------------------------------------------------------------
-
-kernmaxfiles=$( sysctl -n kern.maxfiles )
-kernmaxnew=10000
-
-if [ $kernmaxfiles -lt $kernmaxnew ];
-  then
-   echo " "
-   echo " setting kernmaxfiles "
-   echo "kern.maxfiles=$kernmaxnew" >> /etc/sysctl.conf
-fi
 
 sleep 1
 
