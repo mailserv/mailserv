@@ -23,7 +23,7 @@ namespace :system do
   task :update_hostname => [ :dovecot, :postfix, :awstats ]
 
   task :dovecot do
-    filename = "/etc/dovecot/dovecot.conf"
+    filename = "/etc/dovecot/local.conf"
     if !File.exists?(filename) || !File.size?(filename) || ENV['RESET'] == "true"
       dovecot_conf = File.read("#{@templates}/dovecot.conf").gsub(/^\s*postmaster_address.*/,"  postmaster_address = postmaster@#{@hostname}")
     else
