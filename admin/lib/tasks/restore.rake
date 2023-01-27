@@ -16,7 +16,7 @@ namespace :mailserv do
         exit 2
       end
       encryption_key = backup.encryption_key
-      restore_path = "var/mailserver/mail/" + restore_path unless restore_path.blank?
+      restore_path = "var/mailserv/mail/" + restore_path unless restore_path.blank?
 
       if encryption_key.present?
         Rails.logger.debug "/usr/local/bin/curl -k #{backup.location}/#{file} | openssl aes-256-cbc -salt -k \"#{encryption_key}\" -d | /usr/local/bin/gtar zxvfp - -C / #{restore_path}"

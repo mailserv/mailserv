@@ -1,11 +1,12 @@
 #!/bin/sh
 
 if [[ "$1" == "install" ]]; then
-  useradd -g =uid -u 901 -s /bin/ksh -d /var/mailserv _mailserv
-  echo "root    ALL=(ALL) SETENV: ALL" >> /etc/sudoers
-  echo "_mailserv   ALL=(ALL) NOPASSWD: SETENV: ALL" >> /etc/sudoers
-  echo "permit nopass _mailserv as root cmd rcctl" >> /etc/doas.conf
-  chmod 640 /etc/doas.conf
+    useradd -g =uid -u 901 -s /bin/ksh -d /var/mailserv _mailserv
+    #echo "root    ALL=(ALL) SETENV: ALL" >> /etc/sudoers
+    echo "_mailserv   ALL=(ALL) NOPASSWD: SETENV: ALL" >> /etc/sudoers
+    echo "permit nopass _mailserv as root cmd rcctl" >> /etc/doas.conf
+    echo "permit nopass _mailserv as root cmd ntpctl" >> /etc/doas.conf
+    chmod 640 /etc/doas.conf
 fi
 
 cd /var/mailserv/admin && chown -R _mailserv:_mailserv log db public tmp
@@ -14,14 +15,6 @@ cd /var/mailserv/admin/public && chown _mailserv:_mailserv javascripts styleshee
 cd /var/mailserv/account && chown -R _mailserv:_mailserv log public tmp
 cd /var/mailserv/account/public && chown _mailserv:_mailserv javascripts stylesheets
 
-#
-# Making dovecot-lda deliver setuid root
-# (needed for delivery to different userids)
-#
-touch /var/log/imap
-chgrp _dovecot /usr/local/libexec/dovecot/dovecot-lda
-chmod 4750 /usr/local/libexec/dovecot/dovecot-lda  
-mkdir /var/mailserv/mail >/dev/null 2>&1
 
 #
 # Create custom log files for log viewer admin interface

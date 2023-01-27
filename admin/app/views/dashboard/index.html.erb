@@ -1,11 +1,12 @@
 <h2>System Overview</h2>
 <table>
   <tr valign="top">
-    <td colspan="2"><%= render :partial => 'system_overview' %></td>
+    <td><%= render :partial => 'system_overview' %></td>
+    <td valign="top"><%= render :partial => 'disk_stats' %></td>
     <td rowspan="3"><%= render :partial => 'process_stats' %></td>
   </tr>
   <tr>
-    <td valign="top">
+    <td colspan="2" valign="top">
       <table class="mini">
         <tr>
           <th>CPU</th>
@@ -17,9 +18,13 @@
           <td><img src="/images/rrd/daily/mem.png" alt="Daily Memory info" /></td>
           <td><img src="/images/rrd/daily/swap.png" alt="Daily Swap info" /></td>
         </tr>
+        <tr>
+          <td><img src="/images/rrd/monthly/cpu.png" alt="Daily CPU info" /></td>
+          <td><img src="/images/rrd/monthly/mem.png" alt="Daily Memory info" /></td>
+          <td><img src="/images/rrd/monthly/swap.png" alt="Daily Swap info" /></td>
+        </tr>
       </table>
     </td>
-    <td valign="top"><%= render :partial => 'disk_stats' %></td>
   </tr>
   <tr>
     <td colspan="2">
@@ -31,6 +36,10 @@
         <tr>
           <td><img src="/images/rrd/daily/mail.png" alt="Daily Mail info" /></td>
           <td><img src="/images/rrd/daily/mail_block.png" alt="Daily Mail Blocking info" /></td>
+        </tr>
+        <tr>
+          <td><img src="/images/rrd/monthly/mail.png" alt="Daily Mail info" /></td>
+          <td><img src="/images/rrd/monthly/mail_block.png" alt="Daily Mail Blocking info" /></td>
         </tr>
       </table>
     </td>
