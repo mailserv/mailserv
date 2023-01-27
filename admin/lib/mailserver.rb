@@ -12,7 +12,7 @@ class Mailserver
       :memcached  => system('rcctl check memcached'),
       :nginx      => system('rcctl check nginx'),
       :ntpd       => system('rcctl check ntpd'),
-      :php        => system('rcctl check php56_fpm')
+      :php        => system('rcctl check php80_fpm')
     }
   end
 

@@ -5,6 +5,10 @@
 
 pkg_add -v -m -I nginx
 
+# info
+# /usr/local/share/doc/pkg-readmes/nginx
+
+
 template="/var/mailserv/install/templates"
 install -m 644 ${template}/nginx.conf /etc/nginx
 
