@@ -17,7 +17,6 @@ install -m 644 \
   ${template}/daily.local \
   ${template}/monthly.local \
   ${template}/login.conf \
-  ${template}/my.cnf \
   ${template}/newsyslog.conf \
   ${template}/profile \
   ${template}/rc.shutdown \

@@ -1,12 +1,5 @@
 #!/bin/sh
 
-if [[ "$1" == "install" ]]; then
-  /usr/local/bin/mysql_install_db > /dev/null 2>&1
-  rcctl enable mysqld
-  rcctl set mysqld flags --pid-file=mysql.pid
-  rcctl start  mysqld
-fi
-
 /usr/local/bin/mysqladmin ping >/dev/null 2>&1
 while [ $? -ne 0 ]; do
   sleep 1; /usr/local/bin/mysqladmin ping >/dev/null 2>&1
